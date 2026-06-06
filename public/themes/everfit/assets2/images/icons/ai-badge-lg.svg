@@ -1,0 +1,38 @@
+<svg width="24" height="15" viewBox="0 0 24 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="24" height="15" rx="7.5" fill="url(#paint0)"/>
+<rect width="24" height="15" rx="7.5" fill="url(#paint1)"/>
+<g filter="url(#filter0)">
+<path d="M8.69709 11H7.21413L9.47372 4.45455H11.2571L13.5135 11H12.0305L10.391 5.95028H10.3398L8.69709 11ZM8.6044 8.4272H12.1072V9.50746H8.6044V8.4272ZM15.6852 4.45455V11H14.3013V4.45455H15.6852Z" fill="white"/>
+</g>
+</g>
+<rect x="0.25" y="0.25" width="23.5" height="14.5" rx="7.25" stroke="url(#paint2)" style="mix-blend-mode:overlay" stroke-width="0.5"/>
+<defs>
+<filter id="filter0" x="3.21436" y="2.45459" width="16.4707" height="14.5454" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<radialGradient id="paint0" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(12.4 15) rotate(-90) scale(15.3571 30.25)">
+<stop stop-color="#67B5FF"/>
+<stop offset="0.393477" stop-color="#FAEAFF"/>
+<stop offset="1" stop-color="#0080FF"/>
+</radialGradient>
+<radialGradient id="paint1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(12.4 15) rotate(-90) scale(15.3571 30.25)">
+<stop offset="0.249736" stop-color="#D64FFF"/>
+<stop offset="1" stop-color="#005CD4"/>
+</radialGradient>
+<linearGradient id="paint2" x1="12" y1="0" x2="12" y2="15" gradientUnits="userSpaceOnUse">
+<stop stop-opacity="0.4"/>
+<stop offset="1"/>
+</linearGradient>
+<clipPath id="clip0">
+<rect width="24" height="15" rx="7.5" fill="white"/>
+</clipPath>
+</defs>
+</svg>
