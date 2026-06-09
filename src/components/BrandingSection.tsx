@@ -3,14 +3,14 @@ import { cn } from "@/lib/utils";
 
 const accordionItems = [
   {
-    title: "Custom Branded App",
+    title: "Workspace Professionale",
     description:
-      "Keep your branding front and center with customizable color theme and logo as unique as your workouts.",
+      "Il tuo studio digitale, personalizzato con il tuo brand e i tuoi colori. Un'esperienza coerente e professionale per te e per ogni tuo cliente.",
   },
   {
-    title: "White Label Solution",
+    title: "App Cliente Gymme",
     description:
-      "Launch the custom branded fitness app of your dreams on iOS and Android.",
+      "I tuoi clienti accedono ai loro programmi, progressi e comunicazioni dall'app Gymme — dedicata, semplice, sempre disponibile su iOS e Android.",
   },
 ];
 
@@ -25,7 +25,7 @@ export function BrandingSection() {
           <div className="flex flex-col">
             <div className="inline-flex items-center gap-2 mb-6">
               <Image
-                src="/themes/everfit/assets2/images/homepage/branding.svg"
+                src="/themes/gymme/assets2/images/homepage/branding.svg"
                 alt="Branding icon"
                 width={18}
                 height={18}
@@ -40,7 +40,7 @@ export function BrandingSection() {
                   color: "#1b1b1b",
                 }}
               >
-                BRANDING
+                GYMME STUDIO
               </span>
             </div>
 
@@ -54,9 +54,9 @@ export function BrandingSection() {
                 color: "#1b1b1b",
               }}
             >
-              Elevate Your Presence,
+              Il Tuo Studio,
               <br />
-              Expand Your Reach.
+              la Tua Identità.
             </h2>
 
             <div className="mt-8 flex flex-col gap-4">
@@ -110,14 +110,14 @@ export function BrandingSection() {
                 textDecoration: "none",
               }}
             >
-              Contact Sales
+              Inizia Gratis →
             </a>
           </div>
 
           <div className="flex gap-4">
             <div className="flex-1 relative" style={{ minHeight: "420px" }}>
               <Image
-                src="/themes/everfit/assets2/images/homepage/branding/branding-1-2xl.webp"
+                src="/themes/gymme/assets2/images/homepage/branding/branding-1-2xl.webp"
                 alt="Branded app mockup 1"
                 fill
                 className="object-cover"
@@ -127,7 +127,7 @@ export function BrandingSection() {
             </div>
             <div className="flex-1 relative" style={{ minHeight: "420px" }}>
               <Image
-                src="/themes/everfit/assets2/images/homepage/branding/branding-2-2xl.webp"
+                src="/themes/gymme/assets2/images/homepage/branding/branding-2-2xl.webp"
                 alt="Branded app mockup 2"
                 fill
                 className="object-cover"

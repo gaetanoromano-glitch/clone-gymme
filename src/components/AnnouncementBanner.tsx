@@ -20,14 +20,14 @@ export default function AnnouncementBanner({ onClose }: Props) {
         style={{
           color: "rgba(255,255,255,0.85)",
           fontSize: "14px",
-          fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+          fontFamily: "Plus Jakarta Sans, sans-serif",
           fontWeight: 400,
           margin: 0,
         }}
       >
-        Join us every Wednesday for{" "}
+        Sei un professionista del benessere? Entra in{" "}
         <span style={{ fontWeight: 700, color: "#ffffff" }}>
-          Everfit Foundations 101 Webinar
+          Gymme Early Access
         </span>{" "}
         👉
         <a
@@ -39,7 +39,7 @@ export default function AnnouncementBanner({ onClose }: Props) {
             cursor: "pointer",
           }}
         >
-          Sign Up Here
+          Registrati ora
         </a>
       </p>
       <button

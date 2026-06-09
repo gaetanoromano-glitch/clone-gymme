@@ -4,48 +4,48 @@ import { FeatureAccordion, AccordionItem } from "@/components/FeatureAccordion";
 
 const items: AccordionItem[] = [
   {
-    icon: "/themes/everfit/assets2/images/homepage/icons/1-1-messages-icon.svg",
-    title: "1-1 Messaging",
+    icon: "/themes/gymme/assets2/images/homepage/icons/1-1-messages-icon.svg",
+    title: "Messaggi 1-a-1",
     description:
-      "Stay close with clients using direct messages and voice notes.",
+      "Comunicazione diretta tra professionista e cliente con storico completo e notifiche push. La relazione quotidiana che fa la differenza.",
     screenshot: "/uploads/2025/08/engage-item.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/icons/scheduled-icon.svg",
-    title: "Scheduled Messaging",
-    description: "Automate check-in reminders and motivational messages.",
+    icon: "/themes/gymme/assets2/images/homepage/icons/scheduled-icon.svg",
+    title: "Messaggi Programmati",
+    description: "Automatizza i promemoria di seduta e i messaggi motivazionali. Nessun cliente dimentica, nessun appuntamento saltato.",
     screenshot:
-      "/themes/everfit/assets2/images/homepage/engage/scheduled.webp",
+      "/themes/gymme/assets2/images/homepage/engage/scheduled.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/icons/community-forum-icon.svg",
-    title: "Community Forum",
-    description: "Build a community where clients support each other.",
+    icon: "/themes/gymme/assets2/images/homepage/icons/community-forum-icon.svg",
+    title: "Health Team Collaborativo",
+    description: "PT, Nutrizionista e Osteopata condividono il contesto del cliente in un unico spazio. Ogni professionista lavora nel suo modulo, tutti vedono il quadro completo.",
     screenshot:
-      "/themes/everfit/assets2/images/homepage/engage/broadcast.webp",
+      "/themes/gymme/assets2/images/homepage/engage/broadcast.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/icons/broadcast-icon.svg",
-    title: "Broadcast Messaging",
-    description: "Send announcements to all clients at once.",
+    icon: "/themes/gymme/assets2/images/homepage/icons/broadcast-icon.svg",
+    title: "Alert Anti-Dropout",
+    description: "Reminder automatici basati sul comportamento del cliente. Il sistema segnala i rischi, tu intervieni prima che sia troppo tardi.",
     screenshot:
-      "/themes/everfit/assets2/images/homepage/engage/broadcast.webp",
+      "/themes/gymme/assets2/images/homepage/engage/broadcast.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/icons/announcements-icon.svg",
-    title: "Announcements",
-    description: "Keep clients informed with program updates and news.",
+    icon: "/themes/gymme/assets2/images/homepage/icons/announcements-icon.svg",
+    title: "Gestione Documenti",
+    description: "Richiedi e ricevi documenti clinici dal cliente — certificati medici, analisi del sangue, prescrizioni. Scadenze automatiche e notifiche di rinnovo incluse.",
     screenshot:
-      "/themes/everfit/assets2/images/homepage/engage/announcements.webp",
+      "/themes/gymme/assets2/images/homepage/engage/announcements.webp",
   },
 ];
 
 export function EngageSection() {
   return (
     <FeatureAccordion
-      badgeIcon="/themes/everfit/assets2/images/homepage/icons/engage.svg"
-      badgeText="ENGAGE"
-      headingLines={["Stay Connected.", "Anytime, Anywhere."]}
+      badgeIcon="/themes/gymme/assets2/images/homepage/icons/engage.svg"
+      badgeText="COINVOLGI"
+      headingLines={["Resta Connesso.", "Sempre, Ovunque."]}
       items={items}
     />
   );

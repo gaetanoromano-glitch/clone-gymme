@@ -21,11 +21,8 @@ export default function Home() {
   const [bannerVisible, setBannerVisible] = useState(true);
 
   return (
-    <>
-      {bannerVisible && (
-        <AnnouncementBanner onClose={() => setBannerVisible(false)} />
-      )}
-      <Navbar bannerVisible={bannerVisible} />
+    <> 
+      <Navbar bannerVisible={false} />
       <main>
         <HeroSection topOffset={bannerVisible ? 137 : 87} />
         <IndustrySolutionSection />

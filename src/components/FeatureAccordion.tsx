@@ -69,7 +69,7 @@ export function FeatureAccordion({
               style={{
                 fontSize: 13,
                 fontWeight: 700,
-                fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 color: "#1b1b1b",
@@ -84,7 +84,7 @@ export function FeatureAccordion({
               fontSize: 44,
               fontWeight: 700,
               fontFamily:
-                '"TWK Everett", Inter, ui-sans-serif, system-ui, sans-serif',
+                '"Unbounded", sans-serif',
               color: "#1b1b1b",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
@@ -131,7 +131,7 @@ export function FeatureAccordion({
                         fontSize: 18,
                         fontWeight: isActive ? 700 : 600,
                         fontFamily:
-                          "Inter, ui-sans-serif, system-ui, sans-serif",
+                          "Plus Jakarta Sans, sans-serif",
                         color: "#1b1b1b",
                       }}
                     >
@@ -168,7 +168,7 @@ export function FeatureAccordion({
                         fontSize: 15,
                         color: "rgba(27,27,27,0.7)",
                         fontFamily:
-                          "Inter, ui-sans-serif, system-ui, sans-serif",
+                          "Plus Jakarta Sans, sans-serif",
                         lineHeight: 1.6,
                         paddingTop: 12,
                         paddingLeft: 36,

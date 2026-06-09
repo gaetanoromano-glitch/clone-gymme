@@ -13,30 +13,30 @@ interface Tab {
 
 const tabs: Tab[] = [
   {
-    icon: "/themes/everfit/assets2/images/homepage/plan-coach.svg",
-    title: "Client Programming",
+    icon: "/themes/gymme/assets2/images/homepage/plan-coach.svg",
+    title: "Protocolli & Schede",
     description:
-      "Create structured, progressive workout plans in minutes, assisted by AI.",
+      "Crea protocolli strutturati di Training, Nutrition e Recovery con struttura a settimane e giorni. Assegna a uno o più clienti con un click.",
     screenshot: "/uploads/2025/08/coach-item.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/meal-plans.svg",
-    title: "Macros Tracking",
+    icon: "/themes/gymme/assets2/images/homepage/meal-plans.svg",
+    title: "AI Protocol Builder",
     description:
-      "Build macro-based meal plans and give clients flexible ways to log meals. Now powered by AI with instant meal scanning through MacroSnap.",
+      "Genera protocolli completi con un semplice prompt. L'AI produce una bozza strutturata e modificabile — il professionista approva sempre prima della pubblicazione.",
     screenshot: "/uploads/2025/08/manage-item.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/habit.svg",
-    title: "Habit Tracking",
-    description: "Boost and refine client motivation with daily insights.",
+    icon: "/themes/gymme/assets2/images/homepage/habit.svg",
+    title: "Calendario & Sedute",
+    description: "Pianifica sedute, invia inviti automatici via WhatsApp o email e gestisci il calendario multi-cliente con reminder proattivi.",
     screenshot: "/uploads/2025/08/engage-item.webp",
   },
   {
-    icon: "/themes/everfit/assets2/images/homepage/running.svg",
-    title: "On-Demand Training",
+    icon: "/themes/gymme/assets2/images/homepage/running.svg",
+    title: "CRM Clienti",
     description:
-      "Enable client access to workout programs and resources, anytime.",
+      "Tieni tutto il contesto del cliente in un unico posto: anamnesi clinica, misurazioni, storico pagamenti, progressi e documenti.",
     screenshot: "/uploads/2025/08/scale-item-1.webp",
   },
 ];
@@ -65,7 +65,7 @@ export default function PlanCoachSection() {
               style={{ marginBottom: "20px", gap: "8px" }}
             >
               <Image
-                src="/themes/everfit/assets2/images/homepage/plan-coach.svg"
+                src="/themes/gymme/assets2/images/homepage/plan-coach.svg"
                 alt="Plan & Coach icon"
                 width={24}
                 height={24}
@@ -75,13 +75,13 @@ export default function PlanCoachSection() {
                 style={{
                   fontSize: "13px",
                   fontWeight: 700,
-                  fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
                   letterSpacing: "0.08em",
                   color: "#1b1b1b",
                   textTransform: "uppercase",
                 }}
               >
-                PLAN &amp; COACH
+                PIANIFICA &amp; GESTISCI
               </span>
             </div>
 
@@ -96,7 +96,7 @@ export default function PlanCoachSection() {
                 marginBottom: "32px",
               }}
             >
-              Plan With Precision, Coach With Confidence.
+              Pianifica con Precisione, Allena con Fiducia.
             </h2>
 
             <div
@@ -138,7 +138,7 @@ export default function PlanCoachSection() {
                     style={{
                       fontSize: "16px",
                       fontWeight: 600,
-                      fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+                      fontFamily: "Plus Jakarta Sans, sans-serif",
                       color:
                         activeTab === index
                           ? "#1b1b1b"
@@ -156,7 +156,7 @@ export default function PlanCoachSection() {
             <p
               style={{
                 fontSize: "16px",
-                fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
                 color: "rgba(27,27,27,0.7)",
                 lineHeight: 1.6,
                 maxWidth: "400px",

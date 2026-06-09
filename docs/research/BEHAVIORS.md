@@ -1,4 +1,4 @@
-# Behaviors — everfit.io
+# Behaviors — gymme.io
 
 ## Global Behaviors
 

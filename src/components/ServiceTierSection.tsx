@@ -7,20 +7,21 @@ interface FeatureItem {
 }
 
 const highTicketFeatures: FeatureItem[] = [
-  { label: "Customized training plans", checkmarkSrc: "/themes/everfit/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
-  { label: "Personal check-ins", checkmarkSrc: "/themes/everfit/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
-  { label: "Direct communication", checkmarkSrc: "/themes/everfit/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
+  { label: "CRM clienti con anamnesi e misurazioni", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
+  { label: "Protocolli Training, Nutrition e Recovery", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
+  { label: "AI Protocol Builder e Business Dashboard", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
 ];
 
 const lowTicketFeatures: FeatureItem[] = [
-  { label: "On-demand training content", checkmarkSrc: "/themes/everfit/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
-  { label: "Group check-ins", checkmarkSrc: "/themes/everfit/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
-  { label: "Community forums & Online fitness challenges", checkmarkSrc: "/themes/everfit/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
+  { label: "Visualizzazione scheda e allenamenti del giorno", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
+  { label: "Check-in, progressi e foto in tempo reale", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
+  { label: "Comunicazione diretta col professionista", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
 ];
 
 export function ServiceTierSection() {
   return (
     <section
+      id="ecosistema"
       style={{ backgroundColor: "#ffffff", padding: "80px 80px" }}
       className="w-full"
     >
@@ -30,25 +31,25 @@ export function ServiceTierSection() {
             style={{
               fontSize: "56px",
               fontWeight: 700,
-              fontFamily: '"TWK Everett", Inter, sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
             }}
           >
-            Offer All Your Training Services
+            Gymme Studio e App Cliente:
           </h2>
           <h2
             style={{
               fontSize: "56px",
               fontWeight: 700,
-              fontFamily: '"TWK Everett", Inter, sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
             }}
           >
-            Seamlessly In One Place
+            un Ecosistema Connesso
           </h2>
         </div>
 
@@ -79,7 +80,7 @@ export function ServiceTierSection() {
                   marginBottom: "8px",
                 }}
               >
-                One-To-One. Personalized.
+                Per i Professionisti. Potente.
               </p>
 
               <h3
@@ -87,12 +88,12 @@ export function ServiceTierSection() {
                   color: "#ffffff",
                   fontSize: "28px",
                   fontWeight: 700,
-                  fontFamily: '"TWK Everett", Inter, sans-serif',
+                  fontFamily: '"Unbounded", sans-serif',
                   marginBottom: "24px",
                   lineHeight: 1.2,
                 }}
               >
-                High Ticket Clients
+                Gymme Studio
               </h3>
 
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -131,7 +132,7 @@ export function ServiceTierSection() {
               }}
             >
               <Image
-                src="/themes/everfit/assets2/images/homepage/revolutionary/1-1-2xl.webp"
+                src="/themes/gymme/assets2/images/homepage/revolutionary/1-1-2xl.webp"
                 alt="One-to-one coaching app"
                 fill
                 style={{ objectFit: "contain", objectPosition: "bottom right" }}
@@ -160,7 +161,7 @@ export function ServiceTierSection() {
                   marginBottom: "8px",
                 }}
               >
-                One-To-Many. Community Focused.
+                Per i Clienti. Semplice.
               </p>
 
               <h3
@@ -168,12 +169,12 @@ export function ServiceTierSection() {
                   color: "#1b1b1b",
                   fontSize: "28px",
                   fontWeight: 700,
-                  fontFamily: '"TWK Everett", Inter, sans-serif',
+                  fontFamily: '"Unbounded", sans-serif',
                   marginBottom: "24px",
                   lineHeight: 1.2,
                 }}
               >
-                Low Ticket Clients
+                App Cliente
               </h3>
 
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -212,7 +213,7 @@ export function ServiceTierSection() {
               }}
             >
               <Image
-                src="/themes/everfit/assets2/images/homepage/revolutionary/1-many-2xl.webp"
+                src="/themes/gymme/assets2/images/homepage/revolutionary/1-many-2xl.webp"
                 alt="One-to-many coaching app"
                 fill
                 style={{ objectFit: "contain", objectPosition: "bottom right" }}

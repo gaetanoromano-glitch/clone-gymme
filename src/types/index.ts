@@ -1,4 +1,4 @@
-// Everfit site content types
+// gymme site content types
 
 export interface NavLink {
   label: string;

@@ -6,20 +6,16 @@ import { cn } from "@/lib/utils";
 
 const slides = [
   {
-    coachType: "Fitness Coaches",
-    bg: "/themes/everfit/assets2/images/homepage/hero-animation/fitness-coaches-xl.webp",
+    coachType: "Personal Trainer",
+    bg: "/themes/gymme/assets2/images/homepage/hero-animation/fitness-coaches-xl.webp",
   },
   {
-    coachType: "Gyms & Studios",
-    bg: "/themes/everfit/assets2/images/homepage/hero-animation/gym-studio-xl.webp",
+    coachType: "Nutrizionisti",
+    bg: "/themes/gymme/assets2/images/homepage/hero-animation/gym-studio-xl.webp",
   },
   {
-    coachType: "Nutrition Coaches",
-    bg: "/themes/everfit/assets2/images/homepage/hero-animation/nutrition-coaches-xl.webp",
-  },
-  {
-    coachType: "Sport Coaches",
-    bg: "/themes/everfit/assets2/images/homepage/hero-animation/sport-coaches-xl.webp",
+    coachType: "Osteopati",
+    bg: "/themes/gymme/assets2/images/homepage/hero-animation/sport-coaches-xl.webp",
   },
 ];
 
@@ -57,7 +53,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
       }}
       className="h-[560px] md:h-[600px] lg:h-[849px]"
     >
-      <p className="sr-only">Everfit Coaching Platform</p>
+      <p className="sr-only">Gymme — Piattaforma Wellness Multi-Professionale</p>
 
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
@@ -103,7 +99,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
         <div>
           <h2
             style={{
-              fontFamily: '"TWK Everett", Inter, sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               fontWeight: 700,
               color: "rgba(255,255,255,0.9)",
               lineHeight: 1.1,
@@ -112,7 +108,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
             }}
             className="text-[36px] md:text-[48px] lg:text-[64px]"
           >
-            The All-In-One Platform for
+            La Piattaforma Data-Driven per
           </h2>
 
           <div
@@ -125,7 +121,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           >
             <span
               style={{
-                fontFamily: '"TWK Everett", Inter, sans-serif',
+                fontFamily: '"Unbounded", sans-serif',
                 fontWeight: 700,
                 color: "rgba(255,255,255,0.8)",
                 lineHeight: 1.1,
@@ -144,7 +140,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
 
           <h2
             style={{
-              fontFamily: '"TWK Everett", Inter, sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               fontWeight: 700,
               color: "rgba(255,255,255,0.9)",
               lineHeight: 1.1,
@@ -153,13 +149,13 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
             }}
             className="text-[36px] md:text-[48px] lg:text-[64px]"
           >
-            To Level Up Your Business
+            che Collaborano, Crescono e Fidelizzano
           </h2>
 
           <p
             style={{
               color: "rgba(255,255,255,0.85)",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "Plus Jakarta Sans, sans-serif",
               fontWeight: 400,
               marginTop: "16px",
               maxWidth: "520px",
@@ -168,8 +164,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
             }}
             className="text-base md:text-[18px]"
           >
-            Unlock your full potential with the #1 platform to coach, scale,
-            and win.
+            La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso.
           </p>
 
           <div
@@ -180,7 +175,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           >
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Inserisci la tua email"
               style={{
                 height: "56px",
                 padding: "0 20px",
@@ -190,7 +185,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
                 backdropFilter: "blur(8px)",
                 color: "white",
                 fontSize: "16px",
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
                 outline: "none",
               }}
               className={cn(
@@ -208,7 +203,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
                 color: "#1b1b1b",
                 fontSize: "16px",
                 fontWeight: 600,
-                fontFamily: "Inter, sans-serif",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
                 border: "none",
                 cursor: "pointer",
                 transition: "all 0.2s ease",
@@ -216,20 +211,9 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
               }}
               className="w-full sm:w-auto hover:bg-white/90"
             >
-              Start free trial
+              Inizia gratis
             </button>
           </div>
-
-          <p
-            style={{
-              marginTop: "12px",
-              color: "rgba(255,255,255,0.6)",
-              fontSize: "14px",
-              fontFamily: "Inter, sans-serif",
-            }}
-          >
-            Trusted by over 210,000 coaches
-          </p>
         </div>
       </div>
     </section>

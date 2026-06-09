@@ -1,266 +1,331 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { gsap } from "gsap";
+import "./PillNav.css";
 
 interface Props {
   bannerVisible: boolean;
 }
 
 const NAV_LINKS = [
-  { label: "FEATURES +", href: "#" },
-  { label: "RESOURCES +", href: "#" },
-  { label: "PRICING", href: "#" },
+  { label: "Soluzioni", href: "#soluzioni" },
+  { label: "Ecosistema", href: "#ecosistema" },
+  { label: "Funzionalità", href: "#funzionalita" },
+  { label: "Risultati", href: "#risultati" },
 ];
+
+const EASE = "power3.out";
 
 export default function Navbar({ bannerVisible }: Props) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
+  const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);
+  const activeTweenRefs = useRef<Array<gsap.core.Tween | null>>([]);
+
+  const logoImgRef = useRef<HTMLImageElement | null>(null);
+  const logoTweenRef = useRef<gsap.core.Tween | null>(null);
+  const logoRef = useRef<HTMLAnchorElement | null>(null);
+  const hamburgerRef = useRef<HTMLButtonElement | null>(null);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const navItemsRef = useRef<HTMLDivElement | null>(null);
+
+  /* ── Scroll detection ─────────────────────────────────────────── */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const topOffset = bannerVisible ? 50 : 0;
+  /* ── GSAP circle layout + initial animation ───────────────────── */
+  useEffect(() => {
+    const layout = () => {
+      circleRefs.current.forEach((circle, index) => {
+        if (!circle?.parentElement) return;
 
-  const linkColor = isScrolled ? "#1b1b1b" : "rgba(255,255,255,0.9)";
+        const pill = circle.parentElement;
+        const { width: w, height: h } = pill.getBoundingClientRect();
+        const R = ((w * w) / 4 + h * h) / (2 * h);
+        const D = Math.ceil(2 * R) + 2;
+        const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
+        const originY = D - delta;
+
+        circle.style.width = `${D}px`;
+        circle.style.height = `${D}px`;
+        circle.style.bottom = `-${delta}px`;
+
+        gsap.set(circle, {
+          xPercent: -50,
+          scale: 0,
+          transformOrigin: `50% ${originY}px`,
+        });
+
+        const label = pill.querySelector<HTMLElement>(".pill-label");
+        const hoverLabel = pill.querySelector<HTMLElement>(".pill-label-hover");
+
+        if (label) gsap.set(label, { y: 0 });
+        if (hoverLabel) gsap.set(hoverLabel, { y: h + 12, opacity: 0 });
+
+        tlRefs.current[index]?.kill();
+        const tl = gsap.timeline({ paused: true });
+
+        tl.to(circle, { scale: 1.2, xPercent: -50, duration: 2, ease: EASE, overwrite: "auto" }, 0);
+
+        if (label) {
+          tl.to(label, { y: -(h + 8), duration: 2, ease: EASE, overwrite: "auto" }, 0);
+        }
+
+        if (hoverLabel) {
+          gsap.set(hoverLabel, { y: Math.ceil(h + 100), opacity: 0 });
+          tl.to(hoverLabel, { y: 0, opacity: 1, duration: 2, ease: EASE, overwrite: "auto" }, 0);
+        }
+
+        tlRefs.current[index] = tl;
+      });
+    };
+
+    layout();
+    window.addEventListener("resize", layout);
+    document.fonts?.ready?.then(layout).catch(() => {});
+
+    // Hide mobile menu initially
+    const menu = mobileMenuRef.current;
+    if (menu) {
+      gsap.set(menu, { visibility: "hidden", opacity: 0 });
+    }
+
+    // Initial load animation
+    const logo = logoRef.current;
+    const navItems = navItemsRef.current;
+
+    if (logo) {
+      gsap.from(logo, { scale: 0, duration: 0.6, ease: EASE });
+    }
+
+    if (navItems) {
+      gsap.from(navItems, { width: 0, overflow: "hidden", duration: 0.6, ease: EASE });
+    }
+
+    return () => window.removeEventListener("resize", layout);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /* ── Pill hover handlers ──────────────────────────────────────── */
+  const handleEnter = (i: number) => {
+    const tl = tlRefs.current[i];
+    if (!tl) return;
+    activeTweenRefs.current[i]?.kill();
+    activeTweenRefs.current[i] = tl.tweenTo(tl.duration(), {
+      duration: 0.3,
+      ease: EASE,
+      overwrite: "auto",
+    }) as unknown as gsap.core.Tween;
+  };
+
+  const handleLeave = (i: number) => {
+    const tl = tlRefs.current[i];
+    if (!tl) return;
+    activeTweenRefs.current[i]?.kill();
+    activeTweenRefs.current[i] = tl.tweenTo(0, {
+      duration: 0.2,
+      ease: EASE,
+      overwrite: "auto",
+    }) as unknown as gsap.core.Tween;
+  };
+
+  /* ── Logo spin ────────────────────────────────────────────────── */
+  const handleLogoEnter = () => {
+    const img = logoImgRef.current;
+    if (!img) return;
+    logoTweenRef.current?.kill();
+    gsap.set(img, { rotate: 0 });
+    logoTweenRef.current = gsap.to(img, {
+      rotate: 360,
+      duration: 0.5,
+      ease: EASE,
+      overwrite: "auto",
+    });
+  };
+
+  /* ── Mobile menu toggle ───────────────────────────────────────── */
+  const toggleMobileMenu = () => {
+    const next = !isMobileMenuOpen;
+    setIsMobileMenuOpen(next);
+
+    const hamburger = hamburgerRef.current;
+    const menu = mobileMenuRef.current;
+
+    if (hamburger) {
+      const lines = hamburger.querySelectorAll<HTMLElement>(".hamburger-line");
+      if (next) {
+        gsap.to(lines[0], { rotation: 45, y: 4, duration: 0.3, ease: EASE });
+        gsap.to(lines[1], { rotation: -45, y: -4, duration: 0.3, ease: EASE });
+      } else {
+        gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.3, ease: EASE });
+        gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.3, ease: EASE });
+      }
+    }
+
+    if (menu) {
+      if (next) {
+        gsap.set(menu, { visibility: "visible" });
+        gsap.fromTo(
+          menu,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.3, ease: EASE }
+        );
+      } else {
+        gsap.to(menu, {
+          opacity: 0,
+          y: 10,
+          duration: 0.2,
+          ease: EASE,
+          onComplete: () => gsap.set(menu, { visibility: "hidden" }),
+        });
+      }
+    }
+  };
+
+  /* ── CSS variables per scroll state ──────────────────────────── */
+  const cssVars = isScrolled
+    ? {
+        ["--pill-bg" as string]: "rgba(255,255,255,0.96)",
+        ["--pill-border" as string]: "1px solid rgba(0,0,0,0.08)",
+        ["--pill-shadow" as string]: "0 4px 32px rgba(0,0,0,0.12)",
+        // --base = fully opaque → circle fill colour AND regular text colour
+        ["--base" as string]: "#1b1b1b",
+        ["--pill-text" as string]: "#1b1b1b",
+        ["--hover-text" as string]: "#ffffff",
+      }
+    : {
+        ["--pill-bg" as string]: "rgba(18,18,18,0.40)",
+        ["--pill-border" as string]: "1px solid rgba(255,255,255,0.14)",
+        ["--pill-shadow" as string]: "0 4px 24px rgba(0,0,0,0.22)",
+        // fully opaque white so the circle visibly covers the dark pill bg
+        ["--base" as string]: "#ffffff",
+        ["--pill-text" as string]: "#ffffff",
+        ["--hover-text" as string]: "#1b1b1b",
+      };
+
+  const topOffset = bannerVisible ? 66 : 16;
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: topOffset,
-        left: 0,
-        width: "100%",
-        height: "87px",
-        display: "flex",
-        alignItems: "center",
-        backdropFilter: "blur(40px)",
-        backgroundColor: "rgba(0,0,0,0)",
-        zIndex: 40,
-        transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
-        borderBottom: "none",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          alignItems: "center",
-          padding: "0 80px",
-        }}
-        className="max-lg:px-6"
-      >
-        <div style={{ flexShrink: 0, transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)" }}>
-          <Link href="/" aria-label="Everfit home">
-            {isScrolled ? (
-              <Image
-                src="/themes/everfit/assets2/images/logo-sticky.svg"
-                alt="Everfit"
-                width={32}
-                height={32}
-                priority
-              />
-            ) : (
-              <Image
-                src="/themes/everfit/assets2/images/white-logo.svg"
-                alt="Everfit"
-                width={120}
-                height={32}
-                priority
-              />
-            )}
-          </Link>
+    <div className="pill-nav-container" style={{ top: topOffset }}>
+      <nav className="pill-nav" aria-label="Primary" style={cssVars}>
+
+        {/* Logo */}
+        <a
+          className="pill-logo"
+          href="/"
+          aria-label="gymme home"
+          onMouseEnter={handleLogoEnter}
+          ref={logoRef}
+        >
+          {/* Use img for GSAP rotation ref */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={isScrolled
+              ? "/themes/gymme/assets2/images/logo-sticky.svg"
+              : "/themes/gymme/assets2/images/white-logo.svg"
+            }
+            alt="gymme"
+            ref={logoImgRef}
+            style={{ height: "26px", width: "auto", display: "block" }}
+          />
+        </a>
+
+        {/* Desktop nav items */}
+        <div className="pill-nav-items desktop-only" ref={navItemsRef}>
+          <ul className="pill-list" role="menubar">
+            {NAV_LINKS.map((item, i) => (
+              <li key={item.href} role="none">
+                <a
+                  role="menuitem"
+                  href={item.href}
+                  className="pill"
+                  aria-label={item.label}
+                  onMouseEnter={() => handleEnter(i)}
+                  onMouseLeave={() => handleLeave(i)}
+                >
+                  <span
+                    className="hover-circle"
+                    aria-hidden="true"
+                    ref={(el) => { circleRefs.current[i] = el; }}
+                  />
+                  <span className="label-stack">
+                    <span className="pill-label">{item.label}</span>
+                    <span className="pill-label-hover" aria-hidden="true">{item.label}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <nav
-          className={cn(
-            "hidden lg:flex items-center",
-            "ml-auto mr-auto",
-          )}
-          style={{ gap: "40px" }}
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                fontSize: "14px",
-                fontWeight: 600,
-                letterSpacing: "0.02em",
-                color: linkColor,
-                textDecoration: "none",
-                transition: "color 0.3s cubic-bezier(0.4,0,0.2,1)",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/* CTA — desktop */}
+        <a href="#demo" className="pill-cta desktop-only">
+          Richiedi una demo
+        </a>
 
-        <div
-          className="hidden lg:flex items-center"
-          style={{ gap: "24px", marginLeft: "auto" }}
-        >
-          <Link
-            href="#"
-            style={{
-              fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-              fontSize: "14px",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              color: linkColor,
-              textDecoration: "none",
-              transition: "color 0.3s cubic-bezier(0.4,0,0.2,1)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            SIGN IN
-          </Link>
-
-          <Link
-            href="#"
-            style={{
-              fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-              fontSize: "14px",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              color: "#ffffff",
-              textDecoration: "none",
-              padding: "12px 20px",
-              borderRadius: "9999px",
-              whiteSpace: "nowrap",
-              transition: "all 0.3s cubic-bezier(0.4,0,0.2,1)",
-              ...(isScrolled
-                ? {
-                    backgroundColor: "#1b1b1b",
-                    border: "none",
-                  }
-                : {
-                    backgroundColor: "transparent",
-                    border: "1px solid rgba(255,255,255,0.9)",
-                  }),
-            }}
-          >
-            START FREE TRIAL →
-          </Link>
-        </div>
-
+        {/* Hamburger — mobile */}
         <button
-          className="lg:hidden ml-auto flex flex-col"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          aria-label="Toggle mobile menu"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: "8px",
-            gap: "5px",
-          }}
+          className="mobile-menu-button mobile-only"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle menu"
+          aria-expanded={isMobileMenuOpen}
+          ref={hamburgerRef}
         >
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "2px",
-              backgroundColor: isScrolled ? "#1b1b1b" : "#ffffff",
-              transition: "background-color 0.3s",
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "2px",
-              backgroundColor: isScrolled ? "#1b1b1b" : "#ffffff",
-              transition: "background-color 0.3s",
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "2px",
-              backgroundColor: isScrolled ? "#1b1b1b" : "#ffffff",
-              transition: "background-color 0.3s",
-            }}
-          />
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
         </button>
-      </div>
+      </nav>
 
-      {mobileOpen && (
-        <div
-          className="lg:hidden"
-          style={{
-            position: "absolute",
-            top: "87px",
-            left: 0,
-            right: 0,
-            backgroundColor: "#ffffff",
-            padding: "24px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-          }}
-        >
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              style={{
-                fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-                fontSize: "14px",
-                fontWeight: 600,
-                letterSpacing: "0.02em",
-                color: "#1b1b1b",
-                textDecoration: "none",
+      {/* Mobile dropdown */}
+      <div
+        className="mobile-menu-popover mobile-only"
+        ref={mobileMenuRef}
+        style={cssVars}
+      >
+        <ul className="mobile-menu-list">
+          {NAV_LINKS.map((item) => (
+            <li key={item.href}>
+              <a
+                href={item.href}
+                className="mobile-menu-link"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  const menu = mobileMenuRef.current;
+                  const hamburger = hamburgerRef.current;
+                  if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });
+                  if (hamburger) {
+                    const lines = hamburger.querySelectorAll<HTMLElement>(".hamburger-line");
+                    gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.2 });
+                    gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.2 });
+                  }
+                }}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href="#demo"
+              className="mobile-menu-link mobile-cta"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                const menu = mobileMenuRef.current;
+                if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });
               }}
             >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="#"
-            onClick={() => setMobileOpen(false)}
-            style={{
-              fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-              fontSize: "14px",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              color: "#1b1b1b",
-              textDecoration: "none",
-            }}
-          >
-            SIGN IN
-          </Link>
-          <Link
-            href="#"
-            onClick={() => setMobileOpen(false)}
-            style={{
-              fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
-              fontSize: "14px",
-              fontWeight: 600,
-              letterSpacing: "0.02em",
-              color: "#ffffff",
-              backgroundColor: "#1b1b1b",
-              textDecoration: "none",
-              padding: "12px 20px",
-              borderRadius: "9999px",
-              textAlign: "center",
-            }}
-          >
-            START FREE TRIAL →
-          </Link>
-        </div>
-      )}
-    </header>
+              Richiedi una demo
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 }

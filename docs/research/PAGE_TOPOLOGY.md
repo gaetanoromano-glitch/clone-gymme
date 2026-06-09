@@ -1,4 +1,4 @@
-# Page Topology — everfit.io
+# Page Topology — gymme.io
 
 ## Overview
 - **Total page height:** ~10,380px
@@ -17,7 +17,7 @@
 - **Height:** 50px
 - **Interaction:** Static, dismissible (close × button)
 - **Color:** Black bg (#000), white text
-- **Content:** "Join us every Wednesday for Everfit Foundations 101 Webinar 👉Sign Up Here"
+- **Content:** "Join us every Wednesday for gymme Foundations 101 Webinar 👉Sign Up Here"
 
 ### 2. Navbar
 - **Position:** Fixed, `top: 50px` (below banner), z=1020
@@ -57,7 +57,7 @@
 ### 6. FiveYearsSection
 - **Top:** ~2826px, Height: 354px
 - **Interaction:** Static
-- **Content:** "5 Years OF Everfit / Never Not Building" promo
+- **Content:** "5 Years OF gymme / Never Not Building" promo
 - **Layout:** Neon yellow-green card (left) + photo grid (right)
 
 ### 7. ForEveryoneSection (container)
@@ -113,8 +113,8 @@
 ### 10. Footer
 - **Top:** ~9477px, Height: ~900px
 - **Interaction:** Static (link hover states)
-- **Content:** 4 column links + social icons + giant gradient "everfit" text + copyright
-- **Giant text:** "everfit" in large letters with blue-to-purple gradient fill
+- **Content:** 4 column links + social icons + giant gradient "gymme" text + copyright
+- **Giant text:** "gymme" in large letters with blue-to-purple gradient fill
 
 ---
 

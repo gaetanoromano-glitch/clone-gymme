@@ -2,65 +2,65 @@ import Image from "next/image";
 
 const columns = [
   {
-    label: "FEATURES",
+    label: "FUNZIONALITÀ",
     links: [
-      { label: "Workout Programming" },
-      { label: "Meal Plans & Recipe Books" },
-      { label: "Habit Coaching" },
-      { label: "Sport Coaching" },
-      { label: "Messaging" },
-      { label: "Forms & Questionnaires" },
-      { label: "Sports Coaching" },
-      { label: "AI Workout Builder" },
-      { label: "Marketplace" },
+      { label: "Protocolli & Schede" },
+      { label: "AI Protocol Builder" },
+      { label: "CRM Clienti" },
+      { label: "Calendario & Sedute" },
+      { label: "Messaggistica" },
+      { label: "Progressi & Misurazioni" },
+      { label: "Client Risk Radar" },
+      { label: "Collaborazione Multi-Pro" },
+      { label: "Referral & Network" },
     ],
   },
   {
-    label: "BILLING",
+    label: "PIANI",
     links: [
-      { label: "Pricing" },
-      { label: "HSA/FSA" },
+      { label: "Prezzi" },
+      { label: "Early Access" },
     ],
   },
   {
-    label: "RESOURCES",
+    label: "RISORSE",
     links: [
-      { label: "Academy" },
-      { label: "Case Studies" },
-      { label: "Webinars" },
+      { label: "Documentazione" },
+      { label: "Casi Studio" },
+      { label: "Webinar" },
       { label: "Blog" },
-      { label: "Help" },
+      { label: "Assistenza" },
     ],
   },
   {
-    label: "COMPANY",
+    label: "AZIENDA",
     links: [
-      { label: "Fitness Intelligence" },
-      { label: "Careers" },
+      { label: "Chi Siamo" },
+      { label: "Carriere" },
     ],
   },
 ];
 
 const socialIcons = [
   {
-    src: "/themes/everfit/assets2/images/homepage/footer/fb-icon.svg",
+    src: "/themes/gymme/assets2/images/homepage/footer/fb-icon.svg",
     alt: "Facebook",
-    href: "https://www.facebook.com/everfitapp",
+    href: "https://www.facebook.com/gymmeapp",
   },
   {
-    src: "/themes/everfit/assets2/images/homepage/footer/ig-icon.svg",
+    src: "/themes/gymme/assets2/images/homepage/footer/ig-icon.svg",
     alt: "Instagram",
-    href: "https://www.instagram.com/everfitapp",
+    href: "https://www.instagram.com/gymmeapp",
   },
   {
-    src: "/themes/everfit/assets2/images/homepage/footer/ytb-icon.svg",
+    src: "/themes/gymme/assets2/images/homepage/footer/ytb-icon.svg",
     alt: "YouTube",
-    href: "https://www.youtube.com/everfit",
+    href: "https://www.youtube.com/gymme",
   },
   {
-    src: "/themes/everfit/assets2/images/homepage/footer/linkedin-icon.svg",
+    src: "/themes/gymme/assets2/images/homepage/footer/linkedin-icon.svg",
     alt: "LinkedIn",
-    href: "https://www.linkedin.com/company/everfit",
+    href: "https://www.linkedin.com/company/gymme",
   },
 ];
 
@@ -160,7 +160,7 @@ export function Footer() {
               paddingRight: "80px",
             }}
           >
-            everfit
+            gymme
           </p>
         </div>
 
@@ -178,7 +178,7 @@ export function Footer() {
               color: "rgba(27,27,27,0.5)",
             }}
           >
-            &copy; 2026 Everfit. All rights reserved
+            &copy; 2026 Gymme. Tutti i diritti riservati
           </p>
           <div className="flex items-center gap-4">
             <a
@@ -202,7 +202,7 @@ export function Footer() {
                 textDecoration: "none",
               }}
             >
-              Terms &amp; Condition
+              Termini &amp; Condizioni
             </a>
           </div>
         </div>

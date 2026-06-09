@@ -33,7 +33,7 @@ export function FiveYearsSection() {
             <div>
               <div
                 style={{
-                  fontFamily: '"TWK Everett", Inter, sans-serif',
+                  fontFamily: '"Unbounded", sans-serif',
                   color: "#1b1b1b",
                   lineHeight: 1.0,
                 }}
@@ -45,8 +45,8 @@ export function FiveYearsSection() {
                     display: "block",
                   }}
                 >
-                  5 Years{" "}
-                  <span style={{ fontSize: "16px", fontWeight: 400 }}>OF</span>
+                  Gymme{" "}
+                  <span style={{ fontSize: "16px", fontWeight: 400 }}>IL TUO</span>
                 </span>
                 <span
                   style={{
@@ -55,7 +55,7 @@ export function FiveYearsSection() {
                     display: "block",
                   }}
                 >
-                  Everfit
+                  Studio
                 </span>
               </div>
 
@@ -63,13 +63,13 @@ export function FiveYearsSection() {
                 style={{
                   fontSize: "40px",
                   fontWeight: 900,
-                  fontFamily: '"TWK Everett", Inter, sans-serif',
+                  fontFamily: '"Unbounded", sans-serif',
                   color: "#1b1b1b",
                   lineHeight: 1.0,
                   marginTop: "4px",
                 }}
               >
-                Never Not Building
+                Sempre con Te
               </div>
             </div>
 
@@ -77,7 +77,7 @@ export function FiveYearsSection() {
               <p
                 style={{
                   fontSize: "12px",
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
                   color: "#1b1b1b",
                   letterSpacing: "0.05em",
                   lineHeight: 1.5,
@@ -85,9 +85,9 @@ export function FiveYearsSection() {
                   margin: 0,
                 }}
               >
-                FROM ONLINE TO OFFLINE, AI KEEPS EVERY MOVE CONNECTED, AND FIVE
-                YEARS IN, EVERFIT IS STILL PUSHING BOUNDARIES WITH SYSTEMS THAT
-                ADAPT, SCALE, AND EVOLVE WITH YOU.
+                DALL&apos;ONLINE ALL&apos;OFFLINE, L&apos;AI MANTIENE OGNI MOSSA CONNESSA. GYMME
+                CRESCE CON TE: SISTEMI CHE SI ADATTANO, SCALANO ED EVOLVONO
+                CON LA TUA ATTIVITÀ.
               </p>
 
               <button
@@ -106,7 +106,7 @@ export function FiveYearsSection() {
                   width: "100%",
                 }}
               >
-                <span>Explore the Highlights</span>
+                <span>Scopri Gymme Studio</span>
                 <span style={{ fontSize: "16px" }}>→</span>
               </button>
             </div>
@@ -126,16 +126,16 @@ export function FiveYearsSection() {
           >
             <div style={{ position: "relative" }}>
               <Image
-                src="/themes/everfit/assets2/images/homepage/five-years/banner-1.webp"
-                alt="Everfit 5 years banner 1"
+                src="/themes/gymme/assets2/images/homepage/five-years/banner-1.webp"
+                alt="gymme 5 years banner 1"
                 fill
                 style={{ objectFit: "cover" }}
               />
             </div>
             <div style={{ position: "relative" }}>
               <Image
-                src="/themes/everfit/assets2/images/homepage/five-years/banner-2.webp"
-                alt="Everfit 5 years banner 2"
+                src="/themes/gymme/assets2/images/homepage/five-years/banner-2.webp"
+                alt="gymme 5 years banner 2"
                 fill
                 style={{ objectFit: "cover" }}
               />

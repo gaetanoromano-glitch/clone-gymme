@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Unbounded, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const unbounded = Unbounded({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-unbounded",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-plus-jakarta",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Everfit | #1 Fitness and Wellness Coaching Platform",
+  title: "gymme | La Piattaforma #1 per il Coaching Fitness e Benessere",
   description:
-    "Deliver your coaching at scale, from low-ticket to high-ticket. All-in-one platform designed for personal trainers, wellness coaches, and gym owners.",
+    "Eroga il tuo coaching su larga scala, dai clienti base a quelli premium. Piattaforma all-in-one pensata per personal trainer, coach del benessere e proprietari di palestre.",
   icons: {
     icon: [
       { url: "/uploads/2025/01/cropped-favicon.png", sizes: "32x32" },
@@ -28,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
     </html>
   );

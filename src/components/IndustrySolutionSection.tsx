@@ -16,47 +16,47 @@ interface Feature {
 const features: Feature[] = [
   {
     num: 1,
-    badge: "AI POWERED",
-    title: "Workout Programming",
-    description: "Deliver personalized training through workout planning, powered by AI.",
-    icon: "/themes/everfit/assets2/images/homepage/industry/AI.svg",
+    badge: "INNOVAZIONE GYMME",
+    title: "Multi-Professionale Nativo",
+    description: "PT, Nutrizionista e Osteopata collaborano sullo stesso cliente con autonomia professionale preservata e contesto condiviso. Nessun competitor single-role lo abilita.",
+    icon: "/themes/gymme/assets2/images/homepage/industry/AI.svg",
     screenshot: "/uploads/2025/08/coach-item.webp",
   },
   {
     num: 2,
-    badge: "AI POWERED",
-    title: "Nutrition",
-    description: "Provide guidance & accountability with flexible meal plan features.",
-    icon: "/themes/everfit/assets2/images/homepage/industry/nutrition.svg",
+    badge: "POTENZIATO DALL'AI",
+    title: "AI Protocol Builder",
+    description: "Genera protocolli strutturati di Training, Nutrition e Recovery con un semplice prompt. L'AI produce una bozza modificabile — tu personalizzi, il cliente riceve il meglio.",
+    icon: "/themes/gymme/assets2/images/homepage/industry/nutrition.svg",
     screenshot: "/uploads/2025/08/manage-item.webp",
   },
   {
     num: 3,
-    title: "Habit Coaching",
-    description: "Create routines that drive lasting results and longevity.",
-    icon: "/themes/everfit/assets2/images/homepage/industry/habit.svg",
+    title: "Client Risk Radar",
+    description: "Analisi predittiva che identifica i clienti a rischio abbandono prima che sia troppo tardi. Aderenza, check-in, pattern di pagamento: tutto in un unico segnale d'allerta.",
+    icon: "/themes/gymme/assets2/images/homepage/industry/habit.svg",
     screenshot: "/uploads/2025/08/engage-item.webp",
   },
   {
     num: 4,
-    title: "Sport Coaching",
-    description: "Go beyond workouts with skill-based drills, and performance analytics.",
-    icon: "/themes/everfit/assets2/images/homepage/industry/sport.svg",
+    title: "Business Dashboard",
+    description: "Rinnovi, margini e metriche operative analizzati con dati certi. Gestisci la tua attività come una macchina prevedibile che cresce con te.",
+    icon: "/themes/gymme/assets2/images/homepage/industry/sport.svg",
     screenshot: "/uploads/2025/08/scale-item-1.webp",
   },
 ];
 
 const trustedLogos = [
-  { name: "BSF", src: "/themes/everfit/assets2/images/homepage/industry/bsf.svg" },
-  { name: "SquashSkills", src: "/themes/everfit/assets2/images/homepage/industry/squash-skills.svg" },
-  { name: "Lyss", src: "/themes/everfit/assets2/images/homepage/industry/lyss.svg" },
-  { name: "PhysioRx", src: "/themes/everfit/assets2/images/homepage/industry/physiorx.svg" },
-  { name: "Drop Gym", src: "/themes/everfit/assets2/images/homepage/industry/drop-gym.svg" },
-  { name: "Henley Fitness", src: "/themes/everfit/assets2/images/homepage/industry/henley-fitness.svg" },
-  { name: "Winning Mentality", src: "/themes/everfit/assets2/images/homepage/industry/winning-mentality.svg" },
-  { name: "Strength Base", src: "/themes/everfit/assets2/images/homepage/industry/strength-base.svg" },
-  { name: "BoulayFit", src: "/themes/everfit/assets2/images/homepage/industry/boulay-fit.svg" },
-  { name: "Integrit", src: "/themes/everfit/assets2/images/homepage/industry/integrit.svg" },
+  { name: "BSF", src: "/themes/gymme/assets2/images/homepage/industry/bsf.svg" },
+  { name: "SquashSkills", src: "/themes/gymme/assets2/images/homepage/industry/squash-skills.svg" },
+  { name: "Lyss", src: "/themes/gymme/assets2/images/homepage/industry/lyss.svg" },
+  { name: "PhysioRx", src: "/themes/gymme/assets2/images/homepage/industry/physiorx.svg" },
+  { name: "Drop Gym", src: "/themes/gymme/assets2/images/homepage/industry/drop-gym.svg" },
+  { name: "Henley Fitness", src: "/themes/gymme/assets2/images/homepage/industry/henley-fitness.svg" },
+  { name: "Winning Mentality", src: "/themes/gymme/assets2/images/homepage/industry/winning-mentality.svg" },
+  { name: "Strength Base", src: "/themes/gymme/assets2/images/homepage/industry/strength-base.svg" },
+  { name: "BoulayFit", src: "/themes/gymme/assets2/images/homepage/industry/boulay-fit.svg" },
+  { name: "Integrit", src: "/themes/gymme/assets2/images/homepage/industry/integrit.svg" },
 ];
 
 export function IndustrySolutionSection() {
@@ -66,6 +66,7 @@ export function IndustrySolutionSection() {
 
   return (
     <section
+      id="soluzioni"
       style={{ backgroundColor: "#ffffff", padding: "80px 80px" }}
       className="w-full"
     >
@@ -75,28 +76,29 @@ export function IndustrySolutionSection() {
             style={{
               fontSize: "56px",
               fontWeight: 700,
-              fontFamily: '"TWK Everett", Inter, sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
             }}
           >
-            The industry&apos;s{" "}
-            <span style={{ fontStyle: "italic", fontFamily: "Inter, serif" }}>
-              Premier Solution
-            </span>
+            I{" "}
+            <span style={{ fontStyle: "italic", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+              5 Pillar
+            </span>{" "}
+            che nessun competitor
           </h2>
           <h2
             style={{
               fontSize: "56px",
               fontWeight: 700,
-              fontFamily: '"TWK Everett", Inter, sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
             }}
           >
-            for Health and Fitness Coaching
+            offre insieme nel mercato italiano
           </h2>
         </div>
 
@@ -200,7 +202,7 @@ export function IndustrySolutionSection() {
                     }}
                   >
                     <Image
-                      src="/themes/everfit/assets2/images/icons/ai-badge-sm.png"
+                      src="/themes/gymme/assets2/images/icons/ai-badge-sm.png"
                       alt="AI"
                       width={14}
                       height={14}
@@ -214,7 +216,7 @@ export function IndustrySolutionSection() {
                 style={{
                   fontSize: "28px",
                   fontWeight: 700,
-                  fontFamily: '"TWK Everett", Inter, sans-serif',
+                  fontFamily: '"Unbounded", sans-serif',
                   color: "#1b1b1b",
                   letterSpacing: "-0.5px",
                 }}
@@ -254,16 +256,7 @@ export function IndustrySolutionSection() {
         </div>
 
         <div className="mt-16">
-          <p
-            style={{
-              fontSize: "13px",
-              color: "rgba(27,27,27,0.5)",
-              marginBottom: "16px",
-              fontWeight: 500,
-            }}
-          >
-            Trusted by over 210,000 coaches
-          </p>
+
 
           <div
             style={{

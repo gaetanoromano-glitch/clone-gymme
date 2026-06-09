@@ -1,57 +1,57 @@
 import Image from "next/image";
 
 const stats = [
-  { prefix: "+", value: "82%", label: "Free Trial\nConversion Rate" },
-  { prefix: "+", value: "90%", label: "Client Retention" },
-  { value: "5,000", label: "New Clients In 30 Days" },
-  { bigText: "25+", label: "Hours Per Week Freed\nUp On Admin Tasks" },
-  { value: "12x", label: "Increase In Revenue\nIn First 3 Months." },
+  { value: "50K+", label: "Professionisti Wellness\nin Italia" },
+  { prefix: "+", value: "30%", label: "Retention Media\ndei Clienti" },
+  { value: "3", label: "Discipline in\nun'Unica Piattaforma" },
+  { bigText: "25+", label: "Ore a Settimana\nRisparmiate" },
+  { value: "0", label: "Competitor Italiani\nMulti-Professionale" },
 ];
 
 const testimonials = [
   {
     quote:
-      "Since using Everfit, our pipeline has strengthened significantly, and our free trial conversions have had a major impact on our top line.",
-    name: "Scott Deakins",
-    title: "Founder and CEO of Under Par Performance Golf",
+      "Finalmente posso collaborare con la nutrizionista dei miei clienti senza gestire mille chat su WhatsApp. Gymme ha cambiato il modo in cui lavoro ogni giorno.",
+    name: "Marco Ferretti",
+    title: "Personal Trainer, Milano",
     photo:
-      "/themes/everfit/assets2/images/homepage/testimonial/testimonial-1-1.webp",
+      "/themes/gymme/assets2/images/homepage/testimonial/testimonial-1-1.webp",
     bgColor: "#1a2744",
   },
   {
     quote:
-      "Everfit has been the game-changer behind my growth from 50 to over 1900 clients.",
-    name: "Cori Leftkowith",
-    title: "Founder of Redefining Strength",
+      "L'AI Protocol Builder mi fa risparmiare ore ogni settimana. Genero la bozza, la personalizzo e la mando al cliente in dieci minuti. Prima ci voleva una mattinata.",
+    name: "Giulia Esposito",
+    title: "Personal Trainer & Coach, Roma",
     photo:
-      "/themes/everfit/assets2/images/homepage/testimonial/testimonial-1-2.webp",
+      "/themes/gymme/assets2/images/homepage/testimonial/testimonial-1-2.webp",
     bgColor: "#4a5568",
   },
   {
     quote:
-      "We ran our group program for the first time on Everfit, and it's been the most dreamy thing ever. The amount of retention is significantly higher than before.",
-    name: "Rachel Henley",
-    title: "Founder of Henley Fitness",
+      "Il Client Risk Radar mi ha segnalato tre clienti a rischio in un mese. Li ho contattati in anticipo e tutti e tre hanno rinnovato il pacchetto. Non avrei mai potuto accorgermene da solo.",
+    name: "Luca Bianchi",
+    title: "Personal Trainer, Napoli",
     photo:
-      "/themes/everfit/assets2/images/homepage/testimonial/testimonial-1-3.webp",
+      "/themes/gymme/assets2/images/homepage/testimonial/testimonial-1-3.webp",
     bgColor: "#2d5016",
   },
   {
     quote:
-      "Everfit was integrating and constantly upgrading how we can make the experience better for clients and coaches.",
-    name: "Brian Foley",
-    title: "Founder of TRNDAY",
+      "Ho uno studio con due PT e una nutrizionista. Con Gymme lavoriamo tutti sullo stesso cliente senza duplicare le informazioni. I clienti lo percepiscono e apprezzano.",
+    name: "Sara Mancini",
+    title: "Fondatrice Studio Wellness, Torino",
     photo:
-      "/themes/everfit/assets2/images/homepage/testimonial/testimonial-1-4.webp",
+      "/themes/gymme/assets2/images/homepage/testimonial/testimonial-1-4.webp",
     bgColor: "#1b1b1b",
   },
   {
     quote:
-      "With Everfit, everything is all right there. It makes it easy to manage everything and see everything all in one platform.",
-    name: "Brandon Woo",
-    title: "Founder of Winning Mentality Fitness",
+      "Gymme mi ha permesso di gestire 40 clienti attivi senza impazzire con fogli Excel e messaggi su tre app diverse. Tutto in un posto, finalmente.",
+    name: "Andrea Romano",
+    title: "Personal Trainer, Firenze",
     photo:
-      "/themes/everfit/assets2/images/homepage/testimonial/testimonial-1-5.webp",
+      "/themes/gymme/assets2/images/homepage/testimonial/testimonial-1-5.webp",
     bgColor: "#3d3d5c",
   },
 ];
@@ -59,6 +59,7 @@ const testimonials = [
 export function RatingsSection() {
   return (
     <section
+      id="risultati"
       className="bg-white"
       style={{ padding: "80px 80px" }}
     >
@@ -72,8 +73,8 @@ export function RatingsSection() {
             letterSpacing: "-1.5px",
           }}
         >
-          <span style={{ fontWeight: 700 }}>#1 Rated </span>
-          <span style={{ fontWeight: 400 }}>Personal Training Platform</span>
+          <span style={{ fontWeight: 700 }}>La Prima Piattaforma </span>
+          <span style={{ fontWeight: 400 }}>Multi-Pro per il Benessere in Italia</span>
         </h2>
 
         <div

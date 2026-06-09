@@ -11,7 +11,7 @@ export function CTASection() {
       }}
     >
       <Image
-        src="/themes/everfit/assets2/images/homepage/join-feature/join-feature.webp"
+        src="/themes/gymme/assets2/images/homepage/join-feature/join-feature.webp"
         alt="App mockup"
         width={800}
         height={604}
@@ -30,9 +30,9 @@ export function CTASection() {
             letterSpacing: "-2px",
           }}
         >
-          Join the Coaching
+          Porta il Tuo Studio
           <br />
-          Evolution today!
+          nel Futuro del Benessere
         </h2>
 
         <p
@@ -44,12 +44,11 @@ export function CTASection() {
             lineHeight: 1.5,
           }}
         >
-          Start your 30-day free trial today and unlock the tools to scale,
-          motivate, and succeed!
+          Inizia oggi e scopri come Gymme trasforma il modo in cui lavori con i tuoi clienti. PT, Nutrizionisti e Osteopati — finalmente in un unico ecosistema.
         </p>
 
         <a
-          href="https://app.everfit.io/signup"
+          href="#"
           className="inline-flex items-center font-inter hover:bg-white/90 transition-colors duration-200"
           style={{
             backgroundColor: "#ffffff",
@@ -63,7 +62,7 @@ export function CTASection() {
             cursor: "pointer",
           }}
         >
-          Start 30-day trial
+          Prova Gymme Gratuitamente →
         </a>
       </div>
     </section>

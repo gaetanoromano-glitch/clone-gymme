@@ -11,10 +11,11 @@ export default function ForEveryoneSection({
 }: ForEveryoneSectionProps) {
   return (
     <section
+      id="funzionalita"
       className={cn("relative w-full", className)}
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('/themes/everfit/assets2/images/homepage/blueprint/blueprint-overlay.webp')",
+          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('/themes/gymme/assets2/images/homepage/blueprint/blueprint-overlay.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -30,16 +31,16 @@ export default function ForEveryoneSection({
             letterSpacing: "-2px",
           }}
         >
-          For Everyone{" "}
+          Per Tutti,{" "}
           <em
             style={{
               fontStyle: "italic",
-              fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+              fontFamily: "Plus Jakarta Sans, sans-serif",
             }}
           >
-            from
+            dai
           </em>{" "}
-          Inspiring Coaches
+          Personal Trainer
         </h2>
         <h2
           className="font-twk text-white"
@@ -50,7 +51,7 @@ export default function ForEveryoneSection({
             letterSpacing: "-2px",
           }}
         >
-          to Training Organizations
+          agli Studi Multidisciplinari
         </h2>
         <p
           style={{
@@ -60,11 +61,10 @@ export default function ForEveryoneSection({
             lineHeight: 1.6,
             marginTop: "16px",
             maxWidth: "600px",
-            fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+            fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
-          A proven blueprint to scale effortlessly, inspire clients, and ignite
-          your business growth.
+          Una piattaforma progettata per PT, Nutrizionisti e Osteopati che vogliono collaborare, crescere e fidelizzare i propri clienti nel tempo.
         </p>
       </div>
       {children}
