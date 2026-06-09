@@ -34,7 +34,6 @@ export default function Home() {
         <HeroSection topOffset={bannerVisible ? 137 : 87} />
         <IndustrySolutionSection />
         <ServiceTierSection />
-        <FiveYearsSection />
         <ForEveryoneSection>
           <PlanCoachSection />
           <MotivateSection />
