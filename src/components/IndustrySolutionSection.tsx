@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 interface Feature {
   num: number;
@@ -11,283 +10,412 @@ interface Feature {
   description: string;
   icon: string;
   screenshot: string;
+  accent: string;
 }
 
 const features: Feature[] = [
   {
     num: 1,
     badge: "INNOVAZIONE GYMME",
-    title: "Multi-Professionale Nativo",
-    description: "PT, Nutrizionista e Osteopata collaborano sullo stesso cliente con autonomia professionale preservata e contesto condiviso. Nessun competitor single-role lo abilita.",
+    title: "Multi-Professionale",
+    description:
+      "PT, Nutrizionista e Osteopata collaborano sullo stesso cliente con autonomia professionale preservata e contesto condiviso. Nessun competitor single-role lo abilita.",
     icon: "/themes/gymme/assets2/images/homepage/industry/AI.svg",
-    screenshot: "/uploads/2025/08/coach-item.webp",
+    screenshot: "/videos/Multi_pro.mp4",
+    accent: "#e8f0ff",
   },
   {
     num: 2,
     badge: "POTENZIATO DALL'AI",
-    title: "AI Protocol Builder",
-    description: "Genera protocolli strutturati di Training, Nutrition e Recovery con un semplice prompt. L'AI produce una bozza modificabile — tu personalizzi, il cliente riceve il meglio.",
+    title: "AI Builder",
+    description:
+      "Meno compiti meccanici, più valore umano. Genera schede e protocolli solidi in pochi istanti con l'AI. Dedica il tuo tempo a ciò che conta: il rapporto con il cliente.",
     icon: "/themes/gymme/assets2/images/homepage/industry/nutrition.svg",
-    screenshot: "/uploads/2025/08/manage-item.webp",
+      screenshot: "/videos/AI_Builder.mp4",
+    accent: "#e8f7ee",
   },
   {
     num: 3,
     title: "Client Risk Radar",
-    description: "Analisi predittiva che identifica i clienti a rischio abbandono prima che sia troppo tardi. Aderenza, check-in, pattern di pagamento: tutto in un unico segnale d'allerta.",
+    description:
+      "Non farti sorprendere dai clienti che spariscono. Intervieni subito sui segnali di crisi e salva il tuo fatturato mensile.",
     icon: "/themes/gymme/assets2/images/homepage/industry/habit.svg",
-    screenshot: "/uploads/2025/08/engage-item.webp",
+      screenshot: "/videos/Client_Risk_Radar.mp4",
+    accent: "#fff3e8",
   },
   {
     num: 4,
     title: "Business Dashboard",
-    description: "Rinnovi, margini e metriche operative analizzati con dati certi. Gestisci la tua attività come una macchina prevedibile che cresce con te.",
+    description:
+      "Smetti di indovinare: analizza rinnovi e margini con dati certi. Trasforma la tua attività in una macchina prevedibile che cresce insieme a te.",
     icon: "/themes/gymme/assets2/images/homepage/industry/sport.svg",
-    screenshot: "/uploads/2025/08/scale-item-1.webp",
+      screenshot: "/videos/Business_Dashboard.mp4",
+    accent: "#f3eeff",
   },
 ];
 
-const trustedLogos = [
-  { name: "BSF", src: "/themes/gymme/assets2/images/homepage/industry/bsf.svg" },
-  { name: "SquashSkills", src: "/themes/gymme/assets2/images/homepage/industry/squash-skills.svg" },
-  { name: "Lyss", src: "/themes/gymme/assets2/images/homepage/industry/lyss.svg" },
-  { name: "PhysioRx", src: "/themes/gymme/assets2/images/homepage/industry/physiorx.svg" },
-  { name: "Drop Gym", src: "/themes/gymme/assets2/images/homepage/industry/drop-gym.svg" },
-  { name: "Henley Fitness", src: "/themes/gymme/assets2/images/homepage/industry/henley-fitness.svg" },
-  { name: "Winning Mentality", src: "/themes/gymme/assets2/images/homepage/industry/winning-mentality.svg" },
-  { name: "Strength Base", src: "/themes/gymme/assets2/images/homepage/industry/strength-base.svg" },
-  { name: "BoulayFit", src: "/themes/gymme/assets2/images/homepage/industry/boulay-fit.svg" },
-  { name: "Integrit", src: "/themes/gymme/assets2/images/homepage/industry/integrit.svg" },
-];
+const N = features.length;
+const ENTRY_FRACTION = 0.5;
+
+function isVideo(src: string) {
+  return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
+}
+
+function MediaDisplay({
+  src,
+  alt,
+  style,
+}: {
+  src: string;
+  alt: string;
+  fill?: boolean;
+  style?: React.CSSProperties;
+}) {
+  if (isVideo(src)) {
+    return (
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          inset: 0,
+          height: "100%",
+          // contain: no cropping — full video always visible.
+          // transparent: letterbox areas show the card's accent colour below.
+          // borderRadius: inherit avoids relying on ancestor overflow:hidden clipping
+          // which breaks under willChange:transform compositing layers (Safari).
+          objectFit: "contain",
+          objectPosition: "top center",
+          background: "transparent",
+          display: "block",
+          borderRadius: "40px",
+            padding:'16px'
+        }}
+      />
+    );
+  }
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      style={style}
+    />
+  );
+}
+
+// Shared section header
+function SectionHeader() {
+  return (
+    <div>
+      <h2
+        style={{
+          fontSize: "clamp(26px, 4.5vw, 56px)",
+          fontWeight: 700,
+          fontFamily: '"Unbounded", sans-serif',
+          color: "#1b1b1b",
+          lineHeight: 1.1,
+          letterSpacing: "-1.5px",
+        }}
+      >
+        I{" "}
+        <span style={{ fontStyle: "italic", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
+          4 Pillar
+        </span>{" "}
+        che nessun competitor
+      </h2>
+      <h2
+        style={{
+          fontSize: "clamp(26px, 4.5vw, 56px)",
+          fontWeight: 700,
+          fontFamily: '"Unbounded", sans-serif',
+          color: "#1b1b1b",
+          lineHeight: 1.1,
+          letterSpacing: "-1.5px",
+        }}
+      >
+        offre insieme nel mercato italiano
+      </h2>
+    </div>
+  );
+}
 
 export function IndustrySolutionSection() {
-  const [activeTab, setActiveTab] = useState(0);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const active = features[activeTab];
+  useEffect(() => {
+    const outer = outerRef.current;
+    if (!outer) return;
+
+    let rafId = 0;
+
+    const update = () => {
+      const rect = outer.getBoundingClientRect();
+      const totalScroll = outer.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / totalScroll));
+
+      cardRefs.current.forEach((card, i) => {
+        if (!card) return;
+        if (i === 0) {
+          card.style.transform = "translateY(0)";
+          return;
+        }
+        const entryStart = i / N;
+        const entryEnd = entryStart + (1 / N) * ENTRY_FRACTION;
+        const t = Math.max(0, Math.min(1, (progress - entryStart) / (entryEnd - entryStart)));
+        card.style.transform = `translateY(${(1 - t) * 100}vh)`;
+      });
+    };
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const initId = requestAnimationFrame(update);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(initId);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   return (
-    <section
-      id="soluzioni"
-      style={{ backgroundColor: "#ffffff", padding: "80px 80px" }}
-      className="w-full"
-    >
-      <div className="max-w-[1280px] mx-auto">
-        <div className="mb-12">
-          <h2
-            style={{
-              fontSize: "56px",
-              fontWeight: 700,
-              fontFamily: '"Unbounded", sans-serif',
-              color: "#1b1b1b",
-              lineHeight: 1.1,
-              letterSpacing: "-1.5px",
-            }}
-          >
-            I{" "}
-            <span style={{ fontStyle: "italic", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-              5 Pillar
-            </span>{" "}
-            che nessun competitor
-          </h2>
-          <h2
-            style={{
-              fontSize: "56px",
-              fontWeight: 700,
-              fontFamily: '"Unbounded", sans-serif',
-              color: "#1b1b1b",
-              lineHeight: 1.1,
-              letterSpacing: "-1.5px",
-            }}
-          >
-            offre insieme nel mercato italiano
-          </h2>
-        </div>
+    <section id="soluzioni" className="w-full" style={{ backgroundColor: "#ffffff" }}>
 
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col md:flex-row gap-2 md:gap-6 overflow-x-auto">
-            {features.map((f, i) => (
-              <button
+      {/* ── MOBILE: simple vertical card list (hidden on lg+) ── */}
+      <div className="lg:hidden px-5 pt-10 pb-6 md:px-10 md:pt-16">
+        <div className="max-w-[1280px] mx-auto">
+          <SectionHeader />
+          <div className="flex flex-col gap-6 mt-8">
+            {features.map((f) => (
+              <div
                 key={f.num}
-                onClick={() => setActiveTab(i)}
-                className={cn(
-                  "flex items-start gap-3 text-left p-4 rounded-xl transition-all duration-200 flex-1 min-w-[200px]",
-                  activeTab === i
-                    ? "bg-[rgba(0,0,0,0.05)]"
-                    : "hover:bg-[rgba(0,0,0,0.03)]"
-                )}
+                style={{
+                  backgroundColor: f.accent,
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                }}
               >
-                <span
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "50%",
-                    backgroundColor:
-                      activeTab === i
-                        ? "rgba(0,0,0,0.3)"
-                        : "rgba(0,0,0,0.1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    color: "#1b1b1b",
-                    flexShrink: 0,
-                    transition: "background-color 0.2s",
-                  }}
-                >
-                  {f.num}
-                </span>
-                <span
-                  style={{
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: "#1b1b1b",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {f.title}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div
-            style={{
-              borderRadius: "20px",
-              backgroundColor: "#f5f5f5",
-              overflow: "hidden",
-              position: "relative",
-              minHeight: "480px",
-            }}
-          >
-            <div
-              key={activeTab}
-              style={{
-                padding: "40px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-                animation: "fadeIn 0.3s ease",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div
-                  style={{
-                    width: "48px",
-                    height: "48px",
-                    position: "relative",
-                    flexShrink: 0,
-                  }}
-                >
-                  <Image
-                    src={active.icon}
-                    alt={active.title}
-                    fill
-                    style={{ objectFit: "contain" }}
+                {/* Screenshot / Video */}
+                <div style={{ position: "relative", height: "200px", width: "100%", overflow: "hidden", borderRadius: "16px 16px 0 0" }}>
+                  <MediaDisplay
+                    src={f.screenshot}
+                    alt={f.title}
+                    style={{ objectFit: "cover", objectPosition: "top left" }}
                   />
                 </div>
-
-                {active.badge && (
-                  <span
+                {/* Text */}
+                <div style={{ padding: "24px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                     {f.badge && (
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "5px",
+                          backgroundColor: "#0370ff",
+                          color: "#fff",
+                          fontSize: "10px",
+                          fontWeight: 700,
+                          letterSpacing: "0.06em",
+                          padding: "3px 8px",
+                          borderRadius: "999px",
+                        }}
+                      >
+                        {f.badge}
+                      </span>
+                    )}
+                    <span
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(27,27,27,0.10)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        color: "#1b1b1b",
+                        flexShrink: 0,
+                        marginLeft: "auto",
+                      }}
+                    >
+                      {f.num}
+                    </span>
+                  </div>
+                  <h3
                     style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      backgroundColor: "#0370ff",
-                      color: "#ffffff",
-                      fontSize: "11px",
+                      fontSize: "18px",
                       fontWeight: 700,
-                      letterSpacing: "0.08em",
-                      padding: "4px 10px",
-                      borderRadius: "999px",
+                      fontFamily: '"Unbounded", sans-serif',
+                      color: "#1b1b1b",
+                      letterSpacing: "-0.5px",
+                      lineHeight: 1.2,
+                      marginBottom: "8px",
                     }}
                   >
-                    <Image
-                      src="/themes/gymme/assets2/images/icons/ai-badge-sm.png"
-                      alt="AI"
-                      width={14}
-                      height={14}
-                    />
-                    {active.badge}
-                  </span>
-                )}
-              </div>
-
-              <h3
-                style={{
-                  fontSize: "28px",
-                  fontWeight: 700,
-                  fontFamily: '"Unbounded", sans-serif',
-                  color: "#1b1b1b",
-                  letterSpacing: "-0.5px",
-                }}
-              >
-                {active.title}
-              </h3>
-
-              <p
-                style={{
-                  fontSize: "16px",
-                  color: "rgba(27,27,27,0.7)",
-                  maxWidth: "480px",
-                  lineHeight: 1.6,
-                }}
-              >
-                {active.description}
-              </p>
-            </div>
-
-            <div
-              key={`screenshot-${activeTab}`}
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "320px",
-                animation: "fadeIn 0.35s ease",
-              }}
-            >
-              <Image
-                src={active.screenshot}
-                alt={`${active.title} screenshot`}
-                fill
-                style={{ objectFit: "cover", objectPosition: "top" }}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16">
-
-
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              gap: "24px 32px",
-            }}
-          >
-            {trustedLogos.map((logo) => (
-              <div
-                key={logo.name}
-                style={{
-                  position: "relative",
-                  width: "80px",
-                  height: "32px",
-                  filter: "grayscale(100%)",
-                  opacity: 0.5,
-                }}
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  fill
-                  style={{ objectFit: "contain" }}
-                />
+                    {f.title}
+                  </h3>
+                  <p style={{ fontSize: "14px", color: "rgba(27,27,27,0.65)", lineHeight: 1.6, margin: 0 }}>
+                    {f.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* ── DESKTOP: sticky animated card stack (hidden below lg) ── */}
+      <div className="hidden lg:block">
+        {/* Header */}
+        <div style={{ padding: "80px 80px 0" }}>
+          <div className="max-w-[1280px] mx-auto">
+            <SectionHeader />
+          </div>
+        </div>
+
+        {/* Scroll runway */}
+        <div ref={outerRef} style={{ height: `${N * 120}vh` }}>
+          <div
+            style={{
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              backgroundColor: "#ffffff",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ position: "relative", width: "100%", height: "480px" }}>
+              {features.map((f, i) => (
+                <div
+                  key={f.num}
+                  ref={(el) => { cardRefs.current[i] = el; }}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    padding: "0 80px",
+                    zIndex: i + 1,
+                    transform: i === 0 ? "translateY(0)" : "translateY(100vh)",
+                    willChange: "transform",
+                  }}
+                >
+                  <div className="max-w-[1280px] mx-auto" style={{ height: "100%" }}>
+                    <div
+                      style={{
+                        backgroundColor: f.accent,
+                        borderRadius: "20px",
+                        height: "100%",
+                        display: "flex",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {/* Left: text */}
+                      <div
+                        style={{
+                          flex: "0 0 45%",
+                          padding: "48px",
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          gap: "20px",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                          {f.badge && (
+                            <span
+                              style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "6px",
+                                backgroundColor: "#0370ff",
+                                color: "#ffffff",
+                                fontSize: "11px",
+                                fontWeight: 700,
+                                letterSpacing: "0.08em",
+                                padding: "4px 10px",
+                                borderRadius: "999px",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              <Image src="/themes/gymme/assets2/images/icons/ai-badge-sm.png" alt="AI" width={14} height={14} />
+                              {f.badge}
+                            </span>
+                          )}
+                        </div>
+
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px" }}>
+                          <div
+                            style={{
+                              width: "32px",
+                              height: "32px",
+                              borderRadius: "50%",
+                              backgroundColor: "rgba(27,27,27,0.10)",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              fontSize: "13px",
+                              fontWeight: 700,
+                              color: "#1b1b1b",
+                              flexShrink: 0,
+                            }}
+                          >
+                            {f.num}
+                          </div>
+                          <h3
+                            style={{
+                              fontSize: "28px",
+                              fontWeight: 700,
+                              fontFamily: '"Unbounded", sans-serif',
+                              color: "#1b1b1b",
+                              letterSpacing: "-0.8px",
+                              lineHeight: 1.15,
+                              margin: 0,
+                            }}
+                          >
+                            {f.title}
+                          </h3>
+                        </div>
+
+                        <p
+                          style={{
+                            fontSize: "15px",
+                            color: "rgba(27,27,27,0.65)",
+                            lineHeight: 1.65,
+                            margin: 0,
+                            maxWidth: "360px",
+                          }}
+                        >
+                          {f.description}
+                        </p>
+                      </div>
+
+                      {/* Right: screenshot / video */}
+                      <div style={{ flex: "0 0 55%", position: "relative", overflow: "hidden", borderRadius: "0 20px 20px 0", display:'flex', justifyContent:'right' }}>
+                        <MediaDisplay
+                          src={f.screenshot}
+                          alt={`${f.title} screenshot`}
+                          style={{ objectFit: "cover", objectPosition: "top left" }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }

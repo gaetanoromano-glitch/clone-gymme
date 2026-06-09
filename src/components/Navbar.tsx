@@ -137,18 +137,7 @@ export default function Navbar({ bannerVisible }: Props) {
   };
 
   /* ── Logo spin ────────────────────────────────────────────────── */
-  const handleLogoEnter = () => {
-    const img = logoImgRef.current;
-    if (!img) return;
-    logoTweenRef.current?.kill();
-    gsap.set(img, { rotate: 0 });
-    logoTweenRef.current = gsap.to(img, {
-      rotate: 360,
-      duration: 0.5,
-      ease: EASE,
-      overwrite: "auto",
-    });
-  };
+
 
   /* ── Mobile menu toggle ───────────────────────────────────────── */
   const toggleMobileMenu = () => {
@@ -221,7 +210,6 @@ export default function Navbar({ bannerVisible }: Props) {
           className="pill-logo"
           href="/"
           aria-label="gymme home"
-          onMouseEnter={handleLogoEnter}
           ref={logoRef}
         >
           {/* Use img for GSAP rotation ref */}

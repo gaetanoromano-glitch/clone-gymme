@@ -1,22 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { useState, useEffect, useRef } from "react";
+import StickerPeel from "@/components/StickerPeel";
 
 const slides = [
-  {
-    coachType: "Personal Trainer",
-    bg: "/themes/gymme/assets2/images/homepage/hero-animation/fitness-coaches-xl.webp",
-  },
-  {
-    coachType: "Nutrizionisti",
-    bg: "/themes/gymme/assets2/images/homepage/hero-animation/gym-studio-xl.webp",
-  },
-  {
-    coachType: "Osteopati",
-    bg: "/themes/gymme/assets2/images/homepage/hero-animation/sport-coaches-xl.webp",
-  },
+  { coachType: "Personal Trainer" },
+  { coachType: "Nutrizionisti" },
+  { coachType: "Osteopati" },
 ];
 
 interface HeroProps {
@@ -26,10 +16,26 @@ interface HeroProps {
 export function HeroSection({ topOffset = 137 }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [collapsing, setCollapsing] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = () => {
+    if (!email.trim()) {
+      inputRef.current?.focus();
+      return;
+    }
+    setCollapsing(true);
+    setTimeout(() => {
+      setSubmitted(true);
+      setTimeout(() => setShowMessage(true), 80);
+    }, 500);
+  };
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
-
     const interval = setInterval(() => {
       setTextVisible(false);
       timeout = setTimeout(() => {
@@ -37,7 +43,6 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
         setTextVisible(true);
       }, 400);
     }, 3000);
-
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
@@ -46,175 +51,241 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
 
   return (
     <section
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        width: "100%",
-      }}
-      className="h-[560px] md:h-[600px] lg:h-[849px]"
+      className="relative overflow-hidden h-[560px] md:h-[700px] lg:h-[849px]"
+      style={{ backgroundColor: "#fafafa" }}
     >
       <p className="sr-only">Gymme — Piattaforma Wellness Multi-Professionale</p>
 
-      <div className="absolute inset-0">
-        {slides.map((slide, index) => (
-          <div
-            key={slide.bg}
-            className="absolute inset-0"
-            style={{
-              opacity: index === currentSlide ? 1 : 0,
-              transition: "opacity 0.8s ease-in-out",
-            }}
-          >
-            <Image
-              src={slide.bg}
-              alt={slide.coachType}
-              fill
-              priority={index === 0}
-              style={{ objectFit: "cover" }}
-              sizes="100vw"
-            />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%)",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-
+      {/* ── Centered content ── */}
       <div
-        style={{
-          position: "relative",
-          zIndex: 10,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          paddingTop: topOffset,
-        }}
-        className="px-5 pb-10 md:px-10 md:pb-12 lg:px-[80px] lg:pb-[80px]"
+        className="relative z-10 flex flex-col items-center justify-center text-center h-full px-5 md:px-10 lg:px-[80px]"
+        style={{ paddingTop: topOffset }}
       >
-        <div>
-          <h2
+        <h2
+          className="text-[30px] md:text-[48px] lg:text-[64px]"
+          style={{
+            fontFamily: '"Unbounded", sans-serif',
+            fontWeight: 700,
+            color: "#1b1b1b",
+            lineHeight: 1.1,
+            letterSpacing: "-2px",
+            margin: 0,
+          }}
+        >
+          L&apos;ecosistema digitale per
+        </h2>
+
+        {/* Animated coach type */}
+        <div
+          style={{
+            height: "clamp(42px, 8vw, 80px)",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <span
+            className="text-[30px] md:text-[48px] lg:text-[64px]"
             style={{
               fontFamily: '"Unbounded", sans-serif',
               fontWeight: 700,
-              color: "rgba(255,255,255,0.9)",
+              color: "#1b1b1b",
               lineHeight: 1.1,
-              letterSpacing: "-2px",
-              margin: 0,
+              letterSpacing: "-2.8px",
+              display: "block",
+              opacity: textVisible ? 1 : 0,
+              transform: textVisible ? "translateY(0)" : "translateY(-8px)",
+              transition: "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
             }}
-            className="text-[36px] md:text-[48px] lg:text-[64px]"
           >
-            La Piattaforma Data-Driven per
-          </h2>
+            {slides[currentSlide].coachType}
+          </span>
+        </div>
 
+        <p
+          style={{
+            color: "rgba(27,27,27,0.6)",
+            fontFamily: "Plus Jakarta Sans, sans-serif",
+            fontWeight: 400,
+            marginTop: "16px",
+            maxWidth: "480px",
+            fontSize: "clamp(14px, 1.4vw, 18px)",
+            lineHeight: 1.55,
+          }}
+        >
+          La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso.
+        </p>
+
+        {/* Pill input + button */}
+        <div
+          style={{
+            marginTop: "32px",
+            minHeight: "56px",
+            width: "100%",
+            maxWidth: "480px",
+            position: "relative",
+          }}
+        >
           <div
             style={{
-              height: "67px",
-              overflow: "hidden",
-              display: "flex",
+              display: submitted ? "none" : "flex",
               alignItems: "center",
+              height: "56px",
+              borderRadius: "999px",
+              backgroundColor: "rgba(0,0,0,0.04)",
+              border: "1.5px solid rgba(0,0,0,0.12)",
+              padding: "6px 6px 6px 20px",
+              width: "100%",
+              transition: "opacity 0.4s ease, transform 0.4s ease",
+              opacity: collapsing ? 0 : 1,
+              transform: collapsing ? "scale(0.82)" : "scale(1)",
+              transformOrigin: "center center",
             }}
-          >
-            <span
-              style={{
-                fontFamily: '"Unbounded", sans-serif',
-                fontWeight: 700,
-                color: "rgba(255,255,255,0.8)",
-                lineHeight: 1.1,
-                letterSpacing: "-2.8px",
-                display: "block",
-                opacity: textVisible ? 1 : 0,
-                transform: textVisible ? "translateY(0)" : "translateY(-8px)",
-                transition:
-                  "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
-              }}
-              className="text-[36px] md:text-[48px] lg:text-[64px]"
-            >
-              {slides[currentSlide].coachType}
-            </span>
-          </div>
-
-          <h2
-            style={{
-              fontFamily: '"Unbounded", sans-serif',
-              fontWeight: 700,
-              color: "rgba(255,255,255,0.9)",
-              lineHeight: 1.1,
-              letterSpacing: "-2px",
-              margin: 0,
-            }}
-            className="text-[36px] md:text-[48px] lg:text-[64px]"
-          >
-            che Collaborano, Crescono e Fidelizzano
-          </h2>
-
-          <p
-            style={{
-              color: "rgba(255,255,255,0.85)",
-              fontFamily: "Plus Jakarta Sans, sans-serif",
-              fontWeight: 400,
-              marginTop: "16px",
-              maxWidth: "520px",
-              fontSize: "18px",
-              lineHeight: 1.5,
-            }}
-            className="text-base md:text-[18px]"
-          >
-            La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso.
-          </p>
-
-          <div
-            className={cn(
-              "flex flex-col gap-3 mt-8 items-start",
-              "sm:flex-row sm:items-center sm:gap-[12px] sm:mt-[32px]"
-            )}
           >
             <input
+              ref={inputRef}
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
               placeholder="Inserisci la tua email"
+              className="placeholder:text-[rgba(0,0,0,0.35)]"
               style={{
-                height: "56px",
-                padding: "0 20px",
-                borderRadius: "12px",
+                flex: 1,
+                background: "none",
                 border: "none",
-                backgroundColor: "rgba(255,255,255,0.15)",
-                backdropFilter: "blur(8px)",
-                color: "white",
-                fontSize: "16px",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
                 outline: "none",
+                color: "#1b1b1b",
+                fontSize: "15px",
+                fontFamily: "Plus Jakarta Sans, sans-serif",
+                minWidth: 0,
               }}
-              className={cn(
-                "w-full sm:w-[360px]",
-                "placeholder:text-[rgba(255,255,255,0.6)]"
-              )}
             />
             <button
               type="button"
+              onClick={handleSubmit}
+              className="hover:bg-[#333] active:scale-95 transition-colors duration-200"
               style={{
-                height: "56px",
-                padding: "0 28px",
-                borderRadius: "12px",
-                backgroundColor: "#ffffff",
-                color: "#1b1b1b",
-                fontSize: "16px",
-                fontWeight: 600,
+                flexShrink: 0,
+                height: "44px",
+                padding: "0 20px",
+                borderRadius: "999px",
+                backgroundColor: "#1b1b1b",
+                color: "#ffffff",
+                fontSize: "14px",
+                fontWeight: 700,
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 border: "none",
                 cursor: "pointer",
-                transition: "all 0.2s ease",
                 whiteSpace: "nowrap",
               }}
-              className="w-full sm:w-auto hover:bg-white/90"
             >
-              Inizia gratis
+              Richiedi una demo
             </button>
           </div>
+
+          {submitted && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "12px",
+                opacity: showMessage ? 1 : 0,
+                transform: showMessage ? "scale(1) translateY(0)" : "scale(0.88) translateY(6px)",
+                transition: "opacity 0.45s ease, transform 0.45s ease",
+              }}
+            >
+              <div
+                style={{
+                  flexShrink: 0,
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  backgroundColor: "rgba(0,0,0,0.06)",
+                  border: "1.5px solid rgba(0,0,0,0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <p
+                style={{
+                  color: "#1b1b1b",
+                  fontFamily: "Plus Jakarta Sans, sans-serif",
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  margin: 0,
+                  lineHeight: 1.4,
+                }}
+              >
+                Sarai ricontattato per schedulare la demo
+              </p>
+            </div>
+          )}
         </div>
+      </div>
+
+      {/*
+        ── Sticker playground ──
+        Positioned as absolute inset-0 layer on top of the content.
+        GSAP Draggable (built into StickerPeel) uses this div as bounds,
+        so stickers can be freely dragged anywhere within the hero area.
+        Hidden on mobile — stickers visible only on lg+ screens.
+      */}
+      <div className="hidden lg:block absolute inset-0" style={{ zIndex: 20 }}>
+        {/* Top-left */}
+        <StickerPeel
+          imageSrc="/themes/gymme/assets2/images/mamozzi/ago.svg"
+          width={110}
+          rotate={-12}
+          peelBackHoverPct={22}
+          peelBackActivePct={42}
+          shadowIntensity={0.3}
+          lightingIntensity={0.0}
+          left="25%"
+          top="20%"
+        />
+        {/* Mid-left */}
+        <StickerPeel
+          imageSrc="/themes/gymme/assets2/images/mamozzi/anna.svg"
+          width={110}
+          rotate={8}
+          peelBackHoverPct={22}
+          peelBackActivePct={42}
+          shadowIntensity={0.3}
+          lightingIntensity={0.01}
+          left="18%"
+          top="400px"
+        />
+        {/* Mid-right */}
+        <StickerPeel
+          imageSrc="/themes/gymme/assets2/images/mamozzi/tanino.svg"
+          width={110}
+          rotate={-7}
+          peelBackHoverPct={22}
+          peelBackActivePct={42}
+          shadowIntensity={0.3}
+          lightingIntensity={0.01}
+          left="75%"
+          top="400px"
+        />
+        {/* Top-right */}
+        <StickerPeel
+          imageSrc="/themes/gymme/assets2/images/mamozzi/angelo.svg"
+          width={110}
+          rotate={14}
+          peelBackHoverPct={22}
+          peelBackActivePct={42}
+          shadowIntensity={0.3}
+          lightingIntensity={0.08}
+          left="70%"
+          top="200px"
+        />
       </div>
     </section>
   );

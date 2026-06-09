@@ -22,14 +22,14 @@ export function ServiceTierSection() {
   return (
     <section
       id="ecosistema"
-      style={{ backgroundColor: "#ffffff", padding: "80px 80px" }}
-      className="w-full"
+      className="w-full px-5 py-10 md:px-10 md:py-16 lg:px-[80px] lg:py-[80px]"
+      style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-[1280px] mx-auto">
         <div className="mb-12">
           <h2
             style={{
-              fontSize: "56px",
+              fontSize: "clamp(28px, 4.5vw, 56px)",
               fontWeight: 700,
               fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
@@ -41,7 +41,7 @@ export function ServiceTierSection() {
           </h2>
           <h2
             style={{
-              fontSize: "56px",
+              fontSize: "clamp(28px, 4.5vw, 56px)",
               fontWeight: 700,
               fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
@@ -53,20 +53,15 @@ export function ServiceTierSection() {
           </h2>
         </div>
 
-        <div
-          style={{
-            marginTop: "48px",
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
           <div
             style={{
               backgroundColor: "#1b1b1b",
               borderRadius: "20px",
-              padding: "40px",
+              padding: "clamp(24px, 3vw, 40px)",
               overflow: "hidden",
               position: "relative",
-              minHeight: "400px",
+              minHeight: "360px",
               display: "flex",
               flexDirection: "column",
             }}
@@ -86,7 +81,7 @@ export function ServiceTierSection() {
               <h3
                 style={{
                   color: "#ffffff",
-                  fontSize: "28px",
+                  fontSize: "clamp(20px, 2.5vw, 28px)",
                   fontWeight: 700,
                   fontFamily: '"Unbounded", sans-serif',
                   marginBottom: "24px",
@@ -100,54 +95,28 @@ export function ServiceTierSection() {
                 {highTicketFeatures.map((item) => (
                   <li
                     key={item.label}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
+                    style={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
                     <div style={{ position: "relative", width: "20px", height: "20px", flexShrink: 0 }}>
-                      <Image
-                        src={item.checkmarkSrc}
-                        alt="check"
-                        fill
-                        style={{ objectFit: "contain" }}
-                      />
+                      <Image src={item.checkmarkSrc} alt="check" fill style={{ objectFit: "contain" }} />
                     </div>
-                    <span style={{ color: item.labelColor, fontSize: "16px" }}>
-                      {item.label}
-                    </span>
+                    <span style={{ color: item.labelColor, fontSize: "15px" }}>{item.label}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                width: "60%",
-                height: "60%",
-              }}
-            >
-              <Image
-                src="/themes/gymme/assets2/images/homepage/revolutionary/1-1-2xl.webp"
-                alt="One-to-one coaching app"
-                fill
-                style={{ objectFit: "contain", objectPosition: "bottom right" }}
-              />
-            </div>
+
           </div>
 
           <div
             style={{
               backgroundColor: "#f5f5f5",
               borderRadius: "20px",
-              padding: "40px",
+              padding: "clamp(24px, 3vw, 40px)",
               overflow: "hidden",
               position: "relative",
-              minHeight: "400px",
+              minHeight: "360px",
               display: "flex",
               flexDirection: "column",
             }}
@@ -167,7 +136,7 @@ export function ServiceTierSection() {
               <h3
                 style={{
                   color: "#1b1b1b",
-                  fontSize: "28px",
+                  fontSize: "clamp(20px, 2.5vw, 28px)",
                   fontWeight: 700,
                   fontFamily: '"Unbounded", sans-serif',
                   marginBottom: "24px",
@@ -181,44 +150,18 @@ export function ServiceTierSection() {
                 {lowTicketFeatures.map((item) => (
                   <li
                     key={item.label}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
+                    style={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
                     <div style={{ position: "relative", width: "20px", height: "20px", flexShrink: 0 }}>
-                      <Image
-                        src={item.checkmarkSrc}
-                        alt="check"
-                        fill
-                        style={{ objectFit: "contain" }}
-                      />
+                      <Image src={item.checkmarkSrc} alt="check" fill style={{ objectFit: "contain" }} />
                     </div>
-                    <span style={{ color: item.labelColor, fontSize: "16px" }}>
-                      {item.label}
-                    </span>
+                    <span style={{ color: item.labelColor, fontSize: "15px" }}>{item.label}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                width: "60%",
-                height: "60%",
-              }}
-            >
-              <Image
-                src="/themes/gymme/assets2/images/homepage/revolutionary/1-many-2xl.webp"
-                alt="One-to-many coaching app"
-                fill
-                style={{ objectFit: "contain", objectPosition: "bottom right" }}
-              />
-            </div>
+
           </div>
         </div>
       </div>

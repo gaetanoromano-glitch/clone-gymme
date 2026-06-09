@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased`}>
+    <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased bg-[#EEEDFB]`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
     </html>
   );

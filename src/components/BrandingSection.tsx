@@ -18,10 +18,9 @@ export function BrandingSection() {
   return (
     <section className="px-4 md:px-10 py-2 max-w-[1280px] mx-auto w-full">
       <div
-        className="bg-white rounded-2xl"
-        style={{ padding: "48px 56px" }}
+        className="bg-white rounded-2xl p-6 md:p-10 lg:p-[48px_56px]"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           <div className="flex flex-col">
             <div className="inline-flex items-center gap-2 mb-6">
               <Image
@@ -47,7 +46,7 @@ export function BrandingSection() {
             <h2
               className="font-twk"
               style={{
-                fontSize: "44px",
+                fontSize: "clamp(24px, 3.5vw, 44px)",
                 fontWeight: 700,
                 letterSpacing: "-1.5px",
                 lineHeight: 1.1,
@@ -72,22 +71,14 @@ export function BrandingSection() {
                 >
                   <h3
                     className="font-inter"
-                    style={{
-                      fontSize: "17px",
-                      fontWeight: 600,
-                      color: "#1b1b1b",
-                    }}
+                    style={{ fontSize: "17px", fontWeight: 600, color: "#1b1b1b" }}
                   >
                     {item.title}
                   </h3>
                   {index === 0 && (
                     <p
                       className="font-inter mt-2"
-                      style={{
-                        fontSize: "15px",
-                        color: "rgba(27,27,27,0.6)",
-                        lineHeight: 1.55,
-                      }}
+                      style={{ fontSize: "15px", color: "rgba(27,27,27,0.6)", lineHeight: 1.55 }}
                     >
                       {item.description}
                     </p>
@@ -115,7 +106,7 @@ export function BrandingSection() {
           </div>
 
           <div className="flex gap-4">
-            <div className="flex-1 relative" style={{ minHeight: "420px" }}>
+            <div className="flex-1 relative" style={{ minHeight: "280px" }}>
               <Image
                 src="/themes/gymme/assets2/images/homepage/branding/branding-1-2xl.webp"
                 alt="Branded app mockup 1"
@@ -125,7 +116,7 @@ export function BrandingSection() {
                 unoptimized
               />
             </div>
-            <div className="flex-1 relative" style={{ minHeight: "420px" }}>
+            <div className="flex-1 relative" style={{ minHeight: "280px" }}>
               <Image
                 src="/themes/gymme/assets2/images/homepage/branding/branding-2-2xl.webp"
                 alt="Branded app mockup 2"

@@ -16,12 +16,19 @@ import { BrandingSection } from "@/components/BrandingSection";
 import { RatingsSection } from "@/components/RatingsSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
+import  ClickSpark  from "@/components/ClickSpark";
 
 export default function Home() {
   const [bannerVisible, setBannerVisible] = useState(true);
 
   return (
-    <> 
+    <ClickSpark
+        sparkColor="#000000"
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
+    >
       <Navbar bannerVisible={false} />
       <main>
         <HeroSection topOffset={bannerVisible ? 137 : 87} />
@@ -39,6 +46,6 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
-    </>
+    </ClickSpark>
   );
 }

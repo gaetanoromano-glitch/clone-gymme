@@ -29,35 +29,19 @@ export function FeatureAccordion({
 
   return (
     <section
+      className="p-6 md:p-10 lg:p-[48px_56px] mx-auto w-full"
       style={{
         backgroundColor: "#ffffff",
         borderRadius: 20,
-        padding: "48px 56px",
         marginTop: 8,
-        marginRight: "auto",
-        marginBottom: 0,
-        marginLeft: "auto",
         maxWidth: 1280,
         overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "48% 52%",
-          gap: 48,
-          alignItems: "start",
-        }}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-[48%_52%] gap-8 lg:gap-12 items-start">
+        {/* Left: accordion */}
         <div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 16,
-            }}
-          >
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
             <Image
               src={badgeIcon}
               alt=""
@@ -81,14 +65,13 @@ export function FeatureAccordion({
 
           <h2
             style={{
-              fontSize: 44,
+              fontSize: "clamp(24px, 3.5vw, 44px)",
               fontWeight: 700,
-              fontFamily:
-                '"Unbounded", sans-serif',
+              fontFamily: '"Unbounded", sans-serif',
               color: "#1b1b1b",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
-              marginBottom: 40,
+              marginBottom: 32,
             }}
           >
             {headingLines.map((line, i) => (
@@ -112,13 +95,7 @@ export function FeatureAccordion({
                     cursor: "pointer",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                    }}
-                  >
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <Image
                       src={item.icon}
                       alt=""
@@ -128,10 +105,9 @@ export function FeatureAccordion({
                     />
                     <span
                       style={{
-                        fontSize: 18,
+                        fontSize: 17,
                         fontWeight: isActive ? 700 : 600,
-                        fontFamily:
-                          "Plus Jakarta Sans, sans-serif",
+                        fontFamily: "Plus Jakarta Sans, sans-serif",
                         color: "#1b1b1b",
                       }}
                     >
@@ -158,17 +134,14 @@ export function FeatureAccordion({
                   <div
                     className={cn(
                       "overflow-hidden transition-all duration-300",
-                      isActive
-                        ? "max-h-40 opacity-100"
-                        : "max-h-0 opacity-0"
+                      isActive ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                     )}
                   >
                     <p
                       style={{
                         fontSize: 15,
                         color: "rgba(27,27,27,0.7)",
-                        fontFamily:
-                          "Plus Jakarta Sans, sans-serif",
+                        fontFamily: "Plus Jakarta Sans, sans-serif",
                         lineHeight: 1.6,
                         paddingTop: 12,
                         paddingLeft: 36,
@@ -178,13 +151,39 @@ export function FeatureAccordion({
                       {item.description}
                     </p>
                   </div>
+
+                  {/* Screenshot shown inline below active item on mobile only */}
+                  <div
+                    className={cn(
+                      "lg:hidden overflow-hidden transition-all duration-300 mt-3",
+                      isActive ? "max-h-[280px] opacity-100" : "max-h-0 opacity-0"
+                    )}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: "#f5f5f5",
+                        borderRadius: 12,
+                        overflow: "hidden",
+                        height: 220,
+                        position: "relative",
+                      }}
+                    >
+                      <Image
+                        src={item.screenshot}
+                        alt={item.title}
+                        fill
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div>
+        {/* Right: sticky screenshot — only on lg+ */}
+        <div className="hidden lg:block">
           <div
             style={{
               position: "sticky",

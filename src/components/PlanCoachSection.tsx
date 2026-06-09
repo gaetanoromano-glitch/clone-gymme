@@ -47,18 +47,14 @@ export default function PlanCoachSection() {
   return (
     <section className="w-full px-4 py-6 md:px-8 md:py-8 lg:px-10 lg:py-10">
       <div
-        className="mx-auto overflow-hidden"
+        className="mx-auto overflow-hidden p-6 md:p-10 lg:p-[48px_56px]"
         style={{
           backgroundColor: "#ffffff",
           borderRadius: "20px",
-          padding: "48px 56px",
           maxWidth: "1280px",
         }}
       >
-        <div
-          className="grid grid-cols-1 gap-10 md:grid-cols-2"
-          style={{ gap: "60px" }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <div className="flex flex-col">
             <div
               className="flex items-center"
@@ -88,7 +84,7 @@ export default function PlanCoachSection() {
             <h2
               className="font-twk"
               style={{
-                fontSize: "44px",
+                fontSize: "clamp(24px, 3.5vw, 44px)",
                 fontWeight: 700,
                 color: "#1b1b1b",
                 lineHeight: 1.1,
@@ -117,7 +113,7 @@ export default function PlanCoachSection() {
                   )}
                   style={{
                     padding: "12px 0",
-                    marginRight: "24px",
+                    marginRight: "20px",
                     gap: "8px",
                     borderBottom:
                       activeTab === index
@@ -136,7 +132,7 @@ export default function PlanCoachSection() {
                   />
                   <span
                     style={{
-                      fontSize: "16px",
+                      fontSize: "15px",
                       fontWeight: 600,
                       fontFamily: "Plus Jakarta Sans, sans-serif",
                       color:
@@ -155,7 +151,7 @@ export default function PlanCoachSection() {
 
             <p
               style={{
-                fontSize: "16px",
+                fontSize: "15px",
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 color: "rgba(27,27,27,0.7)",
                 lineHeight: 1.6,
@@ -172,6 +168,7 @@ export default function PlanCoachSection() {
               overflow: "hidden",
               borderRadius: "12px",
               backgroundColor: "#f5f5f5",
+              minHeight: "240px",
             }}
           >
             {tabs.map((tab, index) => (

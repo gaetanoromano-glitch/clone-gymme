@@ -3,12 +3,8 @@ import Image from "next/image";
 export function FiveYearsSection() {
   return (
     <section
-      style={{
-        backgroundColor: "transparent",
-        padding: "0 80px 90px",
-        position: "relative",
-      }}
-      className="w-full"
+      className="w-full px-5 pb-10 md:px-10 md:pb-16 lg:px-[80px] lg:pb-[90px]"
+      style={{ backgroundColor: "transparent", position: "relative" }}
     >
       <div className="max-w-[1280px] mx-auto">
         <div
@@ -38,30 +34,18 @@ export function FiveYearsSection() {
                   lineHeight: 1.0,
                 }}
               >
-                <span
-                  style={{
-                    fontSize: "40px",
-                    fontWeight: 900,
-                    display: "block",
-                  }}
-                >
+                <span style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 900, display: "block" }}>
                   Gymme{" "}
                   <span style={{ fontSize: "16px", fontWeight: 400 }}>IL TUO</span>
                 </span>
-                <span
-                  style={{
-                    fontSize: "40px",
-                    fontWeight: 900,
-                    display: "block",
-                  }}
-                >
+                <span style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 900, display: "block" }}>
                   Studio
                 </span>
               </div>
 
               <div
                 style={{
-                  fontSize: "40px",
+                  fontSize: "clamp(28px, 3.5vw, 40px)",
                   fontWeight: 900,
                   fontFamily: '"Unbounded", sans-serif',
                   color: "#1b1b1b",
@@ -73,7 +57,7 @@ export function FiveYearsSection() {
               </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "16px" }}>
               <p
                 style={{
                   fontSize: "12px",
@@ -122,6 +106,7 @@ export function FiveYearsSection() {
               position: "relative",
               backgroundColor: "#ffffff",
               overflow: "hidden",
+              minHeight: "200px",
             }}
           >
             <div style={{ position: "relative" }}>
