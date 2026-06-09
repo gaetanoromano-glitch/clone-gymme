@@ -1,0 +1,241 @@
+/* ─── Container ─────────────────────────────────────────────────── */
+.pill-nav-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: auto;
+}
+
+/* ─── Nav pill ───────────────────────────────────────────────────── */
+.pill-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 9999px;
+  background-color: var(--pill-bg);
+  border: var(--pill-border);
+  box-shadow: var(--pill-shadow);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap;
+}
+
+/* ─── Logo ───────────────────────────────────────────────────────── */
+.pill-logo {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+  text-decoration: none;
+  margin-right: 2px;
+  overflow: hidden;
+}
+
+.pill-logo img {
+  display: block;
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+/* ─── Desktop nav items ──────────────────────────────────────────── */
+.pill-nav-items {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pill-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2px;
+}
+
+/* ─── Individual pill link ───────────────────────────────────────── */
+.pill {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--base);
+  user-select: none;
+}
+
+/* circle bubble that grows on hover */
+.hover-circle {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  background-color: var(--base);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Label stack (sliding text animation) ───────────────────────── */
+/* NOTE: overflow is intentionally NOT set here.
+   The parent .pill has overflow:hidden — that's the only clip boundary.
+   Labels travel the full pill height in/out of the pill bounds. */
+.label-stack {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.pill-label {
+  display: block;
+  color: var(--pill-text);
+  white-space: nowrap;
+}
+
+.pill-label-hover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  color: var(--hover-text);
+}
+
+/* ─── CTA button ─────────────────────────────────────────────────── */
+.pill-cta {
+  flex-shrink: 0;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  background-color: var(--base);
+  color: var(--hover-text);
+  margin-left: 4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pill-cta:hover {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+/* ─── Mobile toggle button ───────────────────────────────────────── */
+.mobile-menu-button {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--base);
+  border-radius: 2px;
+  transform-origin: center;
+}
+
+/* ─── Responsive visibility ──────────────────────────────────────── */
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .pill-nav-container {
+    left: 16px;
+    right: 16px;
+    transform: none;
+    width: auto;
+  }
+
+  .pill-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+/* ─── Mobile dropdown ────────────────────────────────────────────── */
+.mobile-menu-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background-color: var(--pill-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 24px;
+  padding: 10px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22);
+  border: var(--pill-border);
+}
+
+.mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-menu-link {
+  display: block;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--base);
+  transition: background-color 0.2s ease;
+}
+
+.mobile-menu-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-cta {
+  margin-top: 4px;
+  background-color: var(--base) !important;
+  color: var(--hover-text) !important;
+  text-align: center;
+  border-radius: 9999px !important;
+}
+
+.mobile-cta:hover {
+  opacity: 0.9;
+  background-color: var(--base) !important;
+}
