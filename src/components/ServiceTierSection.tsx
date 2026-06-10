@@ -60,7 +60,7 @@ export function ServiceTierSection() {
 
             className="
             bg-[var(--text-primary)]"
-            spotlightColor="color-mix(in srgb, var(--surface) 25%, transparent)"
+            spotlightColor="rgba(0, 0, 0, 0.25)"
           >
             <div style={{ flex: 1 }}>
               <p
@@ -109,7 +109,7 @@ export function ServiceTierSection() {
 
             className="custom-spotlight-card
             bg-[var(--bg)]"
-            spotlightColor="color-mix(in srgb, var(--ink) 25%, transparent)"
+            spotlightColor="rgba(0, 0, 0, 0.25)"
           >
             <div style={{ flex: 1 }}>
               <p
