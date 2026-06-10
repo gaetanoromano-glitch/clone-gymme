@@ -130,10 +130,6 @@
   align-items: center;
 }
 
-.pill-cta:hover {
-  opacity: 0.85;
-  transform: scale(0.98);
-}
 
 /* ─── Mobile toggle button ───────────────────────────────────────── */
 .mobile-menu-button {

@@ -14,17 +14,10 @@ interface Tab {
 const tabs: Tab[] = [
   {
     icon: "/themes/gymme/assets2/images/homepage/plan-coach.svg",
-    title: "Protocolli & Schede",
+    title: "Schede & Protocolli con AI",
     description:
-      "Crea protocolli strutturati di Training, Nutrition e Recovery con struttura a settimane e giorni. Assegna a uno o più clienti con un click.",
-    screenshot: "/uploads/2025/08/coach-item.webp",
-  },
-  {
-    icon: "/themes/gymme/assets2/images/homepage/meal-plans.svg",
-    title: "AI Protocol Builder",
-    description:
-      "Genera protocolli completi con un semplice prompt. L'AI produce una bozza strutturata e modificabile — il professionista approva sempre prima della pubblicazione.",
-    screenshot: "/uploads/2025/08/manage-item.webp",
+      "Genera o crea schede e protocolli completi con un semplice prompt. L'AI produce una bozza strutturata e modificabile — il professionista approva sempre prima della pubblicazione. Assegna a uno o più clienti con un click.",
+    screenshot: "/uploads/2025/08/schede.jpg",
   },
   {
     icon: "/themes/gymme/assets2/images/homepage/habit.svg",

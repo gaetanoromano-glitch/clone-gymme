@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SpotlightCard from "@/components/SpotLightCard";
 
 interface FeatureItem {
   label: string;
@@ -53,18 +54,13 @@ export function ServiceTierSection() {
           </h2>
         </div>
 
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-          <div
-            style={{
-              backgroundColor: "#1b1b1b",
-              borderRadius: "20px",
-              padding: "clamp(24px, 3vw, 40px)",
-              overflow: "hidden",
-              position: "relative",
-              minHeight: "360px",
-              display: "flex",
-              flexDirection: "column",
-            }}
+          <SpotlightCard
+
+            className="
+            bg-[#1b1b1b]"
+            spotlightColor="rgba(255, 255, 255, 0.25)"
           >
             <div style={{ flex: 1 }}>
               <p
@@ -107,19 +103,13 @@ export function ServiceTierSection() {
             </div>
 
 
-          </div>
+          </SpotlightCard>
 
-          <div
-            style={{
-              backgroundColor: "#f5f5f5",
-              borderRadius: "20px",
-              padding: "clamp(24px, 3vw, 40px)",
-              overflow: "hidden",
-              position: "relative",
-              minHeight: "360px",
-              display: "flex",
-              flexDirection: "column",
-            }}
+          <SpotlightCard
+
+            className="custom-spotlight-card
+            bg-[#f5f5f5]"
+            spotlightColor="rgba(0, 0, 0, 0.25)"
           >
             <div style={{ flex: 1 }}>
               <p
@@ -162,7 +152,7 @@ export function ServiceTierSection() {
             </div>
 
 
-          </div>
+          </SpotlightCard>
         </div>
       </div>
     </section>

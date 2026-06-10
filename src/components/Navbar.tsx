@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { gsap } from "gsap";
 import "./PillNav.css";
+import { AnimatedButton } from "./AnimatedButton";
 
 interface Props {
   bannerVisible: boolean;
@@ -19,26 +19,15 @@ const NAV_LINKS = [
 const EASE = "power3.out";
 
 export default function Navbar({ bannerVisible }: Props) {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);
   const activeTweenRefs = useRef<Array<gsap.core.Tween | null>>([]);
 
-  const logoImgRef = useRef<HTMLImageElement | null>(null);
-  const logoTweenRef = useRef<gsap.core.Tween | null>(null);
-  const logoRef = useRef<HTMLAnchorElement | null>(null);
   const hamburgerRef = useRef<HTMLButtonElement | null>(null);
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
   const navItemsRef = useRef<HTMLDivElement | null>(null);
-
-  /* ── Scroll detection ─────────────────────────────────────────── */
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   /* ── GSAP circle layout + initial animation ───────────────────── */
   useEffect(() => {
@@ -97,18 +86,6 @@ export default function Navbar({ bannerVisible }: Props) {
       gsap.set(menu, { visibility: "hidden", opacity: 0 });
     }
 
-    // Initial load animation
-    const logo = logoRef.current;
-    const navItems = navItemsRef.current;
-
-    if (logo) {
-      gsap.from(logo, { scale: 0, duration: 0.6, ease: EASE });
-    }
-
-    if (navItems) {
-      gsap.from(navItems, { width: 0, overflow: "hidden", duration: 0.6, ease: EASE });
-    }
-
     return () => window.removeEventListener("resize", layout);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -119,8 +96,8 @@ export default function Navbar({ bannerVisible }: Props) {
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
     activeTweenRefs.current[i] = tl.tweenTo(tl.duration(), {
-      duration: 0.3,
-      ease: EASE,
+      duration: 0.55,
+      ease: "power2.out",
       overwrite: "auto",
     }) as unknown as gsap.core.Tween;
   };
@@ -130,8 +107,8 @@ export default function Navbar({ bannerVisible }: Props) {
     if (!tl) return;
     activeTweenRefs.current[i]?.kill();
     activeTweenRefs.current[i] = tl.tweenTo(0, {
-      duration: 0.2,
-      ease: EASE,
+      duration: 0.45,
+      ease: "power2.inOut",
       overwrite: "auto",
     }) as unknown as gsap.core.Tween;
   };
@@ -178,26 +155,15 @@ export default function Navbar({ bannerVisible }: Props) {
     }
   };
 
-  /* ── CSS variables per scroll state ──────────────────────────── */
-  const cssVars = isScrolled
-    ? {
-        ["--pill-bg" as string]: "rgba(255,255,255,0.96)",
-        ["--pill-border" as string]: "1px solid rgba(0,0,0,0.08)",
-        ["--pill-shadow" as string]: "0 4px 32px rgba(0,0,0,0.12)",
-        // --base = fully opaque → circle fill colour AND regular text colour
-        ["--base" as string]: "#1b1b1b",
-        ["--pill-text" as string]: "#1b1b1b",
-        ["--hover-text" as string]: "#ffffff",
-      }
-    : {
-        ["--pill-bg" as string]: "rgba(18,18,18,0.40)",
-        ["--pill-border" as string]: "1px solid rgba(255,255,255,0.14)",
-        ["--pill-shadow" as string]: "0 4px 24px rgba(0,0,0,0.22)",
-        // fully opaque white so the circle visibly covers the dark pill bg
-        ["--base" as string]: "#ffffff",
-        ["--pill-text" as string]: "#ffffff",
-        ["--hover-text" as string]: "#1b1b1b",
-      };
+  /* ── CSS variables (always light/scrolled style) ─────────────── */
+  const cssVars = {
+    ["--pill-bg" as string]: "rgba(255,255,255,0.96)",
+    ["--pill-border" as string]: "1px solid rgba(0,0,0,0.08)",
+    ["--pill-shadow" as string]: "0 4px 32px rgba(0,0,0,0.12)",
+    ["--base" as string]: "#1b1b1b",
+    ["--pill-text" as string]: "#1b1b1b",
+    ["--hover-text" as string]: "#ffffff",
+  };
 
   const topOffset = bannerVisible ? 66 : 16;
 
@@ -210,17 +176,11 @@ export default function Navbar({ bannerVisible }: Props) {
           className="pill-logo"
           href="/"
           aria-label="gymme home"
-          ref={logoRef}
         >
-          {/* Use img for GSAP rotation ref */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={isScrolled
-              ? "/themes/gymme/assets2/images/logo-sticky.svg"
-              : "/themes/gymme/assets2/images/white-logo.svg"
-            }
+            src="/themes/gymme/assets2/images/logo-all-black.svg"
             alt="gymme"
-            ref={logoImgRef}
             style={{ height: "26px", width: "auto", display: "block" }}
           />
         </a>
@@ -254,9 +214,13 @@ export default function Navbar({ bannerVisible }: Props) {
         </div>
 
         {/* CTA — desktop */}
-        <a href="#demo" className="pill-cta desktop-only">
+        <AnimatedButton
+          href="#demo"
+          className="desktop-only"
+          style={{ padding: "9px 18px", fontSize: "13px", fontWeight: 600, letterSpacing: "0.01em", marginLeft: "4px" }}
+        >
           Richiedi una demo
-        </a>
+        </AnimatedButton>
 
         {/* Hamburger — mobile */}
         <button

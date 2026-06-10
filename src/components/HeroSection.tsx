@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import StickerPeel from "@/components/StickerPeel";
+import { AnimatedButton } from "@/components/AnimatedButton";
 
 const slides = [
   { coachType: "Personal Trainer" },
@@ -51,7 +52,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
 
   return (
     <section
-      className="relative overflow-hidden h-[560px] md:h-[700px] lg:h-[849px]"
+      className="relative overflow-hidden h-[560px] md:h-[700px] lg:h-[849px] sticky top-0 z-[1]"
       style={{ backgroundColor: "#fafafa" }}
     >
       <p className="sr-only">Gymme — Piattaforma Wellness Multi-Professionale</p>
@@ -161,27 +162,12 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
                 minWidth: 0,
               }}
             />
-            <button
-              type="button"
+            <AnimatedButton
               onClick={handleSubmit}
-              className="hover:bg-[#333] active:scale-95 transition-colors duration-200"
-              style={{
-                flexShrink: 0,
-                height: "44px",
-                padding: "0 20px",
-                borderRadius: "999px",
-                backgroundColor: "#1b1b1b",
-                color: "#ffffff",
-                fontSize: "14px",
-                fontWeight: 700,
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                border: "none",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-              }}
+              style={{ flexShrink: 0, height: "44px", padding: "0 20px", fontSize: "14px" }}
             >
               Richiedi una demo
-            </button>
+            </AnimatedButton>
           </div>
 
           {submitted && (
@@ -237,9 +223,9 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
         so stickers can be freely dragged anywhere within the hero area.
         Hidden on mobile — stickers visible only on lg+ screens.
       */}
-      <div className="hidden lg:block absolute inset-0" style={{ zIndex: 20 }}>
-        {/* Top-left */}
+      <div className="hidden lg:block absolute inset-0" style={{ zIndex: 20, pointerEvents: "none" }}>
         <StickerPeel
+          className="pointer-events-auto"
           imageSrc="/themes/gymme/assets2/images/mamozzi/ago.svg"
           width={110}
           rotate={-12}
@@ -250,39 +236,39 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           left="25%"
           top="20%"
         />
-        {/* Mid-left */}
         <StickerPeel
+          className="pointer-events-auto"
           imageSrc="/themes/gymme/assets2/images/mamozzi/anna.svg"
           width={110}
           rotate={8}
           peelBackHoverPct={22}
           peelBackActivePct={42}
           shadowIntensity={0.3}
-          lightingIntensity={0.01}
+          lightingIntensity={0.0}
           left="18%"
           top="400px"
         />
-        {/* Mid-right */}
         <StickerPeel
+          className="pointer-events-auto"
           imageSrc="/themes/gymme/assets2/images/mamozzi/tanino.svg"
           width={110}
           rotate={-7}
           peelBackHoverPct={22}
           peelBackActivePct={42}
           shadowIntensity={0.3}
-          lightingIntensity={0.01}
+          lightingIntensity={0.0}
           left="75%"
           top="400px"
         />
-        {/* Top-right */}
         <StickerPeel
+          className="pointer-events-auto"
           imageSrc="/themes/gymme/assets2/images/mamozzi/angelo.svg"
           width={110}
           rotate={14}
           peelBackHoverPct={22}
           peelBackActivePct={42}
           shadowIntensity={0.3}
-          lightingIntensity={0.08}
+          lightingIntensity={0.0}
           left="70%"
           top="200px"
         />

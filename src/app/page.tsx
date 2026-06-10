@@ -32,17 +32,18 @@ export default function Home() {
       <Navbar bannerVisible={false} />
       <main>
         <HeroSection topOffset={bannerVisible ? 137 : 87} />
-        <IndustrySolutionSection />
-        <ServiceTierSection />
-        <ForEveryoneSection>
-          <PlanCoachSection />
-          <MotivateSection />
-          <EngageSection />
-          <ScaleSection />
-          <BrandingSection />
-        </ForEveryoneSection>
-        <RatingsSection />
-        <CTASection />
+        <div className="relative z-[2]">
+          <IndustrySolutionSection />
+          <ServiceTierSection />
+          <ForEveryoneSection>
+            <PlanCoachSection />
+            <MotivateSection />
+            <EngageSection />
+            <ScaleSection />
+          </ForEveryoneSection>
+          <RatingsSection />
+          <CTASection />
+        </div>
       </main>
       <Footer />
     </ClickSpark>

@@ -186,7 +186,15 @@ export function IndustrySolutionSection() {
   }, []);
 
   return (
-    <section id="soluzioni" className="w-full" style={{ backgroundColor: "#ffffff" }}>
+    <section
+      id="soluzioni"
+      className="w-full relative z-[2]"
+      style={{
+        backgroundColor: "#ffffff",
+        borderRadius: "24px 24px 0 0",
+        boxShadow: "0 -8px 40px rgba(0,0,0,0.10)",
+      }}
+    >
 
       {/* ── MOBILE: simple vertical card list (hidden on lg+) ── */}
       <div className="lg:hidden px-5 pt-10 pb-6 md:px-10 md:pt-16">
@@ -276,7 +284,7 @@ export function IndustrySolutionSection() {
       {/* ── DESKTOP: sticky animated card stack (hidden below lg) ── */}
       <div className="hidden lg:block">
         {/* Header */}
-        <div style={{ padding: "80px 80px 0" }}>
+        <div style={{ padding: "60px 60px 0" }}>
           <div className="max-w-[1280px] mx-auto">
             <SectionHeader />
           </div>
