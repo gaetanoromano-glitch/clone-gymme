@@ -191,8 +191,7 @@ export function IndustrySolutionSection() {
       className="w-full relative z-[2]"
       style={{
         backgroundColor: "#ffffff",
-        borderRadius: "24px 24px 0 0",
-        boxShadow: "0 -8px 40px rgba(0,0,0,0.10)",
+        borderRadius: "48px 48px 0 0",
       }}
     >
 
@@ -345,7 +344,7 @@ export function IndustrySolutionSection() {
                                 display: "inline-flex",
                                 alignItems: "center",
                                 gap: "6px",
-                                backgroundColor: "#0370ff",
+                                backgroundColor: "#7C5CFF",
                                 color: "#ffffff",
                                 fontSize: "11px",
                                 fontWeight: 700,

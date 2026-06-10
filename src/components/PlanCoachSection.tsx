@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 
 interface Tab {
   icon: string;
@@ -36,6 +35,7 @@ const tabs: Tab[] = [
 ];
 
 const N = tabs.length;
+const PX_PER_ITEM = 400;
 
 export default function PlanCoachSection() {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -43,28 +43,34 @@ export default function PlanCoachSection() {
   const [activeTab, setActiveTab] = useState(0);
   const progressBarRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
+  const sectionTopRef = useRef(0);
+  const totalScrollRef = useRef(1);
+
+  const measure = () => {
     const outer = outerRef.current;
     if (!outer) return;
+    sectionTopRef.current = window.scrollY + outer.getBoundingClientRect().top;
+    totalScrollRef.current = outer.offsetHeight - window.innerHeight;
+  };
+
+  useEffect(() => {
+    measure();
+    window.addEventListener("resize", measure, { passive: true });
+
     let rafId = 0;
 
     const update = () => {
-      if (window.innerWidth < 1024) return;
-      const rect = outer.getBoundingClientRect();
-      const totalScroll = outer.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, -rect.top / totalScroll));
+      const progress = Math.max(
+        0,
+        Math.min(1, (window.scrollY - sectionTopRef.current) / totalScrollRef.current)
+      );
       const raw = progress * N;
       const idx = Math.min(Math.floor(raw), N - 1);
 
       progressBarRefs.current.forEach((bar, i) => {
         if (!bar) return;
-        if (i < idx) {
-          bar.style.width = "100%";
-        } else if (i === idx) {
-          bar.style.width = `${(raw - idx) * 100}%`;
-        } else {
-          bar.style.width = "0%";
-        }
+        const scale = i < idx ? 1 : i === idx ? raw - idx : 0;
+        bar.style.transform = `scaleX(${scale})`;
       });
 
       if (idx !== activeTabRef.current) {
@@ -78,188 +84,113 @@ export default function PlanCoachSection() {
       rafId = requestAnimationFrame(update);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    const initId = requestAnimationFrame(update);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          window.addEventListener("scroll", onScroll, { passive: true });
+          rafId = requestAnimationFrame(update);
+        } else {
+          window.removeEventListener("scroll", onScroll);
+          cancelAnimationFrame(rafId);
+        }
+      },
+      { rootMargin: "100px 0px 100px 0px" }
+    );
+
+    const outer = outerRef.current;
+    if (outer) observer.observe(outer);
+
     return () => {
-      cancelAnimationFrame(rafId);
-      cancelAnimationFrame(initId);
+      observer.disconnect();
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
-  const CardContent = ({ clickable }: { clickable: boolean }) => (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-      {/* Left */}
-      <div className="flex flex-col">
-        <div className="flex items-center" style={{ marginBottom: 20, gap: 8 }}>
-          <Image
-            src="/themes/gymme/assets2/images/homepage/plan-coach.svg"
-            alt="Plan & Coach icon"
-            width={24}
-            height={24}
-            style={{ width: 24, height: 24 }}
-          />
-          <span
-            style={{
-              fontSize: 13,
-              fontWeight: 700,
-              fontFamily: "Plus Jakarta Sans, sans-serif",
-              letterSpacing: "0.08em",
-              color: "#1b1b1b",
-              textTransform: "uppercase",
-            }}
-          >
-            PIANIFICA &amp; GESTISCI
-          </span>
-        </div>
-
-        <h2
-          style={{
-            fontSize: "clamp(24px, 3.5vw, 44px)",
-            fontWeight: 700,
-            fontFamily: '"Unbounded", sans-serif',
-            color: "#1b1b1b",
-            lineHeight: 1.1,
-            letterSpacing: "-1.5px",
-            marginBottom: 32,
-          }}
-        >
-          Pianifica con Precisione, Allena con Fiducia.
-        </h2>
-
-        {/* Tab bar */}
-        <div style={{ borderBottom: "1px solid #e5e7eb", marginBottom: 24, position: "relative" }}>
-          <div className="flex overflow-x-auto" style={{ gap: 0 }}>
-            {tabs.map((tab, index) => (
-              <button
-                key={tab.title}
-                onClick={clickable ? () => setActiveTab(index) : undefined}
-                className={cn("flex shrink-0 items-center border-none bg-transparent", clickable ? "cursor-pointer" : "cursor-default")}
-                style={{
-                  padding: "12px 0",
-                  marginRight: 20,
-                  gap: 8,
-                  position: "relative",
-                  marginBottom: -1,
-                }}
-                type="button"
-              >
-                <Image src={tab.icon} alt={tab.title} width={20} height={20} style={{ width: 20, height: 20 }} />
-                <span
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 600,
-                    fontFamily: "Plus Jakarta Sans, sans-serif",
-                    color: activeTab === index ? "#1b1b1b" : "rgba(27,27,27,0.4)",
-                    transition: "color 0.3s ease",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {tab.title}
-                </span>
-                {/* Per-tab progress bar */}
-                <div
-                  ref={(el) => { progressBarRefs.current[index] = el; }}
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    height: 2,
-                    backgroundColor: "#1b1b1b",
-                    width: "0%",
-                    transition: "width 0.12s linear",
-                  }}
-                />
-              </button>
+  return (
+    <>
+      {/* ── MOBILE ───────────────────────────────────────────────────── */}
+      <div className="lg:hidden px-5 py-6 md:px-10 md:py-8">
+        <div style={{ backgroundColor: "#fff", borderRadius: 20, padding: "32px 24px", maxWidth: 1280, margin: "0 auto" }}>
+          <h2 style={{ fontSize: "clamp(22px, 5vw, 36px)", fontWeight: 700, fontFamily: '"Unbounded", sans-serif', color: "#1b1b1b", lineHeight: 1.1, letterSpacing: "-1.5px", marginBottom: 24 }}>
+            Pianifica con Precisione, Allena con Fiducia.
+          </h2>
+          <div style={{ borderBottom: "1px solid #e5e7eb", marginBottom: 20 }}>
+            <div style={{ display: "flex", overflowX: "auto", gap: 0 }}>
+              {tabs.map((tab, index) => (
+                <button key={index} onClick={() => setActiveTab(index)} type="button"
+                  style={{ padding: "12px 0", marginRight: 20, gap: 8, display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", flexShrink: 0, position: "relative", marginBottom: -1 }}>
+                  <Image src={tab.icon} alt="" width={20} height={20} style={{ width: 20, height: 20 }} />
+                  <span style={{ fontSize: 14, fontWeight: 600, fontFamily: "Plus Jakarta Sans, sans-serif", color: activeTab === index ? "#1b1b1b" : "rgba(27,27,27,0.4)", whiteSpace: "nowrap", transition: "color 0.3s ease" }}>
+                    {tab.title}
+                  </span>
+                  <div style={{ position: "absolute", bottom: 0, left: 0, height: 2, backgroundColor: "#1b1b1b", width: activeTab === index ? "100%" : "0%", transition: "width 0.3s ease" }} />
+                </button>
+              ))}
+            </div>
+          </div>
+          <p style={{ fontSize: 14, color: "rgba(27,27,27,0.7)", fontFamily: "Plus Jakarta Sans, sans-serif", lineHeight: 1.6, marginBottom: 16 }}>
+            {tabs[activeTab].description}
+          </p>
+          <div style={{ position: "relative", backgroundColor: "#f5f5f5", borderRadius: 10, overflow: "hidden", height: 220 }}>
+            {tabs.map((tab, i) => (
+              <Image key={i} src={tab.screenshot} alt={tab.title} fill style={{ objectFit: "cover", opacity: activeTab === i ? 1 : 0, transition: "opacity 0.4s ease" }} priority={i === 0} />
             ))}
           </div>
         </div>
-
-        <p
-          style={{
-            fontSize: 15,
-            fontFamily: "Plus Jakarta Sans, sans-serif",
-            color: "rgba(27,27,27,0.7)",
-            lineHeight: 1.6,
-            maxWidth: 400,
-          }}
-        >
-          {tabs[activeTab].description}
-        </p>
       </div>
 
-      {/* Right: crossfading screenshot */}
-      <div
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          borderRadius: 12,
-          backgroundColor: "#f5f5f5",
-          minHeight: 300,
-        }}
-      >
-        {tabs.map((tab, index) => (
-          <Image
-            key={tab.title}
-            src={tab.screenshot}
-            alt={tab.title}
-            fill
-            style={{
-              objectFit: "cover",
-              opacity: activeTab === index ? 1 : 0,
-              transition: "opacity 0.4s ease",
-            }}
-            priority={index === 0}
-          />
-        ))}
-      </div>
-    </div>
-  );
-
-  return (
-    <>
-      {/* ── MOBILE: click-driven ── */}
-      <div className="lg:hidden px-5 py-6 md:px-10 md:py-8">
-        <div
-          style={{
-            backgroundColor: "#ffffff",
-            borderRadius: 20,
-            padding: "32px 24px",
-            maxWidth: 1280,
-            margin: "0 auto",
-          }}
-        >
-          <CardContent clickable />
-        </div>
-      </div>
-
-      {/* ── DESKTOP: scroll-driven sticky ── */}
+      {/* ── DESKTOP: sticky scroll-driven runway ─────────────────────── */}
       <div
         ref={outerRef}
         className="hidden lg:block"
-        style={{ height: `${N * 100}vh`, position: "relative" }}
+        style={{ height: `calc(100vh + ${N * PX_PER_ITEM}px)`, position: "relative" }}
       >
-        <div
-          style={{
-            position: "sticky",
-            top: 0,
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            padding: "0 40px",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#ffffff",
-              borderRadius: 20,
-              width: "100%",
-              maxWidth: 1280,
-              margin: "0 auto",
-              padding: "48px 56px",
-            }}
-          >
-            <CardContent clickable={false} />
+        <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", padding: "0 40px" }}>
+          <div style={{ backgroundColor: "#fff", borderRadius: 20, width: "100%", maxWidth: 1280, margin: "0 auto", padding: "48px 56px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "48% 52%", gap: 48, alignItems: "start" }}>
+
+              {/* Left */}
+              <div>
+                <h2 style={{ fontSize: "clamp(24px, 3.5vw, 44px)", fontWeight: 700, fontFamily: '"Unbounded", sans-serif', color: "#1b1b1b", lineHeight: 1.1, letterSpacing: "-1.5px", marginBottom: 32 }}>
+                  Pianifica con Precisione,<br />Allena con Fiducia.
+                </h2>
+                <div style={{ borderBottom: "1px solid #e5e7eb", marginBottom: 24 }}>
+                  <div style={{ display: "flex", gap: 0 }}>
+                    {tabs.map((tab, index) => (
+                      <button key={index}
+                        onClick={() => { activeTabRef.current = index; setActiveTab(index); }}
+                        type="button"
+                        style={{ padding: "12px 0", marginRight: 20, gap: 8, display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", flexShrink: 0, position: "relative", marginBottom: -1 }}>
+                        <Image src={tab.icon} alt="" width={20} height={20} style={{ width: 20, height: 20 }} />
+                        <span style={{ fontSize: 15, fontWeight: 600, fontFamily: "Plus Jakarta Sans, sans-serif", color: activeTab === index ? "#1b1b1b" : "rgba(27,27,27,0.4)", whiteSpace: "nowrap", transition: "color 0.3s ease" }}>
+                          {tab.title}
+                        </span>
+                        {/* scaleX progress bar — GPU composited, no layout reflow */}
+                        <div
+                          ref={(el) => { progressBarRefs.current[index] = el; }}
+                          style={{ position: "absolute", bottom: 0, left: 0, height: 2, width: "100%", backgroundColor: "#1b1b1b", transformOrigin: "left center", transform: "scaleX(0)" }}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <p style={{ fontSize: 15, fontFamily: "Plus Jakarta Sans, sans-serif", color: "rgba(27,27,27,0.7)", lineHeight: 1.6, maxWidth: 400 }}>
+                  {tabs[activeTab].description}
+                </p>
+              </div>
+
+              {/* Right: crossfading screenshot */}
+              <div style={{ position: "relative", backgroundColor: "#f5f5f5", borderRadius: 16, overflow: "hidden", height: 460 }}>
+                {tabs.map((tab, i) => (
+                  <Image key={i} src={tab.screenshot} alt={tab.title} fill
+                    style={{ objectFit: "cover", opacity: activeTab === i ? 1 : 0, transition: "opacity 0.4s ease" }}
+                    priority={i === 0} />
+                ))}
+              </div>
+
+            </div>
           </div>
         </div>
       </div>

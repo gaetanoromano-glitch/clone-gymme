@@ -15,7 +15,7 @@ export default function ForEveryoneSection({
       className={cn("relative w-full", className)}
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('/themes/gymme/assets2/images/homepage/blueprint/blueprint-overlay.webp')",
+          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('/themes/gymme/assets2/images/bg.svg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -31,27 +31,9 @@ export default function ForEveryoneSection({
             letterSpacing: "-2px",
           }}
         >
-          Per Tutti,{" "}
-          <em
-            style={{
-              fontStyle: "italic",
-              fontFamily: "Plus Jakarta Sans, sans-serif",
-            }}
-          >
-            dai
-          </em>{" "}
-          Personal Trainer
-        </h2>
-        <h2
-          className="font-twk text-white"
-          style={{
-            fontSize: "clamp(36px, 5.625vw, 72px)",
-            fontWeight: 700,
-            lineHeight: 1.05,
-            letterSpacing: "-2px",
-          }}
-        >
-          agli Studi Multidisciplinari
+            Per Tutti, dai Personal Trainer
+            agli Studi Multidisciplinari
+
         </h2>
         <p
           style={{
@@ -60,11 +42,10 @@ export default function ForEveryoneSection({
             fontWeight: 400,
             lineHeight: 1.6,
             marginTop: "16px",
-            maxWidth: "600px",
             fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
-          Una piattaforma progettata per PT, Nutrizionisti e Osteopati che vogliono collaborare, crescere e fidelizzare i propri clienti nel tempo.
+          Una piattaforma progettata per chi vuole collaborare, crescere e fidelizzare i propri clienti nel tempo.
         </p>
       </div>
       {children}

@@ -36,13 +36,13 @@ export default function Home() {
           <IndustrySolutionSection />
           <ServiceTierSection />
           <ForEveryoneSection>
-            <PlanCoachSection />
+            {/*<PlanCoachSection />*/}
             <MotivateSection />
-            <EngageSection />
-            <ScaleSection />
+            {/*<EngageSection />*/}
+            {/*<ScaleSection />*/}
           </ForEveryoneSection>
           <RatingsSection />
-          <CTASection />
+          {/*<CTASection />*/}
         </div>
       </main>
       <Footer />

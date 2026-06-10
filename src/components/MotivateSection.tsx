@@ -5,38 +5,59 @@ import { FeatureAccordion, AccordionItem } from "@/components/FeatureAccordion";
 const items: AccordionItem[] = [
   {
     icon: "/themes/gymme/assets2/images/homepage/icons/data-analytics-icon.svg",
-    title: "Client Risk Radar",
-    description: "Identifica i clienti a rischio abbandono prima che sia troppo tardi. Aderenza al piano, frequenza login, pattern di pagamento: tutto in un unico segnale predittivo.",
+    title: "Monitoraggio progressi",
+    description: "Niente più dubbi sul valore del tuo lavoro: mostra progressi concreti e dati oggettivi che motivano il cliente a non mollare.",
     screenshot:
-      "/themes/gymme/assets2/images/homepage/motivate/data-analytics.webp",
+      "/themes/gymme/assets2/images/foto_gymme/Monitoring progressi.png",
   },
   {
     icon: "/themes/gymme/assets2/images/homepage/icons/goal-settings-icon.svg",
-    title: "Progressi & Misurazioni",
-    description: "Storico completo di misurazioni antropometriche, foto progresso affiancate per confronto prima/dopo e grafici di evoluzione forza e peso nel tempo.",
+    title: "Gestione appuntamenti",
+    description: "Elimina il caos dei messaggi infiniti su WhatsApp. Automatizza le prenotazioni e riprenditi il tuo tempo libero.",
     screenshot:
-      "/themes/gymme/assets2/images/homepage/motivate/goal-setting.webp",
+        "/themes/gymme/assets2/images/foto_gymme/Gestione appuntamenti.png",
   },
   {
     icon: "/themes/gymme/assets2/images/homepage/icons/adherence-icon.svg",
-    title: "Monitoraggio Aderenza",
-    description: "Tieni traccia di completamenti, sedute residue e cancellazioni per ogni cliente. Dashboard aderenza sempre aggiornata per non perdere nessun segnale.",
+    title: "CRM",
+    description: "Basta informazioni sparse tra fogli e chat. Accedi in un istante allo storico completo di ogni cliente. Gestione centralizzata per un servizio fluido e preciso.",
     screenshot:
-      "/themes/gymme/assets2/images/homepage/motivate/data-analytics.webp",
+        "/themes/gymme/assets2/images/foto_gymme/CRM.png",
   },
   {
     icon: "/themes/gymme/assets2/images/homepage/icons/check-ins-icon.svg",
-    title: "Check-in Giornalieri",
-    description: "Il cliente registra umore e benessere dall'app ogni giorno. I dati arrivano direttamente al professionista per un coaching più informato e proattivo.",
+    title: "Pacchetti",
+    description: "Elimina lo stress e l'imbarazzo di rincorrere i pagamenti. Gestisci scadenze e vendite in automatico senza errori manuali.",
     screenshot:
-      "/themes/gymme/assets2/images/homepage/motivate/check-ins.webp",
+        "/themes/gymme/assets2/images/foto_gymme/Pacchetti.png",
   },
   {
     icon: "/themes/gymme/assets2/images/homepage/icons/integrations-trackers-icon.svg",
-    title: "Report Automatici",
-    description: "Genera report progressi automatici da condividere col cliente. Grafici, foto e milestone raggiunte in un documento professionale pronto in un click.",
+    title: "Comunicazione diretta",
+    description: "Resta vicino ai tuoi clienti con promemoria automatici che mantengono alto il coinvolgimento e la presenza.",
     screenshot:
-      "/themes/gymme/assets2/images/homepage/motivate/integrations.webp",
+        "/themes/gymme/assets2/images/foto_gymme/Comunicazione diretta.png",
+  },
+  {
+    icon: "/themes/gymme/assets2/images/homepage/icons/data-analytics-icon.svg",
+    title: "Live Mode",
+    description: "Un cockpit intelligente per gestire più clienti contemporaneamente, senza perdere un battito.",
+    screenshot:
+        "/themes/gymme/assets2/images/foto_gymme/Live mode.png",
+  },
+  {
+    icon: "/themes/gymme/assets2/images/homepage/icons/goal-settings-icon.svg",
+    title: "Referral & Network Growth",
+    description: "Tre scenari di referral nativi: invita colleghi, consiglia professionisti ai tuoi clienti, collabora su clienti condivisi.",
+    screenshot:
+        "/themes/gymme/assets2/images/foto_gymme/Referral.png",
+  },
+  {
+    icon: "/themes/gymme/assets2/images/homepage/icons/goal-settings-icon.svg",
+    title: "Showcase social",
+    description: "Trasforma i progressi reali dei tuoi clienti in contenuti social pronti in pochi tap.",
+    screenshot:
+        "/themes/gymme/assets2/images/foto_gymme/Social Story Mode.png",
   },
 ];
 

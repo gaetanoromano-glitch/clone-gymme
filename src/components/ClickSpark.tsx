@@ -33,38 +33,9 @@ const ClickSpark = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparksRef = useRef<Spark[]>([]);
   const animationIdRef = useRef<number>(0);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const parent = canvas.parentElement;
-    if (!parent) return;
-
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-
-    const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-      }
-    };
-
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeCanvas, 100);
-    };
-
-    const ro = new ResizeObserver(handleResize);
-    ro.observe(parent);
-    resizeCanvas();
-
-    return () => {
-      ro.disconnect();
-      clearTimeout(resizeTimeout);
-    };
-  }, []);
+  // true while the draw loop is active. Lets us start it on demand and
+  // stop it the moment there are no sparks left to animate.
+  const runningRef = useRef(false);
 
   const easeFunc = useCallback(
     (t: number): number => {
@@ -83,11 +54,40 @@ const ClickSpark = ({
     [easing]
   );
 
+  // ── Canvas sized to the VIEWPORT only (position: fixed), not the whole
+  //    page. Page height no longer affects canvas cost. ────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const resize = () => {
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener("resize", resize, { passive: true });
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationIdRef.current);
+      runningRef.current = false;
+    };
+  }, []);
+
+  // ── Draw loop: ONLY runs while sparks exist. Stops itself when empty,
+  //    so the page isn't repainting a full-screen canvas 60fps at idle. ─
+  const startLoop = useCallback(() => {
+    if (runningRef.current) return;
+    runningRef.current = true;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
 
     const draw = (timestamp: number) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -117,22 +117,22 @@ const ClickSpark = ({
         return true;
       });
 
-      animationIdRef.current = requestAnimationFrame(draw);
+      if (sparksRef.current.length > 0) {
+        animationIdRef.current = requestAnimationFrame(draw);
+      } else {
+        // Nothing left to draw — clear once and idle (no more frames).
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        runningRef.current = false;
+      }
     };
 
     animationIdRef.current = requestAnimationFrame(draw);
-
-    return () => {
-      cancelAnimationFrame(animationIdRef.current);
-    };
-  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration, easeFunc, extraScale]);
+  }, [duration, easeFunc, sparkRadius, extraScale, sparkSize, sparkColor]);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Canvas is fixed at (0,0), so viewport coords map directly.
+    const x = e.clientX;
+    const y = e.clientY;
 
     const now = performance.now();
     const newSparks: Spark[] = Array.from({ length: sparkCount }, (_, i) => ({
@@ -143,24 +143,22 @@ const ClickSpark = ({
     }));
 
     sparksRef.current.push(...newSparks);
+    startLoop();
   };
 
   return (
-    <div
-      style={{ position: "relative", width: "100%", height: "100%" }}
-      onClick={handleClick}
-    >
+    <div style={{ position: "relative", width: "100%" }} onClick={handleClick}>
       <canvas
         ref={canvasRef}
         style={{
-          width: "100%",
-          height: "100%",
+          position: "fixed",
+          inset: 0,
+          width: "100vw",
+          height: "100vh",
           display: "block",
           userSelect: "none",
-          position: "absolute",
-          top: 0,
-          left: 0,
           pointerEvents: "none",
+          zIndex: 9999,
         }}
       />
       {children}

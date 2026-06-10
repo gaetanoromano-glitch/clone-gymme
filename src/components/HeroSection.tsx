@@ -57,6 +57,17 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
     >
       <p className="sr-only">Gymme — Piattaforma Wellness Multi-Professionale</p>
 
+      {/* ── Background ── */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/themes/gymme/assets2/images/bg.svg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+
       {/* ── Centered content ── */}
       <div
         className="relative z-10 flex flex-col items-center justify-center text-center h-full px-5 md:px-10 lg:px-[80px]"
