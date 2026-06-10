@@ -39,7 +39,7 @@ const testimonials = [
     name: "Sara Mancini",
     title: "Fondatrice Studio Wellness, Torino",
     photo: "/themes/gymme/assets2/images/homepage/testimonial/testimonial-1-4.webp",
-    bgColor: "#1b1b1b",
+    bgColor: "var(--text-primary)",
   },
   {
     quote:
@@ -63,7 +63,7 @@ export function RatingsSection() {
           style={{
             fontSize: "clamp(24px, 4.5vw, 56px)",
             lineHeight: 1.1,
-            color: "#1b1b1b",
+            color: "var(--text-primary)",
             letterSpacing: "-1.5px",
           }}
         >
@@ -80,7 +80,7 @@ export function RatingsSection() {
               key={i}
               className="font-inter flex flex-col justify-between"
               style={{
-                backgroundColor: "#f5f5f5",
+                backgroundColor: "var(--bg)",
                 borderRadius: "16px",
                 padding: "20px 18px",
                 flex: 1,
@@ -91,14 +91,14 @@ export function RatingsSection() {
                 {stat.bigText ? (
                   <span
                     className="font-twk block"
-                    style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "#1b1b1b", lineHeight: 1 }}
+                    style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}
                   >
                     {stat.bigText}
                   </span>
                 ) : (
                   <span
                     className="font-twk block"
-                    style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "#1b1b1b", lineHeight: 1 }}
+                    style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}
                   >
                     {stat.prefix && (
                       <span style={{ fontSize: "clamp(20px, 2.2vw, 28px)", fontWeight: 700 }}>
@@ -111,7 +111,7 @@ export function RatingsSection() {
                 <p
                   style={{
                     fontSize: "13px",
-                    color: "rgba(27,27,27,0.6)",
+                    color: "color-mix(in srgb, var(--text-primary) 60%, transparent)",
                     lineHeight: 1.4,
                     marginTop: "8px",
                     whiteSpace: "pre-line",
@@ -124,47 +124,47 @@ export function RatingsSection() {
           ))}
         </div>
 
-        <div
-          className="flex overflow-x-auto"
-          style={{ gap: "16px", scrollbarWidth: "none" as const, paddingBottom: "8px" }}
-        >
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="flex flex-col flex-shrink-0 overflow-hidden"
-              style={{ width: "clamp(260px, 30vw, 340px)", borderRadius: "16px" }}
-            >
-              <div className="relative" style={{ height: "180px", width: "100%" }}>
-                <Image
-                  src={t.photo}
-                  alt={t.name}
-                  fill
-                  className="object-cover object-top"
-                  unoptimized
-                />
-              </div>
-              <div
-                className="flex flex-col flex-1"
-                style={{ padding: "20px", backgroundColor: t.bgColor }}
-              >
-                <p
-                  className="font-inter"
-                  style={{ color: "#ffffff", fontSize: "15px", lineHeight: 1.5, fontWeight: 400, flex: 1 }}
-                >
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div style={{ marginTop: "16px" }}>
-                  <p className="font-inter" style={{ color: "#ffffff", fontSize: "14px", fontWeight: 700 }}>
-                    {t.name}
-                  </p>
-                  <p className="font-inter" style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", marginTop: "4px" }}>
-                    {t.title}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/*<div*/}
+        {/*  className="flex overflow-x-auto"*/}
+        {/*  style={{ gap: "16px", scrollbarWidth: "none" as const, paddingBottom: "8px" }}*/}
+        {/*>*/}
+        {/*  {testimonials.map((t) => (*/}
+        {/*    <div*/}
+        {/*      key={t.name}*/}
+        {/*      className="flex flex-col flex-shrink-0 overflow-hidden"*/}
+        {/*      style={{ width: "clamp(260px, 30vw, 340px)", borderRadius: "16px" }}*/}
+        {/*    >*/}
+        {/*      <div className="relative" style={{ height: "180px", width: "100%" }}>*/}
+        {/*        <Image*/}
+        {/*          src={t.photo}*/}
+        {/*          alt={t.name}*/}
+        {/*          fill*/}
+        {/*          className="object-cover object-top"*/}
+        {/*          unoptimized*/}
+        {/*        />*/}
+        {/*      </div>*/}
+        {/*      <div*/}
+        {/*        className="flex flex-col flex-1"*/}
+        {/*        style={{ padding: "20px", backgroundColor: t.bgColor }}*/}
+        {/*      >*/}
+        {/*        <p*/}
+        {/*          className="font-inter"*/}
+        {/*          style={{ color: "var(--surface)", fontSize: "15px", lineHeight: 1.5, fontWeight: 400, flex: 1 }}*/}
+        {/*        >*/}
+        {/*          &ldquo;{t.quote}&rdquo;*/}
+        {/*        </p>*/}
+        {/*        <div style={{ marginTop: "16px" }}>*/}
+        {/*          <p className="font-inter" style={{ color: "var(--surface)", fontSize: "14px", fontWeight: 700 }}>*/}
+        {/*            {t.name}*/}
+        {/*          </p>*/}
+        {/*          <p className="font-inter" style={{ color: "color-mix(in srgb, var(--surface) 70%, transparent)", fontSize: "13px", marginTop: "4px" }}>*/}
+        {/*            {t.title}*/}
+        {/*          </p>*/}
+        {/*        </div>*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  ))}*/}
+        {/*</div>*/}
       </div>
     </section>
   );

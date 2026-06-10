@@ -2,10 +2,11 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import type { IconWeight } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 export interface AccordionItem {
-  icon: string;
+  icon: React.ComponentType<{ size?: number; weight?: IconWeight; color?: string }>;
   title: string;
   description: string;
   screenshot: string;
@@ -112,7 +113,7 @@ export function FeatureAccordion({
             return (
               <div key={index} onClick={() => setActiveIndex(index)} style={{ borderBottom: "1px solid #e5e7eb", padding: "18px 0", cursor: "pointer" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <Image src={item.icon} alt="" width={22} height={22} style={{ width: 22, height: 22, flexShrink: 0 }} />
+                  <item.icon size={22} weight="regular" color={isActive ? "#1b1b1b" : "rgba(27,27,27,0.45)"} />
                   <span style={{ fontSize: 16, fontWeight: isActive ? 700 : 500, fontFamily: "Plus Jakarta Sans, sans-serif", color: isActive ? "#1b1b1b" : "rgba(27,27,27,0.45)", transition: "color 0.3s" }}>
                     {item.title}
                   </span>
@@ -176,7 +177,7 @@ export function FeatureAccordion({
                         }}
                       />
                       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                        <Image src={item.icon} alt="" width={24} height={24} style={{ width: 24, height: 24, flexShrink: 0 }} />
+                        <item.icon size={24} weight="regular" color={isActive ? "#1b1b1b" : "rgba(27,27,27,0.45)"} />
                         <span style={{ fontSize: 17, fontWeight: isActive ? 700 : 500, fontFamily: "Plus Jakarta Sans, sans-serif", color: isActive ? "#1b1b1b" : "rgba(27,27,27,0.45)", transition: "color 0.3s ease" }}>
                           {item.title}
                         </span>

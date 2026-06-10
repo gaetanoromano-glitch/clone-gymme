@@ -8,15 +8,15 @@ interface FeatureItem {
 }
 
 const highTicketFeatures: FeatureItem[] = [
-  { label: "CRM clienti con anamnesi e misurazioni", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
-  { label: "Protocolli Training, Nutrition e Recovery", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
-  { label: "AI Protocol Builder e Business Dashboard", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "rgba(255,255,255,0.85)" },
+  { label: "CRM clienti con anamnesi e misurazioni", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
+  { label: "Protocolli Training, Nutrition e Recovery", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
+  { label: "AI Protocol Builder e Business Dashboard", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
 ];
 
 const lowTicketFeatures: FeatureItem[] = [
-  { label: "Visualizzazione scheda e allenamenti del giorno", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
-  { label: "Check-in, progressi e foto in tempo reale", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
-  { label: "Comunicazione diretta col professionista", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "#1b1b1b" },
+  { label: "Visualizzazione scheda e allenamenti del giorno", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "var(--text-primary)" },
+  { label: "Check-in, progressi e foto in tempo reale", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "var(--text-primary)" },
+  { label: "Comunicazione diretta col professionista", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "var(--text-primary)" },
 ];
 
 export function ServiceTierSection() {
@@ -24,7 +24,7 @@ export function ServiceTierSection() {
     <section
       id="ecosistema"
       className="w-full px-5 py-10 md:px-10 md:py-16 lg:px-[80px] lg:py-[80px]"
-      style={{ backgroundColor: "#ffffff" }}
+      style={{ backgroundColor: "var(--surface)" }}
     >
       <div className="max-w-[1280px] mx-auto">
         <div className="mb-12">
@@ -33,7 +33,7 @@ export function ServiceTierSection() {
               fontSize: "clamp(28px, 4.5vw, 56px)",
               fontWeight: 700,
               fontFamily: '"Unbounded", sans-serif',
-              color: "#1b1b1b",
+              color: "var(--text-primary)",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
             }}
@@ -45,7 +45,7 @@ export function ServiceTierSection() {
               fontSize: "clamp(28px, 4.5vw, 56px)",
               fontWeight: 700,
               fontFamily: '"Unbounded", sans-serif',
-              color: "#1b1b1b",
+              color: "var(--text-primary)",
               lineHeight: 1.1,
               letterSpacing: "-1.5px",
             }}
@@ -59,13 +59,13 @@ export function ServiceTierSection() {
           <SpotlightCard
 
             className="
-            bg-[#1b1b1b]"
-            spotlightColor="rgba(255, 255, 255, 0.25)"
+            bg-[var(--text-primary)]"
+            spotlightColor="color-mix(in srgb, var(--surface) 25%, transparent)"
           >
             <div style={{ flex: 1 }}>
               <p
                 style={{
-                  color: "rgba(255,255,255,0.7)",
+                  color: "color-mix(in srgb, var(--surface) 70%, transparent)",
                   fontSize: "16px",
                   fontWeight: 500,
                   marginBottom: "8px",
@@ -76,7 +76,7 @@ export function ServiceTierSection() {
 
               <h3
                 style={{
-                  color: "#ffffff",
+                  color: "var(--surface)",
                   fontSize: "clamp(20px, 2.5vw, 28px)",
                   fontWeight: 700,
                   fontFamily: '"Unbounded", sans-serif',
@@ -108,13 +108,13 @@ export function ServiceTierSection() {
           <SpotlightCard
 
             className="custom-spotlight-card
-            bg-[#f5f5f5]"
-            spotlightColor="rgba(0, 0, 0, 0.25)"
+            bg-[var(--bg)]"
+            spotlightColor="color-mix(in srgb, var(--ink) 25%, transparent)"
           >
             <div style={{ flex: 1 }}>
               <p
                 style={{
-                  color: "rgba(27,27,27,0.6)",
+                  color: "color-mix(in srgb, var(--text-primary) 60%, transparent)",
                   fontSize: "16px",
                   fontWeight: 500,
                   marginBottom: "8px",
@@ -125,7 +125,7 @@ export function ServiceTierSection() {
 
               <h3
                 style={{
-                  color: "#1b1b1b",
+                  color: "var(--text-primary)",
                   fontSize: "clamp(20px, 2.5vw, 28px)",
                   fontWeight: 700,
                   fontFamily: '"Unbounded", sans-serif',

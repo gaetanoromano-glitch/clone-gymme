@@ -22,7 +22,7 @@ const features: Feature[] = [
       "PT, Nutrizionista e Osteopata collaborano sullo stesso cliente con autonomia professionale preservata e contesto condiviso. Nessun competitor single-role lo abilita.",
     icon: "/themes/gymme/assets2/images/homepage/industry/AI.svg",
     screenshot: "/videos/Multi_pro.mp4",
-    accent: "#e8f0ff",
+    accent: "#F2B6FF",
   },
   {
     num: 2,
@@ -32,7 +32,7 @@ const features: Feature[] = [
       "Meno compiti meccanici, più valore umano. Genera schede e protocolli solidi in pochi istanti con l'AI. Dedica il tuo tempo a ciò che conta: il rapporto con il cliente.",
     icon: "/themes/gymme/assets2/images/homepage/industry/nutrition.svg",
       screenshot: "/videos/AI_Builder.mp4",
-    accent: "#e8f7ee",
+    accent: "#8CDEC0",
   },
   {
     num: 3,
@@ -41,7 +41,7 @@ const features: Feature[] = [
       "Non farti sorprendere dai clienti che spariscono. Intervieni subito sui segnali di crisi e salva il tuo fatturato mensile.",
     icon: "/themes/gymme/assets2/images/homepage/industry/habit.svg",
       screenshot: "/videos/Client_Risk_Radar.mp4",
-    accent: "#fff3e8",
+    accent: "#FFC86B",
   },
   {
     num: 4,
@@ -50,7 +50,7 @@ const features: Feature[] = [
       "Smetti di indovinare: analizza rinnovi e margini con dati certi. Trasforma la tua attività in una macchina prevedibile che cresce insieme a te.",
     icon: "/themes/gymme/assets2/images/homepage/industry/sport.svg",
       screenshot: "/videos/Business_Dashboard.mp4",
-    accent: "#f3eeff",
+    accent: "#AECBFF",
   },
 ];
 
@@ -210,7 +210,7 @@ export function IndustrySolutionSection() {
                 }}
               >
                 {/* Screenshot / Video */}
-                <div style={{ position: "relative", height: "200px", width: "100%", overflow: "hidden", borderRadius: "16px 16px 0 0" }}>
+                <div style={{ position: "relative", width: "100%", overflow: "hidden", borderRadius: "16px 16px 0 0" }}>
                   <MediaDisplay
                     src={f.screenshot}
                     alt={f.title}
@@ -354,7 +354,6 @@ export function IndustrySolutionSection() {
                                 whiteSpace: "nowrap",
                               }}
                             >
-                              <Image src="/themes/gymme/assets2/images/icons/ai-badge-sm.png" alt="AI" width={14} height={14} />
                               {f.badge}
                             </span>
                           )}

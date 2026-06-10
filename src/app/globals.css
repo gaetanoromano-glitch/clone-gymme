@@ -150,6 +150,19 @@
   /* Special colors */
   --pastel-red-light: #FEE2E2;
 
+  /* Badge accent (feature "NEW"/tag pills) */
+  --badge: #0370FF;
+
+  /* Light pastel tints (section/card accents) */
+  --tint-sky: #E8F0FF;
+  --tint-mint: #E8F7EE;
+  --tint-butter: #FFF3E8;
+  --tint-purple: #F3EEFF;
+  --tint-lilac: #EEEDFB;
+
+  /* Pure black — solid fills, overlays, scrims (use via color-mix for alpha) */
+  --ink: #000000;
+
   /* ── Semantic Tokens — Atomic Design Layer ─────────────────────── */
   --bg-canvas: var(--bg);
   --bg-surface: var(--surface);
