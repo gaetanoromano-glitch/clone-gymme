@@ -114,20 +114,6 @@ export function Footer() {
         >
           © Gymme 2026
         </p>
-
-        <div className="flex items-center" style={{ gap: "16px" }}>
-          {socialIcons.map((icon) => (
-            <a
-              key={icon.alt}
-              href={icon.href}
-              aria-label={icon.alt}
-              className="flex items-center justify-center hover:opacity-60 transition-opacity duration-200"
-              style={{ width: "36px", height: "36px" }}
-            >
-              <Image src={icon.src} alt={icon.alt} width={36} height={36} unoptimized />
-            </a>
-          ))}
-        </div>
       </div>
     </footer>
   );

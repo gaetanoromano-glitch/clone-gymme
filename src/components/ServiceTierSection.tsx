@@ -1,22 +1,22 @@
-import Image from "next/image";
+import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import SpotlightCard from "@/components/SpotLightCard";
 
 interface FeatureItem {
   label: string;
-  checkmarkSrc: string;
+  iconColor: string;
   labelColor: string;
 }
 
 const highTicketFeatures: FeatureItem[] = [
-  { label: "CRM clienti con anamnesi e misurazioni", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
-  { label: "Protocolli Training, Nutrition e Recovery", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
-  { label: "AI Protocol Builder e Business Dashboard", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon-1.svg", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
+  { label: "CRM clienti con anamnesi e misurazioni", iconColor: "var(--surface)", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
+  { label: "Protocolli Training, Nutrition e Recovery", iconColor: "var(--surface)", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
+  { label: "AI Protocol Builder e Business Dashboard", iconColor: "var(--surface)", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
 ];
 
 const lowTicketFeatures: FeatureItem[] = [
-  { label: "Visualizzazione scheda e allenamenti del giorno", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "var(--text-primary)" },
-  { label: "Check-in, progressi e foto in tempo reale", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "var(--text-primary)" },
-  { label: "Comunicazione diretta col professionista", checkmarkSrc: "/themes/gymme/assets2/images/homepage/icons/checkmark-icon.svg", labelColor: "var(--text-primary)" },
+  { label: "Visualizzazione scheda e allenamenti del giorno", iconColor: "var(--gymme-purple)", labelColor: "var(--text-primary)" },
+  { label: "Check-in, progressi e foto in tempo reale", iconColor: "var(--gymme-purple)", labelColor: "var(--text-primary)" },
+  { label: "Comunicazione diretta col professionista", iconColor: "var(--gymme-purple)", labelColor: "var(--text-primary)" },
 ];
 
 export function ServiceTierSection() {
@@ -93,9 +93,12 @@ export function ServiceTierSection() {
                     key={item.label}
                     style={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
-                    <div style={{ position: "relative", width: "20px", height: "20px", flexShrink: 0 }}>
-                      <Image src={item.checkmarkSrc} alt="check" fill style={{ objectFit: "contain" }} />
-                    </div>
+                    <CheckCircle
+                      size={20}
+                      weight="fill"
+                      color={item.iconColor}
+                      style={{ flexShrink: 0 }}
+                    />
                     <span style={{ color: item.labelColor, fontSize: "15px" }}>{item.label}</span>
                   </li>
                 ))}
@@ -142,9 +145,12 @@ export function ServiceTierSection() {
                     key={item.label}
                     style={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
-                    <div style={{ position: "relative", width: "20px", height: "20px", flexShrink: 0 }}>
-                      <Image src={item.checkmarkSrc} alt="check" fill style={{ objectFit: "contain" }} />
-                    </div>
+                    <CheckCircle
+                      size={20}
+                      weight="fill"
+                      color={item.iconColor}
+                      style={{ flexShrink: 0 }}
+                    />
                     <span style={{ color: item.labelColor, fontSize: "15px" }}>{item.label}</span>
                   </li>
                 ))}

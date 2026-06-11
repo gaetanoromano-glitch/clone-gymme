@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const stats = [
   { value: "50K+", label: "Professionisti Wellness\nin Italia" },
-  { prefix: "+", value: "30%", label: "Retention Media\ndei Clienti" },
+  {  value: "+30%", label: "Retention Media\ndei Clienti" },
   { value: "3", label: "Discipline in\nun'Unica Piattaforma" },
   { bigText: "25+", label: "Ore a Settimana\nRisparmiate" },
   { value: "0", label: "Competitor Italiani\nMulti-Professionale" },
@@ -55,7 +55,7 @@ export function RatingsSection() {
   return (
     <section
       id="risultati"
-      className="bg-white px-5 py-10 md:px-10 md:py-16 lg:px-[80px] lg:py-[80px]"
+      className="bg-white px-5 py-10 md:px-10 md:py-16 lg:px-[80px] lg:py-[80px] h-screen"
     >
       <div className="max-w-[1280px] mx-auto">
         <h2
@@ -100,11 +100,6 @@ export function RatingsSection() {
                     className="font-twk block"
                     style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}
                   >
-                    {stat.prefix && (
-                      <span style={{ fontSize: "clamp(20px, 2.2vw, 28px)", fontWeight: 700 }}>
-                        {stat.prefix}
-                      </span>
-                    )}
                     {stat.value}
                   </span>
                 )}
