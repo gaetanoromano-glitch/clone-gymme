@@ -120,10 +120,7 @@ function SectionHeader() {
           letterSpacing: "-1.5px",
         }}
       >
-        I{" "}
-        <span style={{ fontStyle: "italic", fontFamily: "Plus Jakarta Sans, sans-serif" }}>
-          4 Pillar
-        </span>{" "}
+        I  4 Pillar
         che nessun competitor
       </h2>
       <h2
