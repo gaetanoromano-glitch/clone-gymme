@@ -1,12 +1,36 @@
 import Image from "next/image";
 
-const stats = [
-  { value: "50K+", label: "Professionisti Wellness\nin Italia" },
-  {  value: "+30%", label: "Retention Media\ndei Clienti" },
-  { value: "3", label: "Discipline in\nun'Unica Piattaforma" },
-  { bigText: "25+", label: "Ore a Settimana\nRisparmiate" },
-  { value: "0", label: "Competitor Italiani\nMulti-Professionale" },
+interface StatLayout {
+  area: string;
+  mobileSpan?: string;
+  hero?: boolean;
+}
+
+const STAT_LAYOUTS: StatLayout[] = [
+  { area: "lg:col-start-1 lg:col-end-3 lg:row-start-1 lg:row-end-3", mobileSpan: "col-span-2", hero: true },
+  { area: "lg:col-start-3 lg:col-end-5 lg:row-start-1 lg:row-end-2" },
+  { area: "lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4" },
+  { area: "lg:col-start-4 lg:col-end-5 lg:row-start-2 lg:row-end-4" },
+  { area: "lg:col-start-1 lg:col-end-3 lg:row-start-3 lg:row-end-4", mobileSpan: "col-span-2" },
 ];
+
+const DEFAULT_STATS = [
+  { value: "+38%", label: "Fatturato medio in più\nnel primo anno con Gymme" },
+  { value: "10h", label: "Risparmiate ogni settimana\nsu schede, report e messaggi" },
+  { value: "3×", label: "Clienti seguiti\nsenza aumentare lo stress" },
+  { value: "−75%", label: "Tempo per creare\nun protocollo completo" },
+  { value: "1", label: "App al posto di Excel,\nchat e PDF sparsi" },
+];
+
+interface RatingsSectionProps {
+  heading?: { bold: string; regular: string };
+  stats?: Array<{ value: string; label: string }>;
+}
+
+const DEFAULT_HEADING = {
+  bold: "La Prima Piattaforma ",
+  regular: "Multi-Pro per il Benessere in Italia",
+};
 
 const testimonials = [
   {
@@ -51,15 +75,18 @@ const testimonials = [
   },
 ];
 
-export function RatingsSection() {
+export function RatingsSection({
+  heading = DEFAULT_HEADING,
+  stats = DEFAULT_STATS,
+}: RatingsSectionProps) {
   return (
     <section
       id="risultati"
       className="bg-white px-5 py-10 md:px-10 md:py-16 lg:px-[80px] lg:py-[80px] h-screen"
     >
-      <div className="max-w-[1280px] mx-auto">
+      <div className="max-w-[1280px] mx-auto h-full flex flex-col min-h-0">
         <h2
-          className="font-twk"
+          className="font-twk mb-8 md:mb-10 shrink-0"
           style={{
             fontSize: "clamp(24px, 4.5vw, 56px)",
             lineHeight: 1.1,
@@ -67,56 +94,52 @@ export function RatingsSection() {
             letterSpacing: "-1.5px",
           }}
         >
-          <span style={{ fontWeight: 700 }}>La Prima Piattaforma </span>
-          <span style={{ fontWeight: 400 }}>Multi-Pro per il Benessere in Italia</span>
+          <span style={{ fontWeight: 700 }}>{heading.bold}</span>
+          <span style={{ fontWeight: 400 }}>{heading.regular}</span>
         </h2>
 
-        <div
-          className="grid grid-cols-2 md:flex md:flex-wrap"
-          style={{ gap: "16px", marginTop: "48px", marginBottom: "64px" }}
-        >
-          {stats.map((stat, i) => (
+        <div className="grid flex-1 min-h-0 grid-cols-2 auto-rows-fr gap-4 lg:grid-cols-4 lg:grid-rows-3">
+          {stats.map((stat, i) => {
+            const layout = STAT_LAYOUTS[i];
+            return (
             <div
               key={i}
-              className="font-inter flex flex-col justify-between"
+              className={`font-inter flex flex-col justify-between overflow-hidden ${layout?.mobileSpan ?? ""} ${layout?.area ?? ""}`}
               style={{
-                backgroundColor: "var(--bg)",
-                borderRadius: "16px",
-                padding: "20px 18px",
-                flex: 1,
-                minWidth: "140px",
+                backgroundColor: layout?.hero ? "var(--gymme-purple)" : "var(--bg)",
+                borderRadius: "20px",
+                padding: "24px",
               }}
             >
-              <div>
-                {stat.bigText ? (
-                  <span
-                    className="font-twk block"
-                    style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}
-                  >
-                    {stat.bigText}
-                  </span>
-                ) : (
-                  <span
-                    className="font-twk block"
-                    style={{ fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, color: "var(--text-primary)", lineHeight: 1 }}
-                  >
-                    {stat.value}
-                  </span>
-                )}
-                <p
-                  style={{
-                    fontSize: "13px",
-                    color: "color-mix(in srgb, var(--text-primary) 60%, transparent)",
-                    lineHeight: 1.4,
-                    marginTop: "8px",
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {stat.label}
-                </p>
-              </div>
+              <span
+                className="font-twk block"
+                style={{
+                  fontSize: layout?.hero ? "clamp(44px, 6vw, 88px)" : "clamp(28px, 3vw, 44px)",
+                  fontWeight: 800,
+                  color: layout?.hero ? "var(--surface)" : "var(--text-primary)",
+                  lineHeight: 1,
+                  letterSpacing: "-1px",
+                }}
+              >
+                {stat.value}
+              </span>
+              <p
+                style={{
+                  fontSize: layout?.hero ? "clamp(16px, 1.6vw, 20px)" : "13px",
+                  fontWeight: layout?.hero ? 500 : 400,
+                  color: layout?.hero
+                    ? "color-mix(in srgb, var(--surface) 85%, transparent)"
+                    : "color-mix(in srgb, var(--text-primary) 60%, transparent)",
+                  lineHeight: 1.4,
+                  marginTop: "12px",
+                  whiteSpace: "pre-line",
+                }}
+              >
+                {stat.label}
+              </p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/*<div*/}

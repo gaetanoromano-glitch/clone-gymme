@@ -10,8 +10,8 @@ interface Props {
 }
 
 const NAV_LINKS = [
-  { label: "Soluzioni", href: "#soluzioni" },
   { label: "Ecosistema", href: "#ecosistema" },
+  { label: "Soluzioni", href: "#soluzioni" },
   { label: "Funzionalità", href: "#funzionalita" },
   { label: "Risultati", href: "#risultati" },
 ];

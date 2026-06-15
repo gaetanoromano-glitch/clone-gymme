@@ -3,19 +3,26 @@ import { cn } from "@/lib/utils";
 interface ForEveryoneSectionProps {
   children: React.ReactNode;
   className?: string;
+  heading?: string;
+  subtitle?: string;
 }
+
+const DEFAULT_HEADING = "Per Tutti, dai Personal Trainer agli Studi Multidisciplinari";
+const DEFAULT_SUBTITLE =
+  "Una piattaforma progettata per chi vuole collaborare, crescere e fidelizzare i propri clienti nel tempo.";
 
 export default function ForEveryoneSection({
   children,
   className,
+  heading = DEFAULT_HEADING,
+  subtitle = DEFAULT_SUBTITLE,
 }: ForEveryoneSectionProps) {
   return (
     <section
       id="funzionalita"
       className={cn("relative w-full", className)}
       style={{
-        backgroundImage:
-          "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('/themes/gymme/assets2/images/bg.svg')",
+          backgroundColor:'#A99CFF',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -31,9 +38,7 @@ export default function ForEveryoneSection({
             letterSpacing: "-2px",
           }}
         >
-            Per Tutti, dai Personal Trainer
-            agli Studi Multidisciplinari
-
+            {heading}
         </h2>
         <p
           style={{
@@ -45,7 +50,7 @@ export default function ForEveryoneSection({
             fontFamily: "Plus Jakarta Sans, sans-serif",
           }}
         >
-          Una piattaforma progettata per chi vuole collaborare, crescere e fidelizzare i propri clienti nel tempo.
+          {subtitle}
         </p>
       </div>
       {children}

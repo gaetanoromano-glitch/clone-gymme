@@ -3,20 +3,20 @@
 import Image from "next/image";
 import StickerPeel from "./StickerPeel";
 import { AnimatedButton } from "./AnimatedButton";
+import SplitText from "@/components/SplitText";
 
-const socialIcons = [
-  { src: "/themes/gymme/assets2/images/homepage/footer/fb-icon.svg", alt: "Facebook", href: "https://www.facebook.com/gymmeapp" },
-  { src: "/themes/gymme/assets2/images/homepage/footer/ig-icon.svg", alt: "Instagram", href: "https://www.instagram.com/gymmeapp" },
-  { src: "/themes/gymme/assets2/images/homepage/footer/ytb-icon.svg", alt: "YouTube", href: "https://www.youtube.com/gymme" },
-  { src: "/themes/gymme/assets2/images/homepage/footer/linkedin-icon.svg", alt: "LinkedIn", href: "https://www.linkedin.com/company/gymme" },
-];
 
-export function Footer() {
+
+interface FooterProps {
+  ctaText?: string;
+}
+
+export function Footer({ ctaText = "Diamo forma al futuro del fitness, insieme." }: FooterProps) {
   return (
-    <footer style={{ backgroundColor: "#fafafa" }}>
+    <footer style={{ backgroundColor: "#ffffff" }} className='h-screen flex flex-col items-center justify-center'>
       {/* ── Main hero-like area ── */}
       <div
-        className="relative overflow-hidden flex flex-col items-center justify-center text-center"
+        className="relative overflow-hidden flex flex-col items-center justify-center text-center  h-full w-full"
         style={{ minHeight: "520px", padding: "100px 24px 80px" }}
       >
         {/* Stickers — desktop only */}
@@ -73,19 +73,14 @@ export function Footer() {
 
         {/* Content */}
         <div className="relative flex flex-col items-center" style={{ zIndex: 3, maxWidth: "720px" }}>
-          <h2
-            style={{
-              fontSize: "clamp(32px, 5.5vw, 72px)",
-              fontWeight: 700,
-              fontFamily: '"Unbounded", sans-serif',
-              color: "#1b1b1b",
-              lineHeight: 1.08,
-              letterSpacing: "-2px",
-              margin: 0,
-            }}
-          >
-            Diamo forma al futuro del fitness, insieme.
-          </h2>
+            <SplitText
+                text={ctaText}
+                tag="h1"
+                className="text-[30px] md:text-[48px] lg:text-[64px] font-bold leading-[1.1] tracking-[-2px]"
+                splitType="words"
+                delay={40}
+                duration={0.9}
+            />
 
           <AnimatedButton
             href="#demo"

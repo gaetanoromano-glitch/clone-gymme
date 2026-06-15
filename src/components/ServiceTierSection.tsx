@@ -1,30 +1,33 @@
 import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import SpotlightCard from "@/components/SpotLightCard";
 
-interface FeatureItem {
-  label: string;
-  iconColor: string;
-  labelColor: string;
+const DEFAULT_STUDIO_FEATURES = [
+  "CRM clienti con anamnesi e misurazioni",
+  "Protocolli Training, Nutrition e Recovery",
+  "AI Protocol Builder e Business Dashboard",
+];
+
+const DEFAULT_CLIENT_FEATURES = [
+  "Visualizzazione scheda e allenamenti del giorno",
+  "Check-in, progressi e foto in tempo reale",
+  "Comunicazione diretta col professionista",
+];
+
+interface ServiceTierSectionProps {
+  studioFeatures?: string[];
+  clientFeatures?: string[];
 }
 
-const highTicketFeatures: FeatureItem[] = [
-  { label: "CRM clienti con anamnesi e misurazioni", iconColor: "var(--surface)", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
-  { label: "Protocolli Training, Nutrition e Recovery", iconColor: "var(--surface)", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
-  { label: "AI Protocol Builder e Business Dashboard", iconColor: "var(--surface)", labelColor: "color-mix(in srgb, var(--surface) 85%, transparent)" },
-];
-
-const lowTicketFeatures: FeatureItem[] = [
-  { label: "Visualizzazione scheda e allenamenti del giorno", iconColor: "var(--gymme-purple)", labelColor: "var(--text-primary)" },
-  { label: "Check-in, progressi e foto in tempo reale", iconColor: "var(--gymme-purple)", labelColor: "var(--text-primary)" },
-  { label: "Comunicazione diretta col professionista", iconColor: "var(--gymme-purple)", labelColor: "var(--text-primary)" },
-];
-
-export function ServiceTierSection() {
+export function ServiceTierSection({
+  studioFeatures = DEFAULT_STUDIO_FEATURES,
+  clientFeatures = DEFAULT_CLIENT_FEATURES,
+}: ServiceTierSectionProps) {
   return (
     <section
       id="ecosistema"
-      className="w-full px-5 py-10 md:px-10 md:py-16 lg:px-[80px] lg:py-[80px]"
-      style={{ backgroundColor: "var(--surface)" }}
+      className="w-full px-5 py-10 md:px-10 md:py-16 lg:px-[40px] lg:py-[80px]"
+      style={{ backgroundColor: "var(--surface)",
+          borderRadius: "48px 48px 0 0"}}
     >
       <div className="max-w-[1280px] mx-auto">
         <div className="mb-12">
@@ -60,7 +63,7 @@ export function ServiceTierSection() {
 
             className="
             bg-[var(--text-primary)]"
-            spotlightColor="rgba(0, 0, 0, 0.25)"
+            spotlightColor="rgba(255, 255, 255, 0.25)"
           >
             <div style={{ flex: 1 }}>
               <p
@@ -88,18 +91,18 @@ export function ServiceTierSection() {
               </h3>
 
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-                {highTicketFeatures.map((item) => (
+                {studioFeatures.map((label) => (
                   <li
-                    key={item.label}
+                    key={label}
                     style={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
                     <CheckCircle
                       size={20}
                       weight="fill"
-                      color={item.iconColor}
+                      color="var(--surface)"
                       style={{ flexShrink: 0 }}
                     />
-                    <span style={{ color: item.labelColor, fontSize: "15px" }}>{item.label}</span>
+                    <span style={{ color: "color-mix(in srgb, var(--surface) 85%, transparent)", fontSize: "15px" }}>{label}</span>
                   </li>
                 ))}
               </ul>
@@ -140,18 +143,18 @@ export function ServiceTierSection() {
               </h3>
 
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-                {lowTicketFeatures.map((item) => (
+                {clientFeatures.map((label) => (
                   <li
-                    key={item.label}
+                    key={label}
                     style={{ display: "flex", alignItems: "center", gap: "10px" }}
                   >
                     <CheckCircle
                       size={20}
                       weight="fill"
-                      color={item.iconColor}
+                      color="var(--gymme-purple)"
                       style={{ flexShrink: 0 }}
                     />
-                    <span style={{ color: item.labelColor, fontSize: "15px" }}>{item.label}</span>
+                    <span style={{ color: "var(--text-primary)", fontSize: "15px" }}>{label}</span>
                   </li>
                 ))}
               </ul>

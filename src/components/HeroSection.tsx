@@ -12,9 +12,10 @@ const slides = [
 
 interface HeroProps {
   topOffset?: number;
+  subtitle?: string;
 }
 
-export function HeroSection({ topOffset = 137 }: HeroProps) {
+export function HeroSection({ topOffset = 137, subtitle }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
   const [email, setEmail] = useState("");
@@ -125,7 +126,7 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
             lineHeight: 1.55,
           }}
         >
-          La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso.
+          {subtitle ?? "La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso."}
         </p>
 
         {/* Pill input + button */}
@@ -240,8 +241,8 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           imageSrc="/themes/gymme/assets2/images/mamozzi/ago.svg"
           width={110}
           rotate={-12}
-          peelBackHoverPct={22}
-          peelBackActivePct={42}
+          peelBackHoverPct={15}
+          peelBackActivePct={18}
           shadowIntensity={0.3}
           lightingIntensity={0.0}
           left="25%"
@@ -252,8 +253,8 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           imageSrc="/themes/gymme/assets2/images/mamozzi/anna.svg"
           width={110}
           rotate={8}
-          peelBackHoverPct={22}
-          peelBackActivePct={42}
+          peelBackHoverPct={15}
+          peelBackActivePct={18}
           shadowIntensity={0.3}
           lightingIntensity={0.0}
           left="18%"
@@ -264,8 +265,8 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           imageSrc="/themes/gymme/assets2/images/mamozzi/tanino.svg"
           width={110}
           rotate={-7}
-          peelBackHoverPct={22}
-          peelBackActivePct={42}
+          peelBackHoverPct={15}
+          peelBackActivePct={18}
           shadowIntensity={0.3}
           lightingIntensity={0.0}
           left="75%"
@@ -276,8 +277,8 @@ export function HeroSection({ topOffset = 137 }: HeroProps) {
           imageSrc="/themes/gymme/assets2/images/mamozzi/angelo.svg"
           width={110}
           rotate={14}
-          peelBackHoverPct={22}
-          peelBackActivePct={42}
+          peelBackHoverPct={15}
+          peelBackActivePct={18}
           shadowIntensity={0.3}
           lightingIntensity={0.0}
           left="70%"

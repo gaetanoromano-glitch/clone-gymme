@@ -3,17 +3,14 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 
-interface Feature {
-  num: number;
-  badge?: string;
-  title: string;
-  description: string;
-  icon: string;
-  screenshot: string;
-  accent: string;
-}
+import type { PillarContent } from "@/content/types";
 
-const features: Feature[] = [
+const DEFAULT_HEADING_LINES = [
+  "I 4 Pillar che nessun competitor",
+  "offre insieme nel mercato italiano",
+];
+
+const DEFAULT_PILLARS: PillarContent[] = [
   {
     num: 1,
     badge: "INNOVAZIONE GYMME",
@@ -31,7 +28,7 @@ const features: Feature[] = [
     description:
       "Meno compiti meccanici, più valore umano. Genera schede e protocolli solidi in pochi istanti con l'AI. Dedica il tuo tempo a ciò che conta: il rapporto con il cliente.",
     icon: "/themes/gymme/assets2/images/homepage/industry/nutrition.svg",
-      screenshot: "/videos/AI_Builder.mp4",
+    screenshot: "/videos/AI_Builder.mp4",
     accent: "#8CDEC0",
   },
   {
@@ -40,7 +37,7 @@ const features: Feature[] = [
     description:
       "Non farti sorprendere dai clienti che spariscono. Intervieni subito sui segnali di crisi e salva il tuo fatturato mensile.",
     icon: "/themes/gymme/assets2/images/homepage/industry/habit.svg",
-      screenshot: "/videos/Client_Risk_Radar.mp4",
+    screenshot: "/videos/Client_Risk_Radar.mp4",
     accent: "#FFC86B",
   },
   {
@@ -49,13 +46,17 @@ const features: Feature[] = [
     description:
       "Smetti di indovinare: analizza rinnovi e margini con dati certi. Trasforma la tua attività in una macchina prevedibile che cresce insieme a te.",
     icon: "/themes/gymme/assets2/images/homepage/industry/sport.svg",
-      screenshot: "/videos/Business_Dashboard.mp4",
+    screenshot: "/videos/Business_Dashboard.mp4",
     accent: "#AECBFF",
   },
 ];
 
-const N = features.length;
-const ENTRY_FRACTION = 0.5;
+// Card width as a % of the 1280px box. The leftover width is the span the fan
+// opens across: the first card hugs the left edge, the last hugs the right.
+const CARD_WIDTH_PCT = 60;
+// Vertical step between consecutive cards — gives the diagonal fan look
+// (first card lowest, last card highest).
+const STEP_Y = 40;
 
 function isVideo(src: string) {
   return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
@@ -90,8 +91,8 @@ function MediaDisplay({
           objectPosition: "top center",
           background: "transparent",
           display: "block",
-          borderRadius: "40px",
-            padding:'16px'
+          borderRadius: "32px",
+          padding: "4px",
         }}
       />
     );
@@ -106,64 +107,83 @@ function MediaDisplay({
   );
 }
 
-// Shared section header
-function SectionHeader() {
+function SectionHeader({ headingLines }: { headingLines: string[] }) {
   return (
     <div>
-      <h2
-        style={{
-          fontSize: "clamp(26px, 4.5vw, 56px)",
-          fontWeight: 700,
-          fontFamily: '"Unbounded", sans-serif',
-          color: "#1b1b1b",
-          lineHeight: 1.1,
-          letterSpacing: "-1.5px",
-        }}
-      >
-        I  4 Pillar
-        che nessun competitor
-      </h2>
-      <h2
-        style={{
-          fontSize: "clamp(26px, 4.5vw, 56px)",
-          fontWeight: 700,
-          fontFamily: '"Unbounded", sans-serif',
-          color: "#1b1b1b",
-          lineHeight: 1.1,
-          letterSpacing: "-1.5px",
-        }}
-      >
-        offre insieme nel mercato italiano
-      </h2>
+      {headingLines.map((line, i) => (
+        <h2
+          key={i}
+          style={{
+            fontSize: "clamp(26px, 4.5vw, 56px)",
+            fontWeight: 700,
+            fontFamily: '"Unbounded", sans-serif',
+            color: "#1b1b1b",
+            lineHeight: 1.1,
+            letterSpacing: "-1.5px",
+          }}
+        >
+          {line}
+        </h2>
+      ))}
     </div>
   );
 }
 
-export function IndustrySolutionSection() {
+interface IndustrySolutionSectionProps {
+  headingLines?: string[];
+  pillars?: PillarContent[];
+}
+
+export function IndustrySolutionSection({
+  headingLines = DEFAULT_HEADING_LINES,
+  pillars = DEFAULT_PILLARS,
+}: IndustrySolutionSectionProps) {
+  const N = pillars.length;
   const outerRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const outer = outerRef.current;
-    if (!outer) return;
+    const stage = stageRef.current;
+    if (!outer || !stage) return;
 
     let rafId = 0;
+    let stageW = stage.offsetWidth;
+    const measure = () => { stageW = stage.offsetWidth; };
+
+    const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+    const easeInOut = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
     const update = () => {
       const rect = outer.getBoundingClientRect();
       const totalScroll = outer.offsetHeight - window.innerHeight;
-      const progress = Math.max(0, Math.min(1, -rect.top / totalScroll));
+      const progress = clamp01(-rect.top / totalScroll);
+
+      const cardW = (stageW * CARD_WIDTH_PCT) / 100;
+      const stepX = (stageW - cardW) / (N - 1); // horizontal fan step
+      const centerLeft = (stageW - cardW) / 2; // resting spot before the fan opens
+      const centerTop = ((N - 1) * STEP_Y) / 2;
+      // Fan openness: 0 = all cards stacked in the centre, 1 = fully fanned out.
+      const open = easeInOut(progress);
 
       cardRefs.current.forEach((card, i) => {
         if (!card) return;
-        if (i === 0) {
-          card.style.transform = "translateY(0)";
-          return;
-        }
-        const entryStart = i / N;
-        const entryEnd = entryStart + (1 / N) * ENTRY_FRACTION;
-        const t = Math.max(0, Math.min(1, (progress - entryStart) / (entryEnd - entryStart)));
-        card.style.transform = `translateY(${(1 - t) * 100}vh)`;
+        // Each card slides in from the right across its own scroll segment.
+        const enter = easeOut(clamp01((progress - i / N) * N));
+        const slotLeft = i * stepX; // final fan slot (i=0 left edge … last right edge)
+        const slotTop = (N - 1 - i) * STEP_Y; // first card lowest, last highest
+
+        const restX = centerLeft + (slotLeft - centerLeft) * open;
+        const restY = centerTop + (slotTop - centerTop) * open;
+        // First card starts already centred (no off-screen parking);
+        // the rest stay fully off to the right until their segment enters.
+        const parkDist = (i === 0 ? 0 : 1) * stageW;
+        const x = restX + (1 - enter) * parkDist;
+
+        card.style.transform = `translate(${x}px, ${restY}px)`;
       });
     };
 
@@ -172,13 +192,16 @@ export function IndustrySolutionSection() {
       rafId = requestAnimationFrame(update);
     };
 
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure);
     const initId = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(rafId);
       cancelAnimationFrame(initId);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
     };
   }, []);
 
@@ -188,16 +211,15 @@ export function IndustrySolutionSection() {
       className="w-full relative z-[2]"
       style={{
         backgroundColor: "#ffffff",
-        borderRadius: "48px 48px 0 0",
       }}
     >
 
       {/* ── MOBILE: simple vertical card list (hidden on lg+) ── */}
       <div className="lg:hidden px-5 pt-10 pb-6 md:px-10 md:pt-16">
         <div className="max-w-[1280px] mx-auto">
-          <SectionHeader />
+          <SectionHeader headingLines={headingLines} />
           <div className="flex flex-col gap-6 mt-8">
-            {features.map((f) => (
+            {pillars.map((f) => (
               <div
                 key={f.num}
                 style={{
@@ -282,7 +304,7 @@ export function IndustrySolutionSection() {
         {/* Header */}
         <div style={{ padding: "60px 60px 0" }}>
           <div className="max-w-[1280px] mx-auto">
-            <SectionHeader />
+            <SectionHeader headingLines={headingLines} />
           </div>
         </div>
 
@@ -297,66 +319,59 @@ export function IndustrySolutionSection() {
               overflow: "hidden",
               display: "flex",
               alignItems: "center",
+              padding: "0 40px",
             }}
           >
-            <div style={{ position: "relative", width: "100%", height: "480px" }}>
-              {features.map((f, i) => (
+            <div ref={stageRef} style={{ position: "relative", width: "100%", maxWidth: "1280px", margin: "0 auto", height: "min(82vh, 720px)" }}>
+              {pillars.map((f, i) => (
                 <div
                   key={f.num}
                   ref={(el) => { cardRefs.current[i] = el; }}
                   style={{
                     position: "absolute",
-                    inset: 0,
-                    padding: "0 80px",
+                    top: 0,
+                    left: 0,
+                    height: `calc(100% - ${(N - 1) * STEP_Y}px)`,
+                    width: `${CARD_WIDTH_PCT}%`,
                     zIndex: i + 1,
-                    transform: i === 0 ? "translateY(0)" : "translateY(100vh)",
+                    transform: "translateX(120%)",
                     willChange: "transform",
                   }}
                 >
-                  <div className="max-w-[1280px] mx-auto" style={{ height: "100%" }}>
                     <div
                       style={{
                         backgroundColor: f.accent,
                         borderRadius: "20px",
                         height: "100%",
+                        width: "100%",
                         display: "flex",
+                        flexDirection: "column",
                         overflow: "hidden",
+                        padding: "32px",
+                        gap: "20px",
+                        boxShadow: "0 24px 60px rgba(0,0,0,0.18)",
                       }}
                     >
-                      {/* Left: text */}
+                      {/* Top: screenshot / video */}
+                      <div style={{ flex: "1 1 auto", minHeight: 0, position: "relative", overflow: "hidden", borderRadius: "16px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <MediaDisplay
+                          src={f.screenshot}
+                          alt={`${f.title} screenshot`}
+                          style={{ objectFit: "cover", objectPosition: "top center" }}
+                        />
+                      </div>
+
+                      {/* Bottom: text */}
                       <div
                         style={{
-                          flex: "0 0 45%",
-                          padding: "48px",
+                          flex: "0 0 auto",
                           display: "flex",
                           flexDirection: "column",
-                          justifyContent: "center",
-                          gap: "20px",
+                          gap: "12px",
+                          maxWidth: "760px",
                         }}
                       >
                         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                          {f.badge && (
-                            <span
-                              style={{
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: "6px",
-                                backgroundColor: "#7C5CFF",
-                                color: "#ffffff",
-                                fontSize: "11px",
-                                fontWeight: 700,
-                                letterSpacing: "0.08em",
-                                padding: "4px 10px",
-                                borderRadius: "999px",
-                                whiteSpace: "nowrap",
-                              }}
-                            >
-                              {f.badge}
-                            </span>
-                          )}
-                        </div>
-
-                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "12px" }}>
                           <div
                             style={{
                               width: "32px",
@@ -387,6 +402,26 @@ export function IndustrySolutionSection() {
                           >
                             {f.title}
                           </h3>
+                          {f.badge && (
+                            <span
+                              style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "6px",
+                                backgroundColor: "#7C5CFF",
+                                color: "#ffffff",
+                                fontSize: "11px",
+                                fontWeight: 700,
+                                letterSpacing: "0.08em",
+                                padding: "4px 10px",
+                                borderRadius: "999px",
+                                whiteSpace: "nowrap",
+                                marginLeft: "auto",
+                              }}
+                            >
+                              {f.badge}
+                            </span>
+                          )}
                         </div>
 
                         <p
@@ -395,23 +430,12 @@ export function IndustrySolutionSection() {
                             color: "rgba(27,27,27,0.65)",
                             lineHeight: 1.65,
                             margin: 0,
-                            maxWidth: "360px",
                           }}
                         >
                           {f.description}
                         </p>
                       </div>
-
-                      {/* Right: screenshot / video */}
-                      <div style={{ flex: "0 0 55%", position: "relative", overflow: "hidden", borderRadius: "0 20px 20px 0", display:'flex', justifyContent:'right' }}>
-                        <MediaDisplay
-                          src={f.screenshot}
-                          alt={`${f.title} screenshot`}
-                          style={{ objectFit: "cover", objectPosition: "top left" }}
-                        />
-                      </div>
                     </div>
-                  </div>
                 </div>
               ))}
             </div>
