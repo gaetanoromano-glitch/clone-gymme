@@ -86,14 +86,14 @@ export const osteopath: ProfessionalContent = {
         description:
           "Crea e condividi protocolli strutturati con esercizi domiciliari e note cliniche. Disponibili nell'app del paziente in tempo reale.",
         screenshot:
-          "/themes/gymme/assets2/images/foto_gymme/Monitoring progressi.png",
+          "/themes/gymme/assets2/images/foto_gymme/Protocolli di trattamento.png",
       },
       {
         iconName: "ClipboardText",
         title: "Anamnesi posturale",
         description:
           "Raccogli digitalmente la storia clinica, le disfunzioni, i sintomi e gli obiettivi di ogni paziente. Sempre accessibile durante la seduta.",
-        screenshot: "/themes/gymme/assets2/images/foto_gymme/CRM.png",
+        screenshot: "/themes/gymme/assets2/images/foto_gymme/Anamnesi posturale.png",
       },
       {
         iconName: "Waveform",
@@ -101,7 +101,7 @@ export const osteopath: ProfessionalContent = {
         description:
           "Tieni traccia dell'aderenza agli esercizi domiciliari e dei feedback sintomatici. Adatta il protocollo in base ai dati reali.",
         screenshot:
-          "/themes/gymme/assets2/images/foto_gymme/Monitoring progressi.png",
+          "/themes/gymme/assets2/images/foto_gymme/Monitoring recovery.png",
       },
       {
         iconName: "CalendarCheck",
