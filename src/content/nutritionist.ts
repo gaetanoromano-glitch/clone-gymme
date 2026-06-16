@@ -86,18 +86,18 @@ export const nutritionist: ProfessionalContent = {
         description:
           "Crea e condividi piani alimentari dettagliati direttamente nell'app del cliente. Strutturati, chiari e sempre aggiornabili in tempo reale.",
         screenshot:
-          "/themes/gymme/assets2/images/foto_gymme/Monitoring progressi.png",
+          "/themes/gymme/assets2/images/foto_gymme/Piani nutrizionali.png",
       },
       {
         iconName: "ClipboardText",
         title: "Anamnesi alimentare",
         description:
           "Raccogli digitalmente la storia alimentare, le intolleranze, gli obiettivi e le abitudini di ogni cliente. Tutto accessibile in un click durante la seduta.",
-        screenshot: "/themes/gymme/assets2/images/foto_gymme/CRM.png",
+        screenshot: "/themes/gymme/assets2/images/foto_gymme/Anamnesi alimentare.png",
       },
       {
         iconName: "ChartBar",
-        title: "Monitoraggio compliance",
+        title: "Client risk radar",
         description:
           "Tieni traccia di quanto i tuoi clienti seguono il piano. Ricevi alert automatici quando qualcosa non va e intervieni prima che mollino.",
         screenshot:
@@ -119,13 +119,13 @@ export const nutritionist: ProfessionalContent = {
         screenshot:
           "/themes/gymme/assets2/images/foto_gymme/Comunicazione diretta.png",
       },
-      {
-        iconName: "BookOpen",
-        title: "Diario alimentare",
-        description:
-          "I clienti registrano i pasti, le foto e le sensazioni direttamente dall'app. Tu ricevi tutto in tempo reale senza dover chiedere.",
-        screenshot: "/themes/gymme/assets2/images/foto_gymme/Live mode.png",
-      },
+      // {
+      //   iconName: "BookOpen",
+      //   title: "Diario alimentare",
+      //   description:
+      //     "I clienti registrano i pasti, le foto e le sensazioni direttamente dall'app. Tu ricevi tutto in tempo reale senza dover chiedere.",
+      //   screenshot: "/themes/gymme/assets2/images/foto_gymme/Live mode.png",
+      // },
       {
         iconName: "Package",
         title: "Pacchetti",

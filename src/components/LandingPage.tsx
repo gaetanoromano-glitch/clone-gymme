@@ -32,6 +32,7 @@ export function LandingPage({ content }: LandingPageProps) {
         <HeroSection
           topOffset={bannerVisible ? 137 : 87}
           subtitle={content.hero.subtitle}
+          fixedCoachType={content.name}
         />
         <div className="relative z-[2]">
           <ServiceTierSection

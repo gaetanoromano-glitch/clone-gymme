@@ -13,9 +13,10 @@ const slides = [
 interface HeroProps {
   topOffset?: number;
   subtitle?: string;
+  fixedCoachType?: string;
 }
 
-export function HeroSection({ topOffset = 137, subtitle }: HeroProps) {
+export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
   const [email, setEmail] = useState("");
@@ -37,6 +38,7 @@ export function HeroSection({ topOffset = 137, subtitle }: HeroProps) {
   };
 
   useEffect(() => {
+    if (fixedCoachType) return;
     let timeout: ReturnType<typeof setTimeout>;
     const interval = setInterval(() => {
       setTextVisible(false);
@@ -49,7 +51,7 @@ export function HeroSection({ topOffset = 137, subtitle }: HeroProps) {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, []);
+  }, [fixedCoachType]);
 
   return (
     <section
@@ -88,7 +90,7 @@ export function HeroSection({ topOffset = 137, subtitle }: HeroProps) {
           L&apos;ecosistema digitale per
         </h2>
 
-        {/* Animated coach type */}
+        {/* Coach type — fixed on professional pages, animated on home */}
         <div
           style={{
             height: "clamp(42px, 8vw, 80px)",
@@ -106,12 +108,12 @@ export function HeroSection({ topOffset = 137, subtitle }: HeroProps) {
               lineHeight: 1.1,
               letterSpacing: "-2.8px",
               display: "block",
-              opacity: textVisible ? 1 : 0,
-              transform: textVisible ? "translateY(0)" : "translateY(-8px)",
-              transition: "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
+              opacity: fixedCoachType ? 1 : (textVisible ? 1 : 0),
+              transform: fixedCoachType ? "translateY(0)" : (textVisible ? "translateY(0)" : "translateY(-8px)"),
+              transition: fixedCoachType ? "none" : "opacity 0.4s ease-in-out, transform 0.4s ease-in-out",
             }}
           >
-            {slides[currentSlide].coachType}
+            {fixedCoachType ?? slides[currentSlide].coachType}
           </span>
         </div>
 
