@@ -8,6 +8,7 @@ import { IndustrySolutionSection } from "@/components/IndustrySolutionSection";
 import { ServiceTierSection } from "@/components/ServiceTierSection";
 import ForEveryoneSection from "@/components/ForEveryoneSection";
 import { MotivateSection } from "@/components/MotivateSection";
+import { WorkModesSection } from "@/components/WorkModesSection";
 import { RatingsSection } from "@/components/RatingsSection";
 import { Footer } from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
@@ -54,6 +55,13 @@ export function LandingPage({ content }: LandingPageProps) {
               features={content.featuresSection.features}
             />
           </ForEveryoneSection>
+          {content.workModes && (
+            <WorkModesSection
+              headingLines={content.workModes.headingLines}
+              subtitle={content.workModes.subtitle}
+              modes={content.workModes.modes}
+            />
+          )}
           <RatingsSection
             heading={content.ratings.heading}
             stats={content.ratings.stats}

@@ -143,6 +143,35 @@ export const personalTrainer: ProfessionalContent = {
     ],
   },
 
+  workModes: {
+    headingLines: ["Online, in sala o ibrido.", "Gymme si adatta a te."],
+    subtitle:
+      "Che tu segua i clienti da remoto, di persona in palestra o combinando i due mondi, la piattaforma resta la stessa: nessun compromesso, qualunque sia il tuo metodo di lavoro.",
+    modes: [
+      {
+        illustration: "/Online.svg",
+        title: "Online",
+        description:
+          "Segui i clienti ovunque si trovino: schede, check-in, video e messaggi sempre sincronizzati. La distanza non è più un limite alla qualità del tuo lavoro.",
+        accent: "#AECBFF",
+      },
+      {
+        illustration: "/In_sala.svg",
+        title: "In sala",
+        description:
+          "Gestisci sessioni in presenza con appuntamenti, Live Mode e progressi a portata di mano. Tutto ciò che ti serve durante l'allenamento, direttamente in palestra.",
+        accent: "#8CDEC0",
+      },
+      {
+        illustration: "/Ibrido.svg",
+        title: "Ibrido",
+        description:
+          "Combina presenza e remoto senza soluzione di continuità. Alterna sedute in sala e follow-up online mantenendo un'unica relazione fluida con ogni cliente.",
+        accent: "#F2B6FF",
+      },
+    ],
+  },
+
   ratings: {
     heading: {
       bold: "La prima piattaforma in Italia ",

@@ -15,6 +15,13 @@ export interface AccordionFeature {
   screenshot: string;
 }
 
+export interface WorkMode {
+  illustration: string;
+  title: string;
+  description: string;
+  accent: string;
+}
+
 export interface ProfessionalContent {
   slug: string;
   name: string;
@@ -43,6 +50,13 @@ export interface ProfessionalContent {
     badgeText: string;
     headingLines: string[];
     features: AccordionFeature[];
+  };
+
+  /** Optional — only professionals that opt in render the usage-modes section. */
+  workModes?: {
+    headingLines: string[];
+    subtitle: string;
+    modes: WorkMode[];
   };
 
   ratings: {
