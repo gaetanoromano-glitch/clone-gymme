@@ -25,7 +25,7 @@ export const osteopath: ProfessionalContent = {
   pillarsSection: {
     headingLines: [
       "I 4 Pillar che nessun competitor",
-      "offre insieme nel mercato italiano",
+      "offre insieme nel mercato italiano.",
     ],
     pillars: [
       {
@@ -41,7 +41,7 @@ export const osteopath: ProfessionalContent = {
       {
         num: 2,
         badge: "POTENZIATO DALL'AI",
-        title: "AI Protocol Builder",
+        title: "AI Builder",
         description:
           "Genera bozze di protocolli di trattamento e piani di recovery in pochi secondi. Personalizza e condividi col paziente. Meno burocrazia, più tempo in studio.",
         icon: "/themes/gymme/assets2/images/homepage/industry/nutrition.svg",
@@ -70,7 +70,7 @@ export const osteopath: ProfessionalContent = {
   },
 
   forEveryone: {
-    heading: "Per Osteopati e Studi Multidisciplinari",
+    heading: "Per tuttə, per Osteopatə e Studi Multidisciplinari.",
     subtitle:
       "Una piattaforma progettata per chi vuole lavorare in sinergia con altri professionisti del benessere, garantire continuità terapeutica e fidelizzare i pazienti nel tempo.",
   },
@@ -153,11 +153,11 @@ export const osteopath: ProfessionalContent = {
 
   ratings: {
     heading: {
-      bold: "La Prima Piattaforma ",
-      regular: "Multi-Pro per il Benessere in Italia",
+      bold: "LLa prima piattaforma in Italia ",
+      regular: "multi-professionale per il benessere.",
     },
     stats: [
-      { value: "+35%", label: "Fatturato medio in più\nnel primo anno con Gymme" },
+      { value: "+45%", label: "Di nuovi clienti con l'utilizzo di piattaforme digitali" },
       { value: "6h", label: "Risparmiate ogni settimana\nsu documentazione e follow-up" },
       { value: "2×", label: "Pazienti seguiti\nsenza aumentare il carico" },
       { value: "−65%", label: "Tempo per documentare\nuna seduta e il protocollo" },

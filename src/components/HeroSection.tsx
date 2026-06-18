@@ -128,7 +128,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
             lineHeight: 1.55,
           }}
         >
-          {subtitle ?? "La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso."}
+          {subtitle ?? "La prima piattaforma italiana che unisce personal trainer, nutrizionistə e osteopatə attorno allo stesso cliente. Un health team, un ecosistema condiviso."}
         </p>
 
         {/* Pill input + button */}

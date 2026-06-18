@@ -6,7 +6,7 @@ export const personalTrainer: ProfessionalContent = {
 
   hero: {
     subtitle:
-      "La prima piattaforma italiana che unisce PT, Nutrizionisti e Osteopati attorno allo stesso cliente. Un health team, un ecosistema condiviso.",
+      "La prima piattaforma italiana che unisce personal trainer, nutrizionistə e osteopatə attorno allo stesso cliente. Un health team, un ecosistema condiviso.",
   },
 
   serviceTier: {
@@ -25,7 +25,7 @@ export const personalTrainer: ProfessionalContent = {
   pillarsSection: {
     headingLines: [
       "I 4 Pillar che nessun competitor",
-      "offre insieme nel mercato italiano",
+      "offre insieme nel mercato italiano.",
     ],
     pillars: [
       {
@@ -70,7 +70,7 @@ export const personalTrainer: ProfessionalContent = {
   },
 
   forEveryone: {
-    heading: "Per Tutti, dai Personal Trainer agli Studi Multidisciplinari",
+    heading: "Per tuttə, Personal Trainer e Studi Multidisciplinari.",
     subtitle:
       "Una piattaforma progettata per chi vuole collaborare, crescere e fidelizzare i propri clienti nel tempo.",
   },
@@ -145,11 +145,11 @@ export const personalTrainer: ProfessionalContent = {
 
   ratings: {
     heading: {
-      bold: "La Prima Piattaforma ",
-      regular: "Multi-Pro per il Benessere in Italia",
+      bold: "La prima piattaforma in Italia ",
+      regular: "multi-professionale per il benessere.",
     },
     stats: [
-      { value: "+38%", label: "Fatturato medio in più\nnel primo anno con Gymme" },
+      { value: "45%", label: "Di nuovi clienti con l'utilizzo di piattaforme digitali" },
       { value: "10h", label: "Risparmiate ogni settimana\nsu schede, report e messaggi" },
       { value: "3×", label: "Clienti seguiti\nsenza aumentare lo stress" },
       { value: "−75%", label: "Tempo per creare\nun protocollo completo" },

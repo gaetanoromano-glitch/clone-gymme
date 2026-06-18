@@ -7,7 +7,7 @@ interface ForEveryoneSectionProps {
   subtitle?: string;
 }
 
-const DEFAULT_HEADING = "Per Tutti, dai Personal Trainer agli Studi Multidisciplinari";
+const DEFAULT_HEADING = "Per tuttə, Personal Trainer e Studi Multidisciplinari.";
 const DEFAULT_SUBTITLE =
   "Una piattaforma progettata per chi vuole collaborare, crescere e fidelizzare i propri clienti nel tempo.";
 

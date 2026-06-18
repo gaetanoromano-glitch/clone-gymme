@@ -7,7 +7,7 @@ import type { PillarContent } from "@/content/types";
 
 const DEFAULT_HEADING_LINES = [
   "I 4 Pillar che nessun competitor",
-  "offre insieme nel mercato italiano",
+  "offre insieme nel mercato italiano.",
 ];
 
 const DEFAULT_PILLARS: PillarContent[] = [

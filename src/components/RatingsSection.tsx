@@ -28,8 +28,8 @@ interface RatingsSectionProps {
 }
 
 const DEFAULT_HEADING = {
-  bold: "La Prima Piattaforma ",
-  regular: "Multi-Pro per il Benessere in Italia",
+  bold: "La prima piattaforma in Italia ",
+  regular: "multi-professionale per il benessere.",
 };
 
 const testimonials = [

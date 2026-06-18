@@ -53,7 +53,7 @@ export function ServiceTierSection({
               letterSpacing: "-1.5px",
             }}
           >
-            un Ecosistema Connesso
+            un ecosistema connesso.
           </h2>
         </div>
 

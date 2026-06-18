@@ -25,7 +25,7 @@ export const nutritionist: ProfessionalContent = {
   pillarsSection: {
     headingLines: [
       "I 4 Pillar che nessun competitor",
-      "offre insieme nel mercato italiano",
+      "offre insieme nel mercato italiano.",
     ],
     pillars: [
       {
@@ -41,7 +41,7 @@ export const nutritionist: ProfessionalContent = {
       {
         num: 2,
         badge: "POTENZIATO DALL'AI",
-        title: "AI Protocol Builder",
+        title: "AI Builder",
         description:
           "Genera piani nutrizionali completi in pochi secondi con l'AI. Personalizza, adatta e invia al cliente in tempo reale. Meno burocrazia, più valore clinico.",
         icon: "/themes/gymme/assets2/images/homepage/industry/nutrition.svg",
@@ -70,7 +70,7 @@ export const nutritionist: ProfessionalContent = {
   },
 
   forEveryone: {
-    heading: "Per Nutrizionisti Liberi Professionisti e Studi Multidisciplinari",
+    heading: "Per tuttə, per Nutrizionistə e Studi Multidisciplinari.",
     subtitle:
       "Una piattaforma progettata per chi vuole collaborare con altri professionisti del benessere, crescere e fidelizzare i propri clienti nel tempo.",
   },
@@ -153,11 +153,11 @@ export const nutritionist: ProfessionalContent = {
 
   ratings: {
     heading: {
-      bold: "La Prima Piattaforma ",
-      regular: "Multi-Pro per il Benessere in Italia",
+      bold: "La prima piattaforma in Italia ",
+      regular: "multi-professionale per il benessere.",
     },
     stats: [
-      { value: "+42%", label: "Compliance media dei clienti\nnel primo anno con Gymme" },
+      { value: "45%", label: "Di nuovi clienti con l'utilizzo di piattaforme digitali" },
       { value: "8h", label: "Risparmiate ogni settimana\nsu piani, report e follow-up" },
       { value: "2.5×", label: "Clienti seguiti\nsenza aumentare il carico" },
       { value: "−70%", label: "Tempo per costruire\nun piano nutrizionale completo" },
