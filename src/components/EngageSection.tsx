@@ -1,6 +1,7 @@
 "use client";
 
 import { FeatureAccordion, AccordionItem } from "@/components/FeatureAccordion";
+import { useClarity } from "@/hooks/useClarity";
 import { ChatText, Clock, UsersThree, BellRinging, Files } from "@phosphor-icons/react";
 
 const items: AccordionItem[] = [
@@ -42,12 +43,14 @@ const items: AccordionItem[] = [
 ];
 
 export function EngageSection() {
+  const { trackEvent } = useClarity();
   return (
     <FeatureAccordion
       badgeIcon="/themes/gymme/assets2/images/homepage/icons/engage.svg"
       badgeText="COINVOLGI"
       headingLines={["Resta Connesso.", "Sempre, Ovunque."]}
       items={items}
+      onItemClick={(title) => trackEvent(`engage_accordion_${title.toLowerCase().replace(/[^a-z0-9]/g, "_")}`)}
     />
   );
 }

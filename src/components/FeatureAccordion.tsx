@@ -18,6 +18,7 @@ interface FeatureAccordionProps {
   badgeText: string;
   headingLines: string[];
   items: AccordionItem[];
+  onItemClick?: (title: string) => void;
 }
 
 // px of scroll runway per item — keeps page height reasonable
@@ -28,6 +29,7 @@ export function FeatureAccordion({
   badgeText,
   headingLines,
   items,
+  onItemClick,
 }: FeatureAccordionProps) {
   const N = items.length;
   const outerRef = useRef<HTMLDivElement>(null);
@@ -111,7 +113,7 @@ export function FeatureAccordion({
           {items.map((item, index) => {
             const isActive = index === activeIndex;
             return (
-              <div key={index} onClick={() => setActiveIndex(index)} style={{ borderBottom: "1px solid #e5e7eb", padding: "18px 0", cursor: "pointer" }}>
+              <div key={index} onClick={() => { setActiveIndex(index); onItemClick?.(item.title); }} style={{ borderBottom: "1px solid #e5e7eb", padding: "18px 0", cursor: "pointer" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <item.icon size={22} weight="regular" color={isActive ? "#1b1b1b" : "rgba(27,27,27,0.45)"} />
                   <span style={{ fontSize: 16, fontWeight: isActive ? 700 : 500, fontFamily: "Plus Jakarta Sans, sans-serif", color: isActive ? "#1b1b1b" : "rgba(27,27,27,0.45)", transition: "color 0.3s" }}>

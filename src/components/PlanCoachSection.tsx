@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useClarity } from "@/hooks/useClarity";
 
 interface Tab {
   icon: string;
@@ -38,6 +39,7 @@ const N = tabs.length;
 const PX_PER_ITEM = 400;
 
 export default function PlanCoachSection() {
+  const { trackEvent } = useClarity();
   const outerRef = useRef<HTMLDivElement>(null);
   const activeTabRef = useRef(0);
   const [activeTab, setActiveTab] = useState(0);
@@ -119,7 +121,7 @@ export default function PlanCoachSection() {
           <div style={{ borderBottom: "1px solid var(--stroke)", marginBottom: 20 }}>
             <div style={{ display: "flex", overflowX: "auto", gap: 0 }}>
               {tabs.map((tab, index) => (
-                <button key={index} onClick={() => setActiveTab(index)} type="button"
+                <button key={index} onClick={() => { setActiveTab(index); trackEvent(`plan_tab_click_${["schede","calendario","crm"][index]}`); }} type="button"
                   style={{ padding: "12px 0", marginRight: 20, gap: 8, display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", flexShrink: 0, position: "relative", marginBottom: -1 }}>
                   <Image src={tab.icon} alt="" width={20} height={20} style={{ width: 20, height: 20 }} />
                   <span style={{ fontSize: 14, fontWeight: 600, fontFamily: "Plus Jakarta Sans, sans-serif", color: activeTab === index ? "var(--text-primary)" : "color-mix(in srgb, var(--text-primary) 40%, transparent)", whiteSpace: "nowrap", transition: "color 0.3s ease" }}>

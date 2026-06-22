@@ -1,6 +1,7 @@
 "use client";
 
 import { FeatureAccordion, AccordionItem } from "@/components/FeatureAccordion";
+import { useClarity } from "@/hooks/useClarity";
 import { UserPlus, ShareNetwork, CreditCard, Handshake, ChartBar } from "@phosphor-icons/react";
 
 const items: AccordionItem[] = [
@@ -44,12 +45,14 @@ const items: AccordionItem[] = [
 ];
 
 export function ScaleSection() {
+  const { trackEvent } = useClarity();
   return (
     <FeatureAccordion
       badgeIcon="/themes/gymme/assets2/images/homepage/icons/scale.svg"
       badgeText="SCALA"
       headingLines={["Scala il Tuo Studio.", "Senza Perdere la Qualità."]}
       items={items}
+      onItemClick={(title) => trackEvent(`scale_accordion_${title.toLowerCase().replace(/[^a-z0-9]/g, "_")}`)}
     />
   );
 }
