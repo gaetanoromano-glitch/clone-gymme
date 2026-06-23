@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Unbounded, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import HotjarInit from "@/components/HotjarInit";
 
 const unbounded = Unbounded({
   subsets: ["latin"],
@@ -36,7 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased bg-[#EEEDFB]`}>
-      <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden">
+        <HotjarInit />
+        {children}
+      </body>
     </html>
   );
 }
