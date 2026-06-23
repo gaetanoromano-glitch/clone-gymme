@@ -25,7 +25,28 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
   const [collapsing, setCollapsing] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const emailFocusedRef = useRef(false);
+  const submittedRef = useRef(false);
   const { trackEvent } = useClarity();
+  const trackEventRef = useRef(trackEvent);
+  trackEventRef.current = trackEvent;
+
+  useEffect(() => {
+    const handleAbandon = () => {
+      if (emailFocusedRef.current && !submittedRef.current) {
+        trackEventRef.current("form_abandon");
+      }
+    };
+    const handleVisibility = () => {
+      if (document.visibilityState === "hidden") handleAbandon();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("beforeunload", handleAbandon);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("beforeunload", handleAbandon);
+    };
+  }, []);
 
   const handleSubmit = () => {
     trackEvent("email_submit");
@@ -33,6 +54,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
       inputRef.current?.focus();
       return;
     }
+    submittedRef.current = true;
     setCollapsing(true);
     setTimeout(() => {
       setSubmitted(true);
@@ -165,7 +187,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => trackEvent("email_focus")}
+              onFocus={() => { emailFocusedRef.current = true; trackEvent("email_focus"); }}
               onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
               placeholder="Inserisci la tua email"
               className="placeholder:text-[rgba(0,0,0,0.35)]"

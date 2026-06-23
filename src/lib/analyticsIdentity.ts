@@ -1,4 +1,5 @@
 const LEAD_KEY = "lead_id";
+const VISITED_KEY = "gymme_visited";
 const POLL_INTERVAL_MS = 200;
 const POLL_TIMEOUT_MS = 5000;
 const IS_DEV = process.env.NODE_ENV === "development";
@@ -56,17 +57,27 @@ function isClarityReady(): boolean {
 // NOTE: the correct Clarity API method name for custom tags is "set",
 // NOT "setTag" — the npm package's Clarity.setTag() maps to window.clarity("set", ...).
 
-function applyTags(leadId: string, campaign: string | null): void {
+interface AnalyticsTags {
+  leadId?: string;
+  campaign?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmContent?: string;
+  utmTerm?: string;
+  visitorType: "new" | "returning";
+}
+
+function applyTags(tags: AnalyticsTags): void {
   try {
-    window.clarity!("set", LEAD_KEY, leadId);
-    if (campaign) {
-      window.clarity!("set", "campaign", campaign);
-    }
+    window.clarity!("set", "visitor_type", tags.visitorType);
+    if (tags.leadId) window.clarity!("set", LEAD_KEY, tags.leadId);
+    if (tags.campaign) window.clarity!("set", "campaign", tags.campaign);
+    if (tags.utmSource) window.clarity!("set", "utm_source", tags.utmSource);
+    if (tags.utmMedium) window.clarity!("set", "utm_medium", tags.utmMedium);
+    if (tags.utmContent) window.clarity!("set", "utm_content", tags.utmContent);
+    if (tags.utmTerm) window.clarity!("set", "utm_term", tags.utmTerm);
     if (IS_DEV) {
-      console.log("[Analytics] Clarity tags applied →", {
-        lead_id: leadId,
-        ...(campaign ? { campaign } : {}),
-      });
+      console.log("[Analytics] Clarity tags applied →", tags);
     }
   } catch (err) {
     if (IS_DEV) {
@@ -77,11 +88,11 @@ function applyTags(leadId: string, campaign: string | null): void {
 
 // ── Polling until the real Clarity SDK is active ───────────────────────────
 
-function waitAndApply(leadId: string, campaign: string | null): void {
+function waitAndApply(tags: AnalyticsTags): void {
   if (typeof window === "undefined") return;
 
   if (isClarityReady()) {
-    applyTags(leadId, campaign);
+    applyTags(tags);
     return;
   }
 
@@ -89,7 +100,7 @@ function waitAndApply(leadId: string, campaign: string | null): void {
   const timer = setInterval(() => {
     if (isClarityReady()) {
       clearInterval(timer);
-      applyTags(leadId, campaign);
+      applyTags(tags);
     } else if (Date.now() >= deadline) {
       clearInterval(timer);
       if (IS_DEV) {
@@ -104,27 +115,35 @@ function waitAndApply(leadId: string, campaign: string | null): void {
 export function initializeAnalyticsIdentity(): void {
   if (typeof window === "undefined") return;
 
-  // 1. Resolve leadId: URL param wins, falls back to localStorage
+  // 1. New vs. returning visitor (checked before any writes)
+  const isNew = !storageGet(VISITED_KEY);
+  if (isNew) storageSet(VISITED_KEY, "1");
+
+  // 2. Resolve leadId: URL param wins, falls back to localStorage
   const fromUrl = getParam("lead");
-  if (fromUrl) {
-    storageSet(LEAD_KEY, fromUrl);
-  }
-  const leadId = fromUrl ?? storageGet(LEAD_KEY);
+  if (fromUrl) storageSet(LEAD_KEY, fromUrl);
+  const leadId = (fromUrl ?? storageGet(LEAD_KEY)) ?? undefined;
 
-  if (!leadId) {
-    if (IS_DEV) {
-      console.log("[Analytics] No lead_id found — skipping Clarity tagging.");
-    }
-    return;
-  }
+  // 3. Collect UTM / campaign params
+  const campaign = (getParam("campaign") ?? getParam("utm_campaign")) ?? undefined;
+  const utmSource = getParam("utm_source") ?? undefined;
+  const utmMedium = getParam("utm_medium") ?? undefined;
+  const utmContent = getParam("utm_content") ?? undefined;
+  const utmTerm = getParam("utm_term") ?? undefined;
 
-  // 2. Resolve optional campaign (?campaign= or ?utm_campaign=)
-  const campaign = getParam("campaign") ?? getParam("utm_campaign");
+  const tags: AnalyticsTags = {
+    visitorType: isNew ? "new" : "returning",
+    ...(leadId && { leadId }),
+    ...(campaign && { campaign }),
+    ...(utmSource && { utmSource }),
+    ...(utmMedium && { utmMedium }),
+    ...(utmContent && { utmContent }),
+    ...(utmTerm && { utmTerm }),
+  };
 
   if (IS_DEV) {
-    console.log("[Analytics] lead_id resolved →", leadId, campaign ? `| campaign: ${campaign}` : "");
+    console.log("[Analytics] Resolved tags →", tags);
   }
 
-  // 3. Apply tags when the real Clarity SDK is active
-  waitAndApply(leadId, campaign);
+  waitAndApply(tags);
 }
