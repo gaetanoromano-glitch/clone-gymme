@@ -216,6 +216,7 @@ export default function Navbar({ bannerVisible }: Props) {
         {/* CTA — desktop */}
         <AnimatedButton
           href="/demo"
+          pageTransition
           className="desktop-only"
           style={{ padding: "9px 18px", fontSize: "13px", fontWeight: 600, letterSpacing: "0.01em", marginLeft: "4px" }}
         >
@@ -267,10 +268,14 @@ export default function Navbar({ bannerVisible }: Props) {
             <a
               href="/demo"
               className="mobile-menu-link mobile-cta"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 setIsMobileMenuOpen(false);
                 const menu = mobileMenuRef.current;
                 if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });
+                window.dispatchEvent(
+                  new CustomEvent("page-transition-start", { detail: { href: "/demo" } })
+                );
               }}
             >
               Richiedi una demo

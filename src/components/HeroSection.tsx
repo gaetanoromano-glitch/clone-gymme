@@ -145,6 +145,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
 
             <AnimatedButton
               href="/demo"
+              pageTransition
               style={{ flexShrink: 0, height: "44px", padding: "0 20px", fontSize: "14px" }}
             >
               Richiedi una demo

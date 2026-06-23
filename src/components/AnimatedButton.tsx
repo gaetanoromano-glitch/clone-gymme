@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 interface AnimatedButtonProps {
   children: ReactNode;
   href?: string;
+  pageTransition?: boolean;
   onClick?: () => void;
   type?: "button" | "submit";
   className?: string;
@@ -15,6 +16,7 @@ interface AnimatedButtonProps {
 export function AnimatedButton({
   children,
   href,
+  pageTransition = false,
   onClick,
   type = "button",
   className = "",
@@ -94,6 +96,15 @@ export function AnimatedButton({
   );
 
   if (href) {
+    const handleTransitionClick = pageTransition
+      ? (e: React.MouseEvent) => {
+          e.preventDefault();
+          window.dispatchEvent(
+            new CustomEvent("page-transition-start", { detail: { href } })
+          );
+        }
+      : undefined;
+
     return (
       <a
         href={href}
@@ -101,6 +112,7 @@ export function AnimatedButton({
         style={baseStyle}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
+        onClick={handleTransitionClick}
       >
         {inner}
       </a>
