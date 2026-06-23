@@ -83,7 +83,7 @@ export function Footer({ ctaText = "Diamo forma al futuro del fitness, insieme."
             />
 
           <AnimatedButton
-            href="#demo"
+            href="/demo"
             style={{ marginTop: "40px", height: "52px", padding: "0 32px", fontSize: "15px" }}
           >
             Richiedi una demo

@@ -141,48 +141,14 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
             position: "relative",
           }}
         >
-          <div
-            style={{
-              display: submitted ? "none" : "flex",
-              alignItems: "center",
-              height: "56px",
-              borderRadius: "999px",
-              backgroundColor: "rgba(0,0,0,0.04)",
-              border: "1.5px solid rgba(0,0,0,0.12)",
-              padding: "6px 6px 6px 20px",
-              width: "100%",
-              transition: "opacity 0.4s ease, transform 0.4s ease",
-              opacity: collapsing ? 0 : 1,
-              transform: collapsing ? "scale(0.82)" : "scale(1)",
-              transformOrigin: "center center",
-            }}
-          >
-            <input
-              ref={inputRef}
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              placeholder="Inserisci la tua email"
-              className="placeholder:text-[rgba(0,0,0,0.35)]"
-              style={{
-                flex: 1,
-                background: "none",
-                border: "none",
-                outline: "none",
-                color: "#1b1b1b",
-                fontSize: "15px",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                minWidth: 0,
-              }}
-            />
+
+
             <AnimatedButton
-              onClick={handleSubmit}
+              href="/demo"
               style={{ flexShrink: 0, height: "44px", padding: "0 20px", fontSize: "14px" }}
             >
               Richiedi una demo
             </AnimatedButton>
-          </div>
 
           {submitted && (
             <div

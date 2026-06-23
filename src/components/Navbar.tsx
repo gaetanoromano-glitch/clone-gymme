@@ -215,7 +215,7 @@ export default function Navbar({ bannerVisible }: Props) {
 
         {/* CTA — desktop */}
         <AnimatedButton
-          href="#demo"
+          href="/demo"
           className="desktop-only"
           style={{ padding: "9px 18px", fontSize: "13px", fontWeight: 600, letterSpacing: "0.01em", marginLeft: "4px" }}
         >
@@ -265,7 +265,7 @@ export default function Navbar({ bannerVisible }: Props) {
           ))}
           <li>
             <a
-              href="#demo"
+              href="/demo"
               className="mobile-menu-link mobile-cta"
               onClick={() => {
                 setIsMobileMenuOpen(false);
