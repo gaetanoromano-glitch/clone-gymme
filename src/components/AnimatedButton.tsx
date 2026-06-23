@@ -99,7 +99,6 @@ export function AnimatedButton({
         href={href}
         className={className}
         style={baseStyle}
-        onClick={onClick}
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
       >

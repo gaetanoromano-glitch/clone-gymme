@@ -1,10 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import { useClarity } from "@/hooks/useClarity";
 
 export function CTASection() {
-  const { trackEvent } = useClarity();
   return (
     <section
       className="relative overflow-hidden flex items-center px-5 py-12 md:px-10 md:py-0 lg:px-[80px]"
@@ -52,7 +48,6 @@ export function CTASection() {
 
         <a
           href="#"
-          onClick={() => trackEvent("cta_section_click")}
           className="inline-flex items-center font-inter hover:bg-white/90 transition-colors duration-200"
           style={{
             backgroundColor: "#ffffff",

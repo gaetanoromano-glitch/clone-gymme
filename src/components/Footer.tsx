@@ -4,7 +4,6 @@ import Image from "next/image";
 import StickerPeel from "./StickerPeel";
 import { AnimatedButton } from "./AnimatedButton";
 import SplitText from "@/components/SplitText";
-import { useClarity } from "@/hooks/useClarity";
 
 
 
@@ -13,7 +12,6 @@ interface FooterProps {
 }
 
 export function Footer({ ctaText = "Diamo forma al futuro del fitness, insieme." }: FooterProps) {
-  const { trackEvent } = useClarity();
   return (
     <footer style={{ backgroundColor: "#ffffff" }} className='h-screen flex flex-col items-center justify-center'>
       {/* ── Main hero-like area ── */}
@@ -86,7 +84,6 @@ export function Footer({ ctaText = "Diamo forma al futuro del fitness, insieme."
 
           <AnimatedButton
             href="#demo"
-            onClick={() => trackEvent("footer_demo_click")}
             style={{ marginTop: "40px", height: "52px", padding: "0 32px", fontSize: "15px" }}
           >
             Richiedi una demo

@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import "./PillNav.css";
 import { AnimatedButton } from "./AnimatedButton";
-import { useClarity } from "@/hooks/useClarity";
 
 interface Props {
   bannerVisible: boolean;
@@ -21,7 +20,6 @@ const EASE = "power3.out";
 
 export default function Navbar({ bannerVisible }: Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { trackEvent } = useClarity();
 
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);
@@ -122,7 +120,6 @@ export default function Navbar({ bannerVisible }: Props) {
   const toggleMobileMenu = () => {
     const next = !isMobileMenuOpen;
     setIsMobileMenuOpen(next);
-    trackEvent(next ? "mobile_menu_open" : "mobile_menu_close");
 
     const hamburger = hamburgerRef.current;
     const menu = mobileMenuRef.current;
@@ -198,7 +195,6 @@ export default function Navbar({ bannerVisible }: Props) {
                   href={item.href}
                   className="pill"
                   aria-label={item.label}
-                  onClick={() => trackEvent(`nav_${item.label.toLowerCase()}`)}
                   onMouseEnter={() => handleEnter(i)}
                   onMouseLeave={() => handleLeave(i)}
                 >
@@ -220,7 +216,6 @@ export default function Navbar({ bannerVisible }: Props) {
         {/* CTA — desktop */}
         <AnimatedButton
           href="#demo"
-          onClick={() => trackEvent("navbar_demo_click")}
           className="desktop-only"
           style={{ padding: "9px 18px", fontSize: "13px", fontWeight: 600, letterSpacing: "0.01em", marginLeft: "4px" }}
         >
@@ -253,7 +248,6 @@ export default function Navbar({ bannerVisible }: Props) {
                 href={item.href}
                 className="mobile-menu-link"
                 onClick={() => {
-                  trackEvent(`nav_${item.label.toLowerCase()}`);
                   setIsMobileMenuOpen(false);
                   const menu = mobileMenuRef.current;
                   const hamburger = hamburgerRef.current;
@@ -274,7 +268,6 @@ export default function Navbar({ bannerVisible }: Props) {
               href="#demo"
               className="mobile-menu-link mobile-cta"
               onClick={() => {
-                trackEvent("navbar_demo_click");
                 setIsMobileMenuOpen(false);
                 const menu = mobileMenuRef.current;
                 if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });

@@ -1,14 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useClarity } from "@/hooks/useClarity";
 
 interface Props {
   onClose: () => void;
 }
 
 export default function AnnouncementBanner({ onClose }: Props) {
-  const { trackEvent } = useClarity();
   return (
     <div
       className={cn("fixed left-0 right-0 top-0 flex items-center justify-center px-6")}
@@ -34,7 +32,6 @@ export default function AnnouncementBanner({ onClose }: Props) {
         👉
         <a
           href="#"
-          onClick={() => trackEvent("banner_registrati_click")}
           style={{
             color: "#ffffff",
             textDecoration: "underline",
@@ -46,7 +43,7 @@ export default function AnnouncementBanner({ onClose }: Props) {
         </a>
       </p>
       <button
-        onClick={() => { trackEvent("banner_close"); onClose(); }}
+        onClick={onClose}
         aria-label="Close announcement"
         style={{
           position: "absolute",

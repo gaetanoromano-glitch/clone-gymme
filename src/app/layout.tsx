@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
 import { Unbounded, Plus_Jakarta_Sans } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { ClarityAnalytics } from "@/components/ClarityAnalytics";
-import { ScrollMilestones } from "@/components/ScrollMilestones";
-import { AnalyticsIdentity } from "@/components/AnalyticsIdentity";
-import { ClarityStylesFix } from "@/components/ClarityStylesFix";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -42,11 +37,6 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased bg-[#EEEDFB]`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
-      <ClarityStylesFix />
-      <GoogleAnalytics gaId="G-FMN1EHEWKY" />
-      <ClarityAnalytics projectId="xb1l4ggnzd" />
-      <AnalyticsIdentity />
-      <ScrollMilestones />
     </html>
   );
 }

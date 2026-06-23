@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import StickerPeel from "@/components/StickerPeel";
 import { AnimatedButton } from "@/components/AnimatedButton";
-import { useClarity } from "@/hooks/useClarity";
 
 const slides = [
   { coachType: "Personal Trainer" },
@@ -25,10 +24,8 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
   const [collapsing, setCollapsing] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { trackEvent } = useClarity();
 
   const handleSubmit = () => {
-    trackEvent("email_submit");
     if (!email.trim()) {
       inputRef.current?.focus();
       return;
@@ -165,7 +162,6 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => trackEvent("email_focus")}
               onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
               placeholder="Inserisci la tua email"
               className="placeholder:text-[rgba(0,0,0,0.35)]"
@@ -181,7 +177,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
               }}
             />
             <AnimatedButton
-              onClick={() => { trackEvent("hero_cta_click"); handleSubmit(); }}
+              onClick={handleSubmit}
               style={{ flexShrink: 0, height: "44px", padding: "0 20px", fontSize: "14px" }}
             >
               Richiedi una demo

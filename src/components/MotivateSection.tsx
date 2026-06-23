@@ -2,7 +2,6 @@
 
 import { FeatureAccordion, type AccordionItem } from "@/components/FeatureAccordion";
 import type { AccordionFeature } from "@/content/types";
-import { useClarity } from "@/hooks/useClarity";
 import {
   ChartLineUp,
   CalendarCheck,
@@ -104,7 +103,6 @@ export function MotivateSection({
   headingLines = ["Traccia, Analizza, Adatta.", "Ogni Sessione."],
   features = DEFAULT_FEATURES,
 }: MotivateSectionProps) {
-  const { trackEvent } = useClarity();
   const items: AccordionItem[] = features.map((f) => ({
     icon: ICON_MAP[f.iconName] ?? ChartLineUp,
     title: f.title,
@@ -118,7 +116,6 @@ export function MotivateSection({
       badgeText={badgeText}
       headingLines={headingLines}
       items={items}
-      onItemClick={(title) => trackEvent(`motivate_accordion_${title.toLowerCase().replace(/[^a-z0-9]/g, "_")}`)}
     />
   );
 }
