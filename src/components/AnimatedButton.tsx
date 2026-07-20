@@ -10,6 +10,7 @@ interface AnimatedButtonProps {
   type?: "button" | "submit";
   className?: string;
   style?: CSSProperties;
+  disabled?: boolean;
 }
 
 export function AnimatedButton({
@@ -19,6 +20,7 @@ export function AnimatedButton({
   type = "button",
   className = "",
   style,
+  disabled = false,
 }: AnimatedButtonProps) {
   const labelRef = useRef<HTMLSpanElement>(null);
   const hoverLabelRef = useRef<HTMLSpanElement>(null);
@@ -69,7 +71,7 @@ export function AnimatedButton({
     backgroundColor: "#1b1b1b",
     color: "#ffffff",
     border: "none",
-    cursor: "pointer",
+    cursor: disabled ? "not-allowed" : "pointer",
     textDecoration: "none",
     fontFamily: "Plus Jakarta Sans, sans-serif",
     fontWeight: 700,
@@ -112,6 +114,7 @@ export function AnimatedButton({
     <button
       type={type}
       onClick={onClick}
+      disabled={disabled}
       className={className}
       style={baseStyle}
       onMouseEnter={handleEnter}
