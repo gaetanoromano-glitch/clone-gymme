@@ -26,11 +26,7 @@ export const metadata: Metadata = {
   description:
     "Eroga il tuo coaching su larga scala, dai clienti base a quelli premium. Piattaforma all-in-one pensata per personal trainer, coach del benessere e proprietari di palestre.",
   icons: {
-    icon: [
-      { url: "/uploads/2025/01/cropped-favicon.png", sizes: "32x32" },
-      { url: "/uploads/2025/01/cropped-favicon.png", sizes: "192x192" },
-    ],
-    apple: { url: "/uploads/2025/01/cropped-favicon.png" },
+    icon: { url: "/favicon.svg", type: "image/svg+xml" },
   },
 };
 
@@ -43,7 +39,7 @@ export default function RootLayout({
     <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased bg-[#EEEDFB]`}>
       <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
       <ClarityStylesFix />
-      <GoogleAnalytics gaId="G-FMN1EHEWKY" />
+      <GoogleAnalytics gaId="G-W4Q5P0YHEC" />
       <ClarityAnalytics projectId="xb1l4ggnzd" />
       <AnalyticsIdentity />
       <ScrollMilestones />
