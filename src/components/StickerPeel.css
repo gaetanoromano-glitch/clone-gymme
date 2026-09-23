@@ -1,21 +1,26 @@
 :root {
   --sticker-rotate: 30deg;
   --sticker-p: 10px;
-  --sticker-peelback-hover: 30%;
-  --sticker-peelback-active: 40%;
-  --sticker-peel-easing: power3.out;
-  --sticker-peel-hover-easing: power2.out;
-  --sticker-start: calc(-1 * var(--sticker-p));
-  --sticker-end: calc(100% + var(--sticker-p));
-  --sticker-shadow-opacity: 0.6;
-  --sticker-lighting-constant: 0.1;
+  --sticker-shadow-opacity: 0.3;
+  --sticker-lift: 16px;
   --peel-direction: 0deg;
 }
 
+/* Ease refs:
+   - lift-off (hover/touch in) is a quick, controlled ease-out
+   - reattach (hover/touch out) settles back with a soft overshoot,
+     like the sticker snapping back onto the surface
+*/
+
 .sticker-container {
   position: relative;
-  transform: rotate(var(--peel-direction));
+  transform: rotate(var(--peel-direction)) translateY(0) scale(1);
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.4s ease-out;
   transform-origin: center;
+  will-change: transform, filter;
 }
 
 .sticker-container * {
@@ -25,96 +30,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.sticker-main {
-  clip-path: polygon(
-    var(--sticker-start) var(--sticker-start),
-    var(--sticker-end) var(--sticker-start),
-    var(--sticker-end) var(--sticker-end),
-    var(--sticker-start) var(--sticker-end)
-  );
-  transition: clip-path 0.6s ease-out;
-  filter: var(--filter-drop-shadow);
+.sticker-container:hover,
+.sticker-container.touch-active {
+  transform: rotate(var(--peel-direction)) translateY(calc(-1 * var(--sticker-lift))) scale(1.05);
+  filter: drop-shadow(0 22px 18px rgba(0, 0, 0, var(--sticker-shadow-opacity)));
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.3s ease-out;
 }
 
-.sticker-main > * {
-  transform: rotate(calc(-1 * var(--peel-direction)));
-}
-
-.sticker-lighting {
-  filter: var(--filter-point-light);
-}
-
-.sticker-container:hover .sticker-main,
-.sticker-container.touch-active .sticker-main {
-  clip-path: polygon(
-    var(--sticker-start) var(--sticker-peelback-hover),
-    var(--sticker-end) var(--sticker-peelback-hover),
-    var(--sticker-end) var(--sticker-end),
-    var(--sticker-start) var(--sticker-end)
-  );
-}
-
-.sticker-container:active .sticker-main {
-  clip-path: polygon(
-    var(--sticker-start) var(--sticker-peelback-active),
-    var(--sticker-end) var(--sticker-peelback-active),
-    var(--sticker-end) var(--sticker-end),
-    var(--sticker-start) var(--sticker-end)
-  );
+.sticker-container:active {
+  transform: rotate(var(--peel-direction)) translateY(calc(-1 * var(--sticker-lift) * 0.55)) scale(1.02);
+  filter: drop-shadow(0 12px 10px rgba(0, 0, 0, calc(var(--sticker-shadow-opacity) * 0.8)));
+  transition:
+    transform 0.15s ease-out,
+    filter 0.15s ease-out;
 }
 
 .sticker-image {
+  display: block;
+  width: var(--sticker-width, 200px);
   transform: rotate(var(--sticker-rotate));
-}
-
-.flap {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: calc(-100% - var(--sticker-p) - var(--sticker-p));
-  clip-path: polygon(
-    var(--sticker-start) var(--sticker-start),
-    var(--sticker-end) var(--sticker-start),
-    var(--sticker-end) var(--sticker-start),
-    var(--sticker-start) var(--sticker-start)
-  );
-  transform: scaleY(-1);
-  transition: all 0.6s ease-out;
-}
-
-.flap > * {
-  transform: rotate(calc(-1 * var(--peel-direction)));
-}
-
-.sticker-container:hover .flap,
-.sticker-container.touch-active .flap {
-  clip-path: polygon(
-    var(--sticker-start) var(--sticker-start),
-    var(--sticker-end) var(--sticker-start),
-    var(--sticker-end) var(--sticker-peelback-hover),
-    var(--sticker-start) var(--sticker-peelback-hover)
-  );
-  top: calc(-100% + 2 * var(--sticker-peelback-hover) - 1px);
-}
-
-.sticker-container:active .flap {
-  clip-path: polygon(
-    var(--sticker-start) var(--sticker-start),
-    var(--sticker-end) var(--sticker-start),
-    var(--sticker-end) var(--sticker-peelback-active),
-    var(--sticker-start) var(--sticker-peelback-active)
-  );
-  top: calc(-100% + 2 * var(--sticker-peelback-active) - 1px);
-}
-
-.flap-lighting {
-  filter: var(--filter-point-light-flipped);
-}
-
-.flap-image {
-  transform: rotate(var(--sticker-rotate));
-  filter: var(--filter-expand-fill);
+  pointer-events: none;
 }
 
 .draggable {
@@ -136,16 +73,6 @@
   .sticker-container {
     touch-action: none;
   }
-}
-
-.sticker-image,
-.flap-image {
-  width: var(--sticker-width, 200px);
-}
-
-.sticker-main,
-.flap {
-  will-change: clip-path, transform;
 }
 
 .sticker-ripple {

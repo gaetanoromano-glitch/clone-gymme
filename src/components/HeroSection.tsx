@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import StickerPeel from "@/components/StickerPeel";
 import { AnimatedButton } from "@/components/AnimatedButton";
 import { useClarity } from "@/hooks/useClarity";
@@ -20,47 +20,7 @@ interface HeroProps {
 export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [textVisible, setTextVisible] = useState(true);
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [collapsing, setCollapsing] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const emailFocusedRef = useRef(false);
-  const submittedRef = useRef(false);
   const { trackEvent } = useClarity();
-  const trackEventRef = useRef(trackEvent);
-  trackEventRef.current = trackEvent;
-
-  useEffect(() => {
-    const handleAbandon = () => {
-      if (emailFocusedRef.current && !submittedRef.current) {
-        trackEventRef.current("form_abandon");
-      }
-    };
-    const handleVisibility = () => {
-      if (document.visibilityState === "hidden") handleAbandon();
-    };
-    document.addEventListener("visibilitychange", handleVisibility);
-    window.addEventListener("beforeunload", handleAbandon);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibility);
-      window.removeEventListener("beforeunload", handleAbandon);
-    };
-  }, []);
-
-  const handleSubmit = () => {
-    trackEvent("email_submit");
-    if (!email.trim()) {
-      inputRef.current?.focus();
-      return;
-    }
-    submittedRef.current = true;
-    setCollapsing(true);
-    setTimeout(() => {
-      setSubmitted(true);
-      setTimeout(() => setShowMessage(true), 80);
-    }, 500);
-  };
 
   useEffect(() => {
     if (fixedCoachType) return;
@@ -156,103 +116,15 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
           {subtitle ?? "La prima piattaforma italiana che unisce personal trainer, nutrizionistə e osteopatə attorno allo stesso cliente. Un health team, un ecosistema condiviso."}
         </p>
 
-        {/* Pill input + button */}
-        <div
-          style={{
-            marginTop: "32px",
-            minHeight: "56px",
-            width: "100%",
-            maxWidth: "480px",
-            position: "relative",
-          }}
-        >
-          <div
-            style={{
-              display: submitted ? "none" : "flex",
-              alignItems: "center",
-              height: "56px",
-              borderRadius: "999px",
-              backgroundColor: "rgba(0,0,0,0.04)",
-              border: "1.5px solid rgba(0,0,0,0.12)",
-              padding: "6px 6px 6px 20px",
-              width: "100%",
-              transition: "opacity 0.4s ease, transform 0.4s ease",
-              opacity: collapsing ? 0 : 1,
-              transform: collapsing ? "scale(0.82)" : "scale(1)",
-              transformOrigin: "center center",
-            }}
+        {/* CTA — routes to the dedicated /demo request page */}
+        <div style={{ marginTop: "32px" }}>
+          <AnimatedButton
+            href="/demo"
+            onClick={() => trackEvent("hero_cta_click")}
+            style={{ height: "56px", padding: "0 36px", fontSize: "15px" }}
           >
-            <input
-              ref={inputRef}
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => { emailFocusedRef.current = true; trackEvent("email_focus"); }}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              placeholder="Inserisci la tua email"
-              className="placeholder:text-[rgba(0,0,0,0.35)]"
-              style={{
-                flex: 1,
-                background: "none",
-                border: "none",
-                outline: "none",
-                color: "#1b1b1b",
-                fontSize: "15px",
-                fontFamily: "Plus Jakarta Sans, sans-serif",
-                minWidth: 0,
-              }}
-            />
-            <AnimatedButton
-              onClick={() => { trackEvent("hero_cta_click"); handleSubmit(); }}
-              style={{ flexShrink: 0, height: "44px", padding: "0 20px", fontSize: "14px" }}
-            >
-              Richiedi una demo
-            </AnimatedButton>
-          </div>
-
-          {submitted && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "12px",
-                opacity: showMessage ? 1 : 0,
-                transform: showMessage ? "scale(1) translateY(0)" : "scale(0.88) translateY(6px)",
-                transition: "opacity 0.45s ease, transform 0.45s ease",
-              }}
-            >
-              <div
-                style={{
-                  flexShrink: 0,
-                  width: "36px",
-                  height: "36px",
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(0,0,0,0.06)",
-                  border: "1.5px solid rgba(0,0,0,0.15)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1b1b1b" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <p
-                style={{
-                  color: "#1b1b1b",
-                  fontFamily: "Plus Jakarta Sans, sans-serif",
-                  fontWeight: 500,
-                  fontSize: "16px",
-                  margin: 0,
-                  lineHeight: 1.4,
-                }}
-              >
-                Sarai ricontattato per schedulare la demo
-              </p>
-            </div>
-          )}
+            Richiedi una demo
+          </AnimatedButton>
         </div>
       </div>
 
