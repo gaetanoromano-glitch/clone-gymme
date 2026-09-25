@@ -1,4 +1,5 @@
 import type { ProfessionalContent } from "./types";
+import { commonFaq } from "./faq";
 
 export const osteopath: ProfessionalContent = {
   slug: "osteopata",
@@ -6,7 +7,7 @@ export const osteopath: ProfessionalContent = {
 
   hero: {
     subtitle:
-      "La prima piattaforma italiana pensata per gli osteopati. Gestisci protocolli di trattamento, monitora il recupero dei tuoi pazienti e collabora con il loro team di professionisti.",
+      "La prima piattaforma italiana pensata per osteopatə. Gestisci protocolli di trattamento, monitora il recupero dei tuoi pazienti e collabora con il loro team di professionisti.",
   },
 
   serviceTier: {
@@ -16,7 +17,7 @@ export const osteopath: ProfessionalContent = {
       "AI Protocol Builder e Business Dashboard per lo studio",
     ],
     clientFeatures: [
-      "Visualizzazione del protocollo e esercizi domiciliari del giorno",
+      "Visualizzazione del protocollo e degli esercizi domiciliari del giorno",
       "Check-in sintomi, progressi e foto posturali in tempo reale",
       "Comunicazione diretta con l'osteopata",
     ],
@@ -61,7 +62,7 @@ export const osteopath: ProfessionalContent = {
         num: 4,
         title: "Business Dashboard",
         description:
-          "Analizza rinnovi, cicli di trattamento e margini con dati certi. Trasforma il tuo studio in qualcosa di prevedibile e crescibile.",
+          "Analizza rinnovi, cicli di trattamento e margini con dati certi. Trasforma il tuo studio in qualcosa di prevedibile e scalabile.",
         icon: "/themes/gymme/assets2/images/homepage/industry/sport.svg",
         screenshot: "/videos/Business_Dashboard.mp4",
         accent: "#AECBFF",
@@ -153,17 +154,36 @@ export const osteopath: ProfessionalContent = {
 
   ratings: {
     heading: {
-      bold: "LLa prima piattaforma in Italia ",
+      bold: "La prima piattaforma in Italia ",
       regular: "multi-professionale per il benessere.",
     },
     stats: [
-      { value: "+45%", label: "Di nuovi clienti con l'utilizzo di piattaforme digitali" },
+      { value: "+45%", label: "di nuovi pazienti con l'utilizzo di piattaforme digitali" },
       { value: "6h", label: "Risparmiate ogni settimana\nsu documentazione e follow-up" },
       { value: "2×", label: "Pazienti seguiti\nsenza aumentare il carico" },
       { value: "−65%", label: "Tempo per documentare\nuna seduta e il protocollo" },
       { value: "1", label: "App al posto di cartelle,\nreminder e messaggi sparsi" },
     ],
   },
+
+  faq: [
+    {
+      question: "Posso creare protocolli di trattamento e di recovery?",
+      answer:
+        "Sì. Crei protocolli strutturati con esercizi domiciliari e note cliniche, disponibili in tempo reale nell'app del paziente. L'AI Builder ti aiuta a generarne una bozza in pochi secondi.",
+    },
+    {
+      question: "Come verifico che il paziente segua gli esercizi a casa?",
+      answer:
+        "Con il monitoraggio recovery tieni traccia dell'aderenza agli esercizi domiciliari e dei feedback sui sintomi. Il Client Risk Radar ti avvisa quando la compliance cala, così puoi adattare il protocollo sui dati reali.",
+    },
+    {
+      question: "Posso gestire l'anamnesi posturale dei pazienti?",
+      answer:
+        "Sì. Raccogli in digitale storia clinica, disfunzioni, sintomi e obiettivi di ogni paziente, sempre consultabili durante la seduta.",
+    },
+    ...commonFaq,
+  ],
 
   footer: {
     ctaText: "Diamo forma al futuro dell'osteopatia, insieme.",

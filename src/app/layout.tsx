@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Unbounded, Plus_Jakarta_Sans } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { ClarityAnalytics } from "@/components/ClarityAnalytics";
 import { ScrollMilestones } from "@/components/ScrollMilestones";
-import { AnalyticsIdentity } from "@/components/AnalyticsIdentity";
+import { CookieConsent } from "@/components/CookieConsent";
 import { ClarityStylesFix } from "@/components/ClarityStylesFix";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_DESCRIPTION, SITE_KEYWORDS, SITE_NAME, SITE_TITLE, SITE_URL, SITE_VERIFICATION, siteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -22,9 +22,31 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "gymme | La Piattaforma #1 per il Coaching Fitness e Benessere",
-  description:
-    "Eroga il tuo coaching su larga scala, dai clienti base a quelli premium. Piattaforma all-in-one pensata per personal trainer, coach del benessere e proprietari di palestre.",
+  metadataBase: new URL(SITE_URL),
+  title: { default: SITE_TITLE, template: `%s | ${SITE_NAME}` },
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Webeetle", url: "https://webeetle.com" }],
+  publisher: "Webeetle",
+  openGraph: {
+    type: "website",
+    locale: "it_IT",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  verification: SITE_VERIFICATION,
   icons: {
     icon: { url: "/favicon.svg", type: "image/svg+xml" },
   },
@@ -37,11 +59,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={`${unbounded.variable} ${plusJakartaSans.variable} h-full antialiased bg-[#EEEDFB]`}>
-      <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden">
+        <JsonLd data={siteJsonLd()} />
+        {children}
+        {/* Google Analytics and Clarity are loaded from here, only after consent. */}
+        <CookieConsent />
+      </body>
       <ClarityStylesFix />
-      <GoogleAnalytics gaId="G-W4Q5P0YHEC" />
-      <ClarityAnalytics projectId="xb1l4ggnzd" />
-      <AnalyticsIdentity />
       <ScrollMilestones />
     </html>
   );

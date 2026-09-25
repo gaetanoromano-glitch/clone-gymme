@@ -1,4 +1,4 @@
-export type { ProfessionalContent, PillarContent, AccordionFeature } from "./types";
+export type { ProfessionalContent, PillarContent, AccordionFeature, FaqItem } from "./types";
 export { personalTrainer } from "./personal-trainer";
 export { nutritionist } from "./nutritionist";
 export { osteopath } from "./osteopath";

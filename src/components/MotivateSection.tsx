@@ -74,7 +74,7 @@ const DEFAULT_FEATURES: AccordionFeature[] = [
   {
     iconName: "Pulse",
     title: "Live Mode",
-    description: "Un cockpit intelligente per gestire più clienti contemporaneamente, senza perdere un battito.",
+    description: "Un cockpit intelligente per gestire più clienti contemporaneamente, senza perdere il ritmo.",
     screenshot: "/themes/gymme/assets2/images/foto_gymme/Live mode.png",
   },
   {

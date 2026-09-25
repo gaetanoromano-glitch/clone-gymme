@@ -1,4 +1,5 @@
 import type { ProfessionalContent } from "./types";
+import { commonFaq } from "./faq";
 
 export const nutritionist: ProfessionalContent = {
   slug: "nutrizionista",
@@ -6,7 +7,7 @@ export const nutritionist: ProfessionalContent = {
 
   hero: {
     subtitle:
-      "La prima piattaforma italiana pensata per i nutrizionisti. Gestisci piani alimentari, monitora la compliance dei tuoi clienti e collabora con il loro team di professionisti.",
+      "La prima piattaforma italiana pensata per nutrizionistə. Gestisci piani alimentari, monitora la compliance dei tuoi clienti e collabora con il loro team di professionisti.",
   },
 
   serviceTier: {
@@ -97,7 +98,7 @@ export const nutritionist: ProfessionalContent = {
       },
       {
         iconName: "ChartBar",
-        title: "Client risk radar",
+        title: "Client Risk Radar",
         description:
           "Tieni traccia di quanto i tuoi clienti seguono il piano. Ricevi alert automatici quando qualcosa non va e intervieni prima che mollino.",
         screenshot:
@@ -157,13 +158,32 @@ export const nutritionist: ProfessionalContent = {
       regular: "multi-professionale per il benessere.",
     },
     stats: [
-      { value: "45%", label: "Di nuovi clienti con l'utilizzo di piattaforme digitali" },
+      { value: "+45%", label: "di nuovi clienti con l'utilizzo di piattaforme digitali" },
       { value: "8h", label: "Risparmiate ogni settimana\nsu piani, report e follow-up" },
-      { value: "2.5×", label: "Clienti seguiti\nsenza aumentare il carico" },
+      { value: "2,5×", label: "Clienti seguiti\nsenza aumentare il carico" },
       { value: "−70%", label: "Tempo per costruire\nun piano nutrizionale completo" },
       { value: "1", label: "App al posto di Excel,\nWhatsApp e PDF sparsi" },
     ],
   },
+
+  faq: [
+    {
+      question: "Posso creare piani alimentari con l'AI?",
+      answer:
+        "Sì. L'AI Builder genera piani nutrizionali completi in pochi secondi; tu li personalizzi, li adatti e li invii al cliente in tempo reale, direttamente nella sua app.",
+    },
+    {
+      question: "Come monitoro la compliance dei miei clienti al piano alimentare?",
+      answer:
+        "Il Client Risk Radar tiene traccia di quanto i clienti seguono il piano e ti invia alert automatici quando qualcuno se ne discosta, così puoi intervenire con un messaggio mirato prima che molli.",
+    },
+    {
+      question: "Posso raccogliere l'anamnesi alimentare in digitale?",
+      answer:
+        "Sì. Raccogli storia alimentare, intolleranze, obiettivi e abitudini di ogni cliente, sempre accessibili in un click durante la seduta.",
+    },
+    ...commonFaq,
+  ],
 
   footer: {
     ctaText: "Diamo forma al futuro della nutrizione, insieme.",

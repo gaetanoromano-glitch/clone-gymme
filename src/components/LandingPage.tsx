@@ -10,6 +10,7 @@ import ForEveryoneSection from "@/components/ForEveryoneSection";
 import { MotivateSection } from "@/components/MotivateSection";
 import { WorkModesSection } from "@/components/WorkModesSection";
 import { RatingsSection } from "@/components/RatingsSection";
+import { FaqSection } from "@/components/FaqSection";
 import { Footer } from "@/components/Footer";
 import ClickSpark from "@/components/ClickSpark";
 
@@ -66,6 +67,7 @@ export function LandingPage({ content }: LandingPageProps) {
             heading={content.ratings.heading}
             stats={content.ratings.stats}
           />
+          <FaqSection items={content.faq} />
         </div>
       </main>
       <Footer ctaText={content.footer.ctaText} />

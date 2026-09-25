@@ -1,4 +1,5 @@
 import type { ProfessionalContent } from "./types";
+import { commonFaq } from "./faq";
 
 export const personalTrainer: ProfessionalContent = {
   slug: "personal-trainer",
@@ -70,7 +71,7 @@ export const personalTrainer: ProfessionalContent = {
   },
 
   forEveryone: {
-    heading: "Per tuttə, Personal Trainer e Studi Multidisciplinari.",
+    heading: "Per tuttə, per Personal Trainer e Studi Multidisciplinari.",
     subtitle:
       "Una piattaforma progettata per chi vuole collaborare, crescere e fidelizzare i propri clienti nel tempo.",
   },
@@ -122,7 +123,7 @@ export const personalTrainer: ProfessionalContent = {
         iconName: "Pulse",
         title: "Live Mode",
         description:
-          "Un cockpit intelligente per gestire più clienti contemporaneamente, senza perdere un battito.",
+          "Un cockpit intelligente per gestire più clienti contemporaneamente, senza perdere il ritmo.",
         screenshot: "/themes/gymme/assets2/images/foto_gymme/Live mode.png",
       },
       {
@@ -178,13 +179,32 @@ export const personalTrainer: ProfessionalContent = {
       regular: "multi-professionale per il benessere.",
     },
     stats: [
-      { value: "45%", label: "Di nuovi clienti con l'utilizzo di piattaforme digitali" },
+      { value: "+45%", label: "di nuovi clienti con l'utilizzo di piattaforme digitali" },
       { value: "10h", label: "Risparmiate ogni settimana\nsu schede, report e messaggi" },
       { value: "3×", label: "Clienti seguiti\nsenza aumentare lo stress" },
       { value: "−75%", label: "Tempo per creare\nun protocollo completo" },
       { value: "1", label: "App al posto di Excel,\nchat e PDF sparsi" },
     ],
   },
+
+  faq: [
+    {
+      question: "Come funziona l'AI Builder per le schede di allenamento?",
+      answer:
+        "L'AI Builder genera in pochi istanti schede e protocolli solidi. Tu li rivedi, li personalizzi e li invii: meno compiti meccanici e più tempo per il rapporto con il cliente.",
+    },
+    {
+      question: "Cos'è il Client Risk Radar?",
+      answer:
+        "È il sistema che segnala i clienti a rischio abbandono. Ti mostra i segnali di crisi prima che il cliente sparisca, così puoi intervenire subito e proteggere il tuo fatturato mensile.",
+    },
+    {
+      question: "Cosa vede il cliente nella sua app?",
+      answer:
+        "Il cliente vede la scheda e gli allenamenti del giorno, registra check-in, progressi e foto in tempo reale e comunica direttamente con te.",
+    },
+    ...commonFaq,
+  ],
 
   footer: {
     ctaText: "Diamo forma al futuro del fitness, insieme.",

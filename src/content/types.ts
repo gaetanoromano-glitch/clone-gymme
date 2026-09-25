@@ -22,6 +22,11 @@ export interface WorkMode {
   accent: string;
 }
 
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface ProfessionalContent {
   slug: string;
   name: string;
@@ -64,6 +69,9 @@ export interface ProfessionalContent {
     /** Exactly 5 stats — positions map to the fixed bento grid layout. */
     stats: Array<{ value: string; label: string }>;
   };
+
+  /** Rendered as a visible FAQ section and as FAQPage structured data. */
+  faq: FaqItem[];
 
   footer: {
     ctaText: string;

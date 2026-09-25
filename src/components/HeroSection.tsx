@@ -61,7 +61,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
         className="relative z-10 flex flex-col items-center justify-center text-center h-full px-5 md:px-10 lg:px-[80px]"
         style={{ paddingTop: topOffset }}
       >
-        <h2
+        <h1
           className="text-[30px] md:text-[48px] lg:text-[64px]"
           style={{
             fontFamily: '"Unbounded", sans-serif',
@@ -73,7 +73,9 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
           }}
         >
           L&apos;ecosistema digitale per
-        </h2>
+          {/* Full, stable heading text for crawlers and screen readers; the visual line below rotates. */}
+          <span className="sr-only"> {fixedCoachType ?? "Personal Trainer, Nutrizionisti e Osteopati"}</span>
+        </h1>
 
         {/* Coach type — fixed on professional pages, animated on home */}
         <div
@@ -85,6 +87,7 @@ export function HeroSection({ topOffset = 137, subtitle, fixedCoachType }: HeroP
           }}
         >
           <span
+            aria-hidden="true"
             className="text-[30px] md:text-[48px] lg:text-[64px]"
             style={{
               fontFamily: '"Unbounded", sans-serif',

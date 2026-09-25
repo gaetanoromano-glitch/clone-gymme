@@ -4,7 +4,13 @@ import Image from "next/image";
 import StickerPeel from "./StickerPeel";
 import { AnimatedButton } from "./AnimatedButton";
 import SplitText from "@/components/SplitText";
+import Link from "next/link";
 import { useClarity } from "@/hooks/useClarity";
+import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
+import { LEGAL_LINKS } from "@/lib/legal";
+
+const legalLinkClass =
+  "cursor-pointer text-[13px] text-[#1b1b1b]/45 transition-colors hover:text-[#1b1b1b]/80";
 
 
 
@@ -77,7 +83,7 @@ export function Footer({ ctaText = "Diamo forma al futuro del fitness, insieme."
         <div className="relative flex flex-col items-center" style={{ zIndex: 3, maxWidth: "720px" }}>
             <SplitText
                 text={ctaText}
-                tag="h1"
+                tag="h2"
                 className="text-[30px] md:text-[48px] lg:text-[64px] font-bold leading-[1.1] tracking-[-2px]"
                 splitType="words"
                 delay={40}
@@ -112,6 +118,20 @@ export function Footer({ ctaText = "Diamo forma al futuro del fitness, insieme."
         >
           © Gymme 2026
         </p>
+        <nav aria-label="Link legali" className="flex flex-wrap justify-center gap-x-5 gap-y-2 font-[family-name:var(--font-plus-jakarta)]">
+          {LEGAL_LINKS.map((legal) =>
+            legal.external ? (
+              <a key={legal.label} href={legal.href} target="_blank" rel="noreferrer" className={legalLinkClass}>
+                {legal.label}
+              </a>
+            ) : (
+              <Link key={legal.label} href={legal.href} className={legalLinkClass}>
+                {legal.label}
+              </Link>
+            ),
+          )}
+          <CookiePreferencesButton className={legalLinkClass} />
+        </nav>
       </div>
     </footer>
   );

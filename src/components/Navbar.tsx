@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import "./PillNav.css";
 import { AnimatedButton } from "./AnimatedButton";
@@ -15,6 +16,7 @@ const NAV_LINKS = [
   { label: "Soluzioni", href: "#soluzioni" },
   { label: "Funzionalità", href: "#funzionalita" },
   { label: "Risultati", href: "#risultati" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const EASE = "power3.out";
@@ -89,7 +91,6 @@ export default function Navbar({ bannerVisible }: Props) {
     }
 
     return () => window.removeEventListener("resize", layout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /* ── Pill hover handlers ──────────────────────────────────────── */
@@ -114,9 +115,6 @@ export default function Navbar({ bannerVisible }: Props) {
       overwrite: "auto",
     }) as unknown as gsap.core.Tween;
   };
-
-  /* ── Logo spin ────────────────────────────────────────────────── */
-
 
   /* ── Mobile menu toggle ───────────────────────────────────────── */
   const toggleMobileMenu = () => {
@@ -158,6 +156,30 @@ export default function Navbar({ bannerVisible }: Props) {
     }
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    const menu = mobileMenuRef.current;
+    const hamburger = hamburgerRef.current;
+    if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });
+    if (hamburger) {
+      const lines = hamburger.querySelectorAll<HTMLElement>(".hamburger-line");
+      gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.2 });
+      gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.2 });
+    }
+  };
+
+  /* ── Close the mobile menu on Escape ──────────────────────────── */
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      closeMobileMenu();
+      hamburgerRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMobileMenuOpen]);
+
   /* ── CSS variables (always light/scrolled style) ─────────────── */
   const cssVars = {
     ["--pill-bg" as string]: "rgba(255,255,255,0.96)",
@@ -175,10 +197,10 @@ export default function Navbar({ bannerVisible }: Props) {
       <nav className="pill-nav" aria-label="Primary" style={cssVars}>
 
         {/* Logo */}
-        <a
+        <Link
           className="pill-logo"
           href="/"
-          aria-label="gymme home"
+          aria-label="gymme, torna alla home"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -186,18 +208,16 @@ export default function Navbar({ bannerVisible }: Props) {
             alt="gymme"
             style={{ height: "26px", width: "auto", display: "block" }}
           />
-        </a>
+        </Link>
 
         {/* Desktop nav items */}
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
-          <ul className="pill-list" role="menubar">
+          <ul className="pill-list">
             {NAV_LINKS.map((item, i) => (
-              <li key={item.href} role="none">
+              <li key={item.href}>
                 <a
-                  role="menuitem"
                   href={item.href}
                   className="pill"
-                  aria-label={item.label}
                   onClick={() => trackEvent(`nav_${item.label.toLowerCase()}`)}
                   onMouseEnter={() => handleEnter(i)}
                   onMouseLeave={() => handleLeave(i)}
@@ -231,8 +251,9 @@ export default function Navbar({ bannerVisible }: Props) {
         <button
           className="mobile-menu-button mobile-only"
           onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? "Chiudi menu" : "Apri menu"}
           aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
           ref={hamburgerRef}
         >
           <span className="hamburger-line" />
@@ -242,6 +263,7 @@ export default function Navbar({ bannerVisible }: Props) {
 
       {/* Mobile dropdown */}
       <div
+        id="mobile-menu"
         className="mobile-menu-popover mobile-only"
         ref={mobileMenuRef}
         style={cssVars}
@@ -254,15 +276,7 @@ export default function Navbar({ bannerVisible }: Props) {
                 className="mobile-menu-link"
                 onClick={() => {
                   trackEvent(`nav_${item.label.toLowerCase()}`);
-                  setIsMobileMenuOpen(false);
-                  const menu = mobileMenuRef.current;
-                  const hamburger = hamburgerRef.current;
-                  if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });
-                  if (hamburger) {
-                    const lines = hamburger.querySelectorAll<HTMLElement>(".hamburger-line");
-                    gsap.to(lines[0], { rotation: 0, y: 0, duration: 0.2 });
-                    gsap.to(lines[1], { rotation: 0, y: 0, duration: 0.2 });
-                  }
+                  closeMobileMenu();
                 }}
               >
                 {item.label}
@@ -270,18 +284,16 @@ export default function Navbar({ bannerVisible }: Props) {
             </li>
           ))}
           <li>
-            <a
+            <Link
               href="/demo"
               className="mobile-menu-link mobile-cta"
               onClick={() => {
                 trackEvent("navbar_demo_click");
-                setIsMobileMenuOpen(false);
-                const menu = mobileMenuRef.current;
-                if (menu) gsap.set(menu, { visibility: "hidden", opacity: 0 });
+                closeMobileMenu();
               }}
             >
               Richiedi una demo
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
