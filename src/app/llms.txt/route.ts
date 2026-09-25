@@ -1,5 +1,6 @@
 import { getAllSlugs, getProfessionalContent } from "@/content";
 import type { ProfessionalContent } from "@/content/types";
+import { getAllPosts } from "@/lib/blog";
 import { SITE_DESCRIPTION, SITE_URL, getProfessionalSeo } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -61,7 +62,14 @@ ${getAllSlugs()
   .filter((c): c is ProfessionalContent => c !== null)
   .map((c) => `- [gymme per ${c.name}](${SITE_URL}/${c.slug}): ${getProfessionalSeo(c).title}`)
   .join("\n")}
-- [Richiedi una demo](${SITE_URL}/demo): prenotazione di una demo gratuita
+- [Richiedi una demo](${SITE_URL}/demo): prenotazione di una demo
+- [Blog](${SITE_URL}/blog): guide per professionisti del benessere
+
+## Articoli del blog
+
+${getAllPosts()
+  .map((post) => `- [${post.title}](${SITE_URL}/blog/${post.slug}): ${post.description}`)
+  .join("\n")}
 
 ${sections}
 

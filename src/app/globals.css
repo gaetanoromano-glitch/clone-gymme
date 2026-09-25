@@ -339,3 +339,76 @@
   margin: 0;
   list-style: none;
 }
+
+/* Blog article body — styles the HTML rendered from Markdown. */
+@layer components {
+  .blog-prose {
+    font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    color: var(--text-primary);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .blog-prose > * + * {
+    margin-top: 1.1em;
+  }
+  .blog-prose h2 {
+    margin-top: 2em;
+    font-size: clamp(22px, 2.6vw, 28px);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+  }
+  .blog-prose h3 {
+    margin-top: 1.6em;
+    font-size: clamp(18px, 2vw, 20px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .blog-prose h2 + *,
+  .blog-prose h3 + * {
+    margin-top: 0.6em;
+  }
+  .blog-prose > :first-child {
+    margin-top: 0;
+  }
+  .blog-prose p,
+  .blog-prose li {
+    color: color-mix(in srgb, var(--text-primary) 78%, transparent);
+  }
+  .blog-prose strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+  .blog-prose a {
+    color: var(--gymme-purple);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .blog-prose ul,
+  .blog-prose ol {
+    padding-left: 1.4em;
+  }
+  .blog-prose ul {
+    list-style: disc;
+  }
+  .blog-prose ol {
+    list-style: decimal;
+  }
+  .blog-prose li + li {
+    margin-top: 0.45em;
+  }
+  .blog-prose li::marker {
+    color: var(--gymme-purple);
+    font-weight: 700;
+  }
+  .blog-prose blockquote {
+    border-left: 3px solid var(--gymme-purple);
+    padding-left: 1em;
+    color: var(--text-secondary);
+  }
+  .blog-prose hr {
+    border: 0;
+    border-top: 1px solid var(--stroke);
+    margin: 2em 0;
+  }
+}

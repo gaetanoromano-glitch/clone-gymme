@@ -9,6 +9,11 @@ import { useClarity } from "@/hooks/useClarity";
 
 interface Props {
   bannerVisible: boolean;
+  /**
+   * Prefix for the in-page section links. Landing pages leave it empty
+   * ("#faq"); other pages pass "/" so the links lead back to the home ("/#faq").
+   */
+  sectionBase?: string;
 }
 
 const NAV_LINKS = [
@@ -17,11 +22,15 @@ const NAV_LINKS = [
   { label: "Funzionalità", href: "#funzionalita" },
   { label: "Risultati", href: "#risultati" },
   { label: "FAQ", href: "#faq" },
+  { label: "Blog", href: "/blog" },
 ];
+
+const resolveHref = (href: string, sectionBase: string) =>
+  href.startsWith("#") ? `${sectionBase}${href}` : href;
 
 const EASE = "power3.out";
 
-export default function Navbar({ bannerVisible }: Props) {
+export default function Navbar({ bannerVisible, sectionBase = "" }: Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { trackEvent } = useClarity();
 
@@ -215,8 +224,8 @@ export default function Navbar({ bannerVisible }: Props) {
           <ul className="pill-list">
             {NAV_LINKS.map((item, i) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
+                <Link
+                  href={resolveHref(item.href, sectionBase)}
                   className="pill"
                   onClick={() => trackEvent(`nav_${item.label.toLowerCase()}`)}
                   onMouseEnter={() => handleEnter(i)}
@@ -231,7 +240,7 @@ export default function Navbar({ bannerVisible }: Props) {
                     <span className="pill-label">{item.label}</span>
                     <span className="pill-label-hover" aria-hidden="true">{item.label}</span>
                   </span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -271,8 +280,8 @@ export default function Navbar({ bannerVisible }: Props) {
         <ul className="mobile-menu-list">
           {NAV_LINKS.map((item) => (
             <li key={item.href}>
-              <a
-                href={item.href}
+              <Link
+                href={resolveHref(item.href, sectionBase)}
                 className="mobile-menu-link"
                 onClick={() => {
                   trackEvent(`nav_${item.label.toLowerCase()}`);
@@ -280,7 +289,7 @@ export default function Navbar({ bannerVisible }: Props) {
                 }}
               >
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
           <li>

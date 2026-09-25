@@ -1,4 +1,5 @@
 import type { ProfessionalContent } from "@/content/types";
+import type { BlogPostMeta } from "@/lib/blog";
 
 // Canonical origin. gymmeapp.it redirects to www, so www is the canonical host.
 // NEXT_PUBLIC_SITE_URL can override it (e.g. for a staging domain).
@@ -185,6 +186,78 @@ export function professionalJsonLd(content: ProfessionalContent) {
             description: feature.description,
           }),
         ),
+      },
+    ],
+  };
+}
+
+export const BLOG_TITLE = "Blog";
+export const BLOG_DESCRIPTION =
+  "Guide pratiche per personal trainer, nutrizionisti e osteopati: collaborazione tra professionisti, fidelizzazione dei clienti, aderenza ai programmi e gestione dello studio.";
+
+export function blogIndexJsonLd(posts: BlogPostMeta[]) {
+  const url = `${SITE_URL}/blog`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Blog",
+        "@id": `${url}#blog`,
+        url,
+        name: `${BLOG_TITLE} ${SITE_NAME}`,
+        description: BLOG_DESCRIPTION,
+        inLanguage: "it-IT",
+        isPartOf: { "@id": WEBSITE_ID },
+        publisher: { "@id": ORGANIZATION_ID },
+        blogPost: posts.map((post) => ({
+          "@type": "BlogPosting",
+          headline: post.title,
+          url: `${url}/${post.slug}`,
+          datePublished: post.date,
+          dateModified: post.updated,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: BLOG_TITLE, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+export function blogPostJsonLd(post: BlogPostMeta) {
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        mainEntityOfPage: url,
+        url,
+        headline: post.title,
+        description: post.description,
+        image: `${url}/opengraph-image`,
+        datePublished: post.date,
+        dateModified: post.updated,
+        inLanguage: "it-IT",
+        articleSection: post.category,
+        timeRequired: `PT${post.readingMinutes}M`,
+        author: { "@type": "Organization", name: post.author, url: SITE_URL },
+        publisher: { "@id": ORGANIZATION_ID },
+        isPartOf: { "@id": `${SITE_URL}/blog#blog` },
+        about: { "@id": SOFTWARE_ID },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: BLOG_TITLE, item: `${SITE_URL}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
       },
     ],
   };
